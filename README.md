@@ -76,7 +76,7 @@ In this example the hamza under the alef of إلى and the final ى are folded (
 <!-- BEGIN:policies -->
 | Policy | SHA-256 | Use | Lossy rules | Card |
 |---|---|---|---|---|
-| `bayanat-norm-v1` | `ebdb82000d0762a65120ffa9311bc6f01b481b19d4348ea5bedb3ab23d759321` | Default for text_norm columns in Bayanat Labs datasets, deduplication and statistics. | alef_maqsura.to_yeh, alef_variants.map | [EN](docs/policies/bayanat-norm-v1.md) · [AR](docs/policies/bayanat-norm-v1.ar.md) |
+| `bayanat-norm-v1` | `ebdb82000d0762a65120ffa9311bc6f01b481b19d4348ea5bedb3ab23d759321` | A normalisation policy for text_norm columns, deduplication and statistics. | alef_maqsura.to_yeh, alef_variants.map | [EN](docs/policies/bayanat-norm-v1.md) · [AR](docs/policies/bayanat-norm-v1.ar.md) |
 | `asr-eval-v1` | `5d866146536a23b90c0882044dae5f55f2484f0635e206828246eabeb69668de` | Scoring only: WER and CER for Arabic speech recognition. | alef_maqsura.to_yeh, alef_variants.map, taa_marbuta.to_heh | [EN](docs/policies/asr-eval-v1.md) · [AR](docs/policies/asr-eval-v1.ar.md) |
 | `raw-safe-v1` | `57c3d9f03fb9b6854f2527cd1e8a47cadc266f47f02dda94652306dacea03bb5` | Cleaning without changing any letter, mark, digit or punctuation. | none | [EN](docs/policies/raw-safe-v1.md) · [AR](docs/policies/raw-safe-v1.ar.md) |
 <!-- END:policies -->
@@ -141,4 +141,4 @@ Code: Apache-2.0 ([LICENSE](LICENSE)). Policy files and conformance fixtures: CC
 
 Questions, corrections and takedown requests: hello@bayanatlabs.com.
 
-**Need production-grade, rights-cleared Arabic data with documented normalisation?** See [Bayanat Labs Knowledge](https://bayanatlabs.com/products/knowledge).
+**Need production-grade, rights-cleared Arabic data with documented normalisation?** See [Bayanat Knowledge](https://bayanatlabs.com/products/knowledge).

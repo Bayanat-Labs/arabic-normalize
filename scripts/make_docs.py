@@ -112,9 +112,9 @@ LOSSY_BY_MODE = {
 
 USE = {
     "bayanat-norm-v1": (
-        "Default for text_norm columns in Bayanat Labs datasets, deduplication and statistics.",
+        "A normalisation policy for text_norm columns, deduplication and statistics.",
         "Store `text_raw` (and `text_diac`, the raw-safe-v1 output) next to it.",
-        "السياسة الافتراضية لحقل النص الموحَّد text_norm في مجموعات البيانات التي تنشرها بيانات لابز، ولإزالة التكرار وحساب الإحصاءات.",
+        "سياسة توحيد لحقل النص الموحَّد text_norm، ولإزالة التكرار وحساب الإحصاءات.",
         "ويُحفظ إلى جانبها النص الخام text_raw والنص المشكول text_diac (ناتج raw-safe-v1)."),
     "asr-eval-v1": (
         "Scoring only: WER and CER for Arabic speech recognition.",

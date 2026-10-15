@@ -93,7 +93,7 @@ const STR = {
     howLib: 'This page runs the JavaScript library @bayanat-labs/arabic-normalize, which gives the same output as the Python library arabic-normalize on every conformance case.',
     ctaH: 'Need production-grade, rights-cleared Arabic data?',
     ctaText: 'Bayanat Labs builds licensed Arabic datasets with documented normalisation.',
-    ctaLink: 'See Bayanat Labs Knowledge',
+    ctaLink: 'See Bayanat Knowledge',
     licence: 'Code: Apache-2.0. Policy files and examples: CC BY 4.0. Unicode tables: Unicode License V3. Font: IBM Plex Sans Arabic, SIL OFL 1.1.',
     errCap: 'The text is over the 10 MiB limit.',
     outputShort: (n) => `The box shows the first ${fmt(n)} characters. Copy output and the download contain the full text.`,

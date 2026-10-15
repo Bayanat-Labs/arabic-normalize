@@ -92,4 +92,4 @@ The parity run compares the full detailed result on seeded random strings (lone 
 
 Code: Apache-2.0 (`LICENSE`). Policy files: CC BY 4.0 (`LICENSE-data`). Generated Unicode tables: Unicode License V3 (`NOTICE-unicode.txt`). Questions, corrections and takedown requests: hello@bayanatlabs.com.
 
-**Need production-grade, rights-cleared Arabic data with documented normalisation?** See [Bayanat Labs Knowledge](https://www.bayanatlabs.com/products/knowledge).
+**Need production-grade, rights-cleared Arabic data with documented normalisation?** See [Bayanat Knowledge](https://www.bayanatlabs.com/products/knowledge).

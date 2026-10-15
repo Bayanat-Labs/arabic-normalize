@@ -2,7 +2,7 @@
 
 Status: pilot (library v0.1.0). Unicode data: UCD 18.0.0, pinned. Every policy names this spec in its `spec` member.
 
-This file defines what each stage and mode does, so that any implementation (Python today, TypeScript later) gives the same output, offset map and change log. Decisions behind the choices are in [DECISIONS.md](DECISIONS.md).
+This file defines what each stage and mode does, so that any implementation (Python and JavaScript in this repository, or any other) gives the same output, offset map and change log. Decisions behind the choices are in [DECISIONS.md](DECISIONS.md).
 
 ## 1. Units and terms
 

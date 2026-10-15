@@ -28,7 +28,7 @@
   "meta": {
     "title_en": "Bayanat Labs standard Arabic text normalisation, version 1",
     "title_ar": "التوحيد القياسي للنص العربي من بيانات لابز، الإصدار 1",
-    "description_en": "Default policy for text_norm columns in Bayanat Labs datasets. NFC plus mapping of Arabic presentation forms; invisible controls removed except a meaningful ZWNJ or emoji ZWJ; tatweel, harakat, Quranic marks and superscript alef removed; alef variants to bare alef; alef maqsura to yeh; taa marbuta kept and flagged; Arabic-Indic and Extended Arabic-Indic digits to ASCII; honorific ligatures kept and flagged.",
+    "description_en": "A normalisation policy for text_norm columns. NFC plus mapping of Arabic presentation forms; invisible controls removed except a meaningful ZWNJ or emoji ZWJ; tatweel, harakat, Quranic marks and superscript alef removed; alef variants to bare alef; alef maqsura to yeh; taa marbuta kept and flagged; Arabic-Indic and Extended Arabic-Indic digits to ASCII; honorific ligatures kept and flagged.",
     "license": "CC-BY-4.0",
     "attribution": "Bayanat Labs (https://bayanatlabs.com)",
     "created": "2026-10-15",

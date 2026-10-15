@@ -120,7 +120,7 @@ To cite a normalisation, name the policy id and its hash, for example "normalise
 
 Licences: code Apache-2.0 (\`LICENSE\`); policy files and examples CC BY 4.0 (\`LICENSE-data\`); generated Unicode tables Unicode License V3 (\`NOTICE-unicode.txt\`); IBM Plex Sans Arabic font (IBM's unmodified files) SIL OFL 1.1 (\`fonts/OFL.txt\`). Contact and takedown requests: hello@bayanatlabs.com.
 
-Need production-grade, rights-cleared Arabic data with documented normalisation? See [Bayanat Labs Knowledge](https://www.bayanatlabs.com/products/knowledge).
+Need production-grade, rights-cleared Arabic data with documented normalisation? See [Bayanat Knowledge](https://www.bayanatlabs.com/products/knowledge).
 `;
 writeFileSync(join(SPACE, 'README.md'), readme);
 

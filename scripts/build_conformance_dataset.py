@@ -49,8 +49,8 @@ DATE = "2026-10-15"
 # the commit this build records.
 HISTORY = [
     ("v0.1", "2026-10-15", "First release: 80 fixtures (dev 64, acceptance 16) from arabic-normalize 0.1.0", "3eb539074bde"),
-    ("v0.1", "2026-10-15", "Card revision: wording, contact address and review status, and the English rationale "
-                           "of dev-021; no input or expected value changed", None),
+    ("v0.1", "2026-10-15", "Card revision: wording, contact address, product name and review status, and the English "
+                           "rationale of dev-021; no input or expected value changed", None),
 ]
 CONFIGS = ["dev", "acceptance"]
 CROISSANT = os.path.join(REPO, "docs", "dataset", "croissant.json")
@@ -522,7 +522,7 @@ Email `hello@bayanatlabs.com`. We act on removal requests within 30 days and on 
 
 ## Need production-grade, rights-cleared data?
 
-This free release covers normalisation test cases. For licensed Arabic text and knowledge datasets with documented normalisation, see **Bayanat Labs Knowledge** → https://www.bayanatlabs.com/products/knowledge
+This free release covers normalisation test cases. For licensed Arabic text and knowledge datasets with documented normalisation, see **Bayanat Knowledge** → https://www.bayanatlabs.com/products/knowledge
 """
 
 

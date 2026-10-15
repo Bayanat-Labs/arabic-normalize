@@ -39,7 +39,7 @@ Zero-width and bidi controls are removed, except a ZWNJ that matters and the ZWJ
 
 ## 7. Policy hash covers behaviour, not prose
 
-A policy id is bound to the SHA-256 of its canonical JSON. The hash covers the canonical JSON of the whole policy object except the top-level `meta` member (titles in English and Arabic, description, licence, status). Reason: the Arabic titles still need native review, and a wording fix must not change the identity of a policy whose behaviour is unchanged. Everything that affects output is inside the hash: `policy_id`, `version`, `spec`, `unicode_version`, `unicode_form`, `idempotent` and every stage mode. The canonical form is defined in SPEC §2 so the TypeScript port can compute the same hash.
+A policy id is bound to the SHA-256 of its canonical JSON. The hash covers the canonical JSON of the whole policy object except the top-level `meta` member (titles in English and Arabic, description, licence, status). Reason: the Arabic titles still need native review, and a wording fix must not change the identity of a policy whose behaviour is unchanged. Everything that affects output is inside the hash: `policy_id`, `version`, `spec`, `unicode_version`, `unicode_form`, `idempotent` and every stage mode. The canonical form is defined in SPEC §2, and the JavaScript port (`js/`) computes the same hash from it.
 
 ## 8. Unicode data is pinned and bound to the policy
 
@@ -47,7 +47,7 @@ Character classes, decompositions and combining classes come from UCD 18.0.0 (th
 
 ## 9. Offsets are code-point spans
 
-Offsets are zero-based code-point indices into the input string, end-exclusive. Each output code point maps to a span `[start, end]`, because one input code point can produce several output code points (ﻻ → لا) and composition can merge several into one. Byte or UTF-16 offsets are left to the caller (the TypeScript port will convert).
+Offsets are zero-based code-point indices into the input string, end-exclusive. Each output code point maps to a span `[start, end]`, because one input code point can produce several output code points (ﻻ → لا) and composition can merge several into one. Byte or UTF-16 offsets are left to the caller. The JavaScript port (`js/`) uses the same code-point offsets, not UTF-16 code units: index the input with `[...text]`.
 
 ## 10. Invalid input: dropped and reported by default, rejected under strict mode
 
