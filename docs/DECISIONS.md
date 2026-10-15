@@ -6,17 +6,17 @@ A released policy never changes. If a decision below is reversed, the new behavi
 
 ## D-01. Unicode form of bayanat-norm-v1: NFC plus Arabic presentation-form mapping (NFKC scoped to Arabic presentation forms)
 
-**Sources.** RULES §5.1 (founder default) says "NFKC (this maps presentation forms U+FB50–FDFF and U+FE70–FEFF)". Claude-research P-TXT says NFC plus presentation-form mapping. Claude-max stage 3 says NFKC. RULES appendix A-10 picked NFKC with ة kept and flagged. The brief resolves to "NFC + explicit mapping of Arabic presentation forms only (equivalent to NFKC for Arabic letters, without folding non-Arabic compatibility characters or expanding ﷺ)". The manual (T3.recipe) keeps the RULES wording and records the difference as its conflict C-03; its stage-3 action text says "presentation forms mapped". normref implements the brief's version.
+**Sources.** RULES §5.1 (founder default) says "NFKC (this maps presentation forms U+FB50–FDFF and U+FE70–FEFF)". One internal research note says NFC plus presentation-form mapping. Another says NFKC. RULES appendix A-10 picked NFKC with ة kept and flagged. The brief resolves to "NFC + explicit mapping of Arabic presentation forms only (equivalent to NFKC for Arabic letters, without folding non-Arabic compatibility characters or expanding ﷺ)". The manual (T3.recipe) keeps the RULES wording and records the difference as its conflict C-03; its stage-3 action text says "presentation forms mapped". normref implements the brief's version.
 
 **Decision.** bayanat-norm-v1 uses `unicode_form: NFC` with `presentation_forms: map`, which applies the NFKC mapping to every Arabic presentation form (U+FB50–U+FDFF, U+FE70–U+FEFF) except the honorific word ligatures, and `ligatures_honorific: flag`.
 
-**Why this is the stricter reading of the founder default.** For Arabic presentation forms the output is the NFKC output, which is the purpose RULES gives for NFKC. Full NFKC would in addition (a) expand U+FDFA ﷺ into an 18-code-point, four-word phrase and U+FDF2 ﷲ into a word, changing word counts and tokenisation, and (b) silently fold non-Arabic compatibility characters: ² to 2, ½ to 1⁄2, ﬁ to fi, fullwidth Ａ to A, … to ..., ① to 1, ㎏ to kg, NBSP to space, Arabic mathematical letters and the Kazakh high-hamza letters U+0675–U+0678. RULES §1 item 8 forbids destructive normalisation applied silently, and A-10 records astra's rule "do not erase task-relevant distinctions". Scoping the compatibility mapping to Arabic presentation forms is the more cautious choice, and the brief gives it as an explicit pitfall. The difference from full NFKC is limited to the cases above; acceptance fixture acc-007 and dev fixture dev-039 pin it.
+**Why this is the stricter reading of the founder default.** For Arabic presentation forms the output is the NFKC output, which is the purpose RULES gives for NFKC. Full NFKC would in addition (a) expand U+FDFA ﷺ into an 18-code-point, four-word phrase and U+FDF2 ﷲ into a word, changing word counts and tokenisation, and (b) silently fold non-Arabic compatibility characters: ² to 2, ½ to 1⁄2, ﬁ to fi, fullwidth Ａ to A, … to ..., ① to 1, ㎏ to kg, NBSP to space, Arabic mathematical letters and the Kazakh high-hamza letters U+0675–U+0678. RULES §1 item 8 forbids destructive normalisation applied silently, and A-10 records the internal rule "do not erase task-relevant distinctions". Scoping the compatibility mapping to Arabic presentation forms is the more cautious choice, and the brief gives it as an explicit pitfall. The difference from full NFKC is limited to the cases above; acceptance fixture acc-007 and dev fixture dev-039 pin it.
 
 **Consequence for the manual.** A dataset that records `normalisation_version: bayanat-norm-v1` follows the RULES §5.1 recipe with this scoping. The manual's T3.recipe line can cite `bayanat-norm-v1` and its hash (see CHANGELOG) as the implementation of RULES §5.1 (founder note filed with the TL-003 engine report). Full NFKC stays available as `unicode_form: NFKC` in a custom policy.
 
 ## D-02. Taa marbuta: kept and flagged in bayanat-norm-v1, folded only for scoring and search
 
-**Sources.** RULES §5.1 and A-10: keep ة and flag it; fold ة→ه only in `text_search`. Claude-max stage 3 unifies it in text_norm. The brief, the manual and normref agree with RULES.
+**Sources.** RULES §5.1 and A-10: keep ة and flag it; fold ة→ه only in `text_search`. One internal research note unifies it in text_norm. The brief, the manual and normref agree with RULES.
 
 **Decision.** bayanat-norm-v1 has `taa_marbuta: flag`: ة is kept and the result carries the flag `taa_marbuta.flag` (and `stats.classes.taa_marbuta` counts it). asr-eval-v1 folds ة→ه (`taa_marbuta: to-heh`, lossy) because WER scoring needs it; the future `search-v1` policy will fold it for `text_search`. raw-safe-v1 keeps it with no flag.
 
@@ -76,7 +76,7 @@ On ordinary Arabic text (letters, harakat, tatweel, alef variants, ى, ة, Arabi
 
 ## D-13. Licences
 
-Code is Apache-2.0 (brief; claude-research Bucket B rule). Policy JSON files and the conformance fixtures are CC BY 4.0 (Bayanat Labs), because they are data (RULES §1 item 10 forbids Apache or MIT for data). The generated tables are derived from the Unicode Character Database and keep the Unicode License V3 notice (NOTICE-unicode.txt). There are no runtime dependencies. GPL tools (PyArabic, Mishkal) are not imported, vendored or consulted for code.
+Code is Apache-2.0 (project brief and the internal licensing rule for code). Policy JSON files and the conformance fixtures are CC BY 4.0 (Bayanat Labs), because they are data (RULES §1 item 10 forbids Apache or MIT for data). The generated tables are derived from the Unicode Character Database and keep the Unicode License V3 notice (NOTICE-unicode.txt). There are no runtime dependencies. GPL tools (PyArabic, Mishkal) are not imported, vendored or consulted for code.
 
 ## D-14. Fixture authorship (deviation from the brief)
 
