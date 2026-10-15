@@ -2,7 +2,7 @@ name: Publish to npm
 
 # Publishes js/ as @bayanat-labs/arabic-normalize when a GitHub release is published.
 # Uses npm trusted publishing (OIDC): configure the trusted publisher for this repository and workflow on
-# npmjs.com first (FOUNDER ACTION); no token is stored in the repository.
+# npmjs.com first (a one-time step for the package owner); no token is stored in the repository.
 
 on:
   release:

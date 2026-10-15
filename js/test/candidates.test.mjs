@@ -1,7 +1,7 @@
 // Copyright 2026 Bayanat Labs
 // SPDX-License-Identifier: Apache-2.0
 //
-// Blind acceptance-b candidates (16 cases written by a second session without engine access).
+// Blind acceptance-b candidates (16 cases written separately, without engine access).
 // Not part of the 80 pilot fixtures; see tests/fixtures/candidates/README.md.
 import assert from 'node:assert/strict';
 import { join } from 'node:path';

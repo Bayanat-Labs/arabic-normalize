@@ -1,17 +1,17 @@
 ---
-native_review: independent_ai_review
-human_linguist_signoff: recommended, not yet done (founder action; sign below and in tests/fixtures/REVIEW.md)
+native_review: pending
+human_linguist_signoff: recommended, not yet done (sign below and in tests/fixtures/REVIEW.md)
 reviewed: 2026-10-15
 ---
 
 # Review of the lossy substitutions (pilot policies)
 
-This is an independent Arabic linguistic review of every change that the pilot policies flag as lossy: the 24 conformance fixtures with a lossy flag and the 31 context classes in which lossy changes occurred in the Arabic Wikipedia stress run ([stress/report.md](stress/report.md)). For each case it asks two questions:
+This is a review of every change that the pilot policies flag as lossy: the 24 conformance fixtures with a lossy flag and the 31 context classes in which lossy changes occurred in the Arabic Wikipedia stress run ([stress/report.md](stress/report.md)). For each case it asks two questions:
 
 1. Is the substitution correct, that is, is the output the form the rule promises (bare alef, yeh, heh)?
 2. Is the lossy flag justified, that is, can the change make two different words identical?
 
-Reviewer: an AI reviewer in a separate agent session (TL-003, oracles and stress part) that did not write the engine or the fixtures. Arabic is Modern Standard Arabic. This review does not replace the human native linguist sign-off that the brief requires; that sign-off is recommended and listed for the founder.
+The review was made by Bayanat Labs separately from the writing of the engine and the fixtures. Arabic is Modern Standard Arabic. It is not a native-speaker review and does not replace the human native linguist sign-off at the end of this page, which is still recommended. The Arabic text has not yet been reviewed by a native Arabic writer; the English governs.
 
 Verdicts: **correct**: the substitution is right and the flag marks a possible merge. **correct, flag conservative**: the substitution is right, but in this instance it restores the standard spelling, so the flag over-reports (the safe direction). **error**: wrong output or wrong flag.
 
@@ -29,7 +29,7 @@ Errors found: 0. No engine or fixture change was needed. Two documentation gaps 
 | Id | Finding | Action |
 |---|---|---|
 | L-1 | No substitution error. All lossy fixtures and all stress classes give the output their rule specifies, and every lossy flag marks a change that can merge two different words. Some flags are conservative (the change restores the standard spelling in that instance); over-flagging is the safe direction. | None. |
-| L-2 | Uthmani (Quranic) spelling. Removing the superscript alef leaves the consonantal skeleton (ٱلْكِتَٰبُ → الكتب), which can coincide with another word (الكتب, the books). It is not flagged, because the superscript alef is classed with the vowel marks (DECISIONS D-04) and counted in diacritization_ratio. The classification is consistent for modern text, where the superscript alef appears in words such as هٰذا and لٰكن and its removal gives the standard spelling. In Uthmani text a hamza written on a tatweel (يَسْـَٔلُونَ) also stays as a combining hamza on the preceding letter (يسٔلون). | Limitation added to the bayanat-norm-v1 and asr-eval-v1 cards (English and Arabic). No engine change: the policies are frozen, and a Quranic-text policy is the right place for a fix (recommendation R-2). |
+| L-2 | Uthmani (Quranic) spelling. Removing the superscript alef leaves the consonantal skeleton (ٱلْكِتَٰبُ → الكتب), which can coincide with another word (الكتب, the books). It is not flagged, because the superscript alef is classed with the vowel marks (docs/DECISIONS.md, section 4) and counted in diacritization_ratio. The classification is consistent for modern text, where the superscript alef appears in words such as هٰذا and لٰكن and its removal gives the standard spelling. In Uthmani text a hamza written on a tatweel (يَسْـَٔلُونَ) also stays as a combining hamza on the preceding letter (يسٔلون). | Limitation added to the bayanat-norm-v1 and asr-eval-v1 cards (English and Arabic). No engine change: the policies are frozen, and a Quranic-text policy is the right place for a fix (recommendation R-2). |
 | L-3 | ى → ي assumes Arabic-language text. In some other languages written in Arabic script (for example Uyghur) ى and ي are different letters. The change is already flagged as lossy. | Limitation added to the bayanat-norm-v1 and asr-eval-v1 cards (English and Arabic). |
 | L-4 | One rule id, alef_variants.map, covers four letters with different effects: ٱ → ا restores standard spelling, while أ، إ، آ → ا delete a hamza that distinguishes words. | No change in v1 (frozen policies). Recommendation R-1. |
 | L-5 | Outside the lossy rules: U+FDFC (rial sign) is in the honorific set of SPEC 4.4, so a price written with ﷼ raises ligatures_honorific.flag. The text is unchanged; only the flag name is inaccurate. | No change in v1. Recommendation R-3. |
@@ -63,7 +63,7 @@ Lossy substitutions are read from the engine's change log for each fixture (coun
 | dev-051 | `bayanat-norm-v1` | نعم، شكرا؛ هل أنت بخير؟ | نعم، شكرا؛ هل انت بخير؟ | أ → ا | correct | أنت → انت. أنت (you) and أنّت (she groaned) both become انت. |
 | dev-052 | `asr-eval-v1` | نعم، شكرا؛ هل أنت بخير؟ | نعم شكرا هل انت بخير | أ → ا | correct | As dev-051, under asr-eval-v1. |
 | dev-054 | `bayanat-norm-v1` | قال: «إلى اللقاء» | قال: «الي اللقاء» | إ → ا; ى → ي | correct | إلى → الي inside quotation marks, as in dev-010. |
-| dev-060 | `asr-eval-v1` | ٱلْكِتَٰبُ | الكتب | ٱ → ا | correct, flag conservative | The only flagged change is ٱ → ا, conservative as in dev-011. The real merge in this fixture comes from removing the superscript alef: Uthmani ٱلْكِتَٰبُ (al-kitāb, the book) becomes الكتب, the spelling of al-kutub (the books). That change is not flagged, because the superscript alef is counted as a vowel mark (DECISIONS D-04). Documented as a limitation (finding L-2). |
+| dev-060 | `asr-eval-v1` | ٱلْكِتَٰبُ | الكتب | ٱ → ا | correct, flag conservative | The only flagged change is ٱ → ا, conservative as in dev-011. The real merge in this fixture comes from removing the superscript alef: Uthmani ٱلْكِتَٰبُ (al-kitāb, the book) becomes الكتب, the spelling of al-kutub (the books). That change is not flagged, because the superscript alef is counted as a vowel mark (docs/DECISIONS.md, section 4). Documented as a limitation (finding L-2). |
 | dev-062 | `asr-eval-v1` | كلمة أخرى | كلمه اخري | أ → ا; ة → ه; ى → ي | correct | كلمة → كلمه (ة → ه) and أخرى → اخري (أ → ا, ى → ي) under asr-eval-v1. |
 | acc-002 | `asr-eval-v1` | 👩🏽‍💻 مبرمجة | 👩🏽‍💻 مبرمجه | ة → ه | correct | مبرمجة → مبرمجه under asr-eval-v1. |
 | acc-006 | `bayanat-norm-v1` | ݐࢠى | ݐࢠي | ى → ي | correct | ى → ي applies whatever the neighbouring letters; the Arabic Supplement and Extended-A letters are kept. The string is a code-point test, not a word. In some other languages written in Arabic script (for example Uyghur) ى and ي are different letters, so the flag is justified (finding L-3). |
@@ -112,7 +112,7 @@ Counts are lossy changes in 113752 Arabic Wikipedia articles (bayanat-norm-v1 fo
 
 ## Lossy wording in the policy cards
 
-The lossy-rule lines and limitations of the six policy cards (`docs/policies/*.md`, English and Arabic) were read against the rules. The descriptions of alef_variants.map, alef_maqsura.to_yeh and taa_marbuta.to_heh are accurate in both languages. Two limitation lines were added to bayanat-norm-v1 and asr-eval-v1 (L-2, L-3) through `scripts/make_docs.py`. The Arabic of those new lines was written in this session and is covered by the cards' own pending native review.
+The lossy-rule lines and limitations of the six policy cards (`docs/policies/*.md`, English and Arabic) were read against the rules. The descriptions of alef_variants.map, alef_maqsura.to_yeh and taa_marbuta.to_heh are accurate in both languages. Two limitation lines were added to bayanat-norm-v1 and asr-eval-v1 (L-2, L-3) through `scripts/make_docs.py`. The Arabic of those new lines is covered by the cards' own pending native review.
 
 ## Human linguist sign-off (recommended)
 

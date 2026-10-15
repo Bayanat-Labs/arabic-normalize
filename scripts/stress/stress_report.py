@@ -19,8 +19,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 OUT = os.path.join(REPO, "docs", "stress")
 POLICIES = ["bayanat-norm-v1", "asr-eval-v1", "raw-safe-v1"]
 LOSSY = ["alef_variants.map", "alef_maqsura.to_yeh", "taa_marbuta.to_heh"]
-OTHER_CORPORA = [("fleurs", "FLEURS ar_eg transcripts (read-speech sentences)"),
-                 ("tanzil", "Tanzil Quran text (Uthmani script)")]
+OTHER_CORPORA = [("fleurs", "FLEURS ar_eg transcripts (read-speech sentences)")]
 
 
 def pct(a, b):
@@ -140,7 +139,7 @@ def main():
         r = sc["policies"][p]
         w("| %s | %.2f | %.2f |" % (p, r["plain_MBps"], r["detailed_MBps"]))
     w("")
-    w("The brief's pilot target is at least 5 MB/s per core for bayanat-norm-v1 in Python; plain mode measured "
+    w("The pilot target is at least 5 MB/s per core for bayanat-norm-v1 in Python; plain mode measured "
       "%.2f MB/s and detailed mode %.2f MB/s." % (sc["policies"]["bayanat-norm-v1"]["plain_MBps"],
                                                   sc["policies"]["bayanat-norm-v1"]["detailed_MBps"]))
     w("")

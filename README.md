@@ -119,7 +119,7 @@ By policy (dev + acceptance): asr-eval-v1 15/15, bayanat-norm-v1 52/52, raw-safe
 JavaScript port (`js/`): 560 of 560 reference cases (the 80 fixtures under 7 policies) and 80 of 80 policy comparisons are identical to the Python engine, including the offset map and change log; counts from `js/conformance.json` (`js/scripts/conformance_counts.mjs`).
 <!-- END:counts -->
 
-The test suite also checks every line of the Unicode 18.0.0 NormalizationTest.txt for NFC, NFD, NFKC and NFKD, every RGI emoji ZWJ sequence, policy hash stability, and properties on random Arabic-heavy strings (idempotence, offset-map consistency, no silent changes). Fixtures are original text written by Bayanat Labs, labelled synthetic/illustrative, and contain no personal data. An independent AI review of every lossy fixture and of the lossy cases met in the stress run is in [docs/LOSSY_REVIEW.md](docs/LOSSY_REVIEW.md); the native-speaker sign-off is pending (`tests/fixtures/REVIEW.md`).
+The test suite also checks every line of the Unicode 18.0.0 NormalizationTest.txt for NFC, NFD, NFKC and NFKD, every RGI emoji ZWJ sequence, policy hash stability, and properties on random Arabic-heavy strings (idempotence, offset-map consistency, no silent changes). Fixtures are original text written by Bayanat Labs, labelled synthetic/illustrative, and contain no personal data. A review of every lossy fixture and of the lossy cases met in the stress run is in [docs/LOSSY_REVIEW.md](docs/LOSSY_REVIEW.md); it is not a native-speaker review, and the native-speaker sign-off is pending (`tests/fixtures/REVIEW.md`).
 
 - Stress run on one Arabic Wikipedia dump part (crashes, offset-map checks, throughput, lossy-flag rates; statistics only): [docs/stress/report.md](docs/stress/report.md).
 - Agreement of CAMeL Tools, tnkeeh, Whisper's basic normaliser and PyArabic with the pilot policies on the fixtures (tables only; the tools run outside this repository): [docs/compat/README.md](docs/compat/README.md).
@@ -136,6 +136,6 @@ Other open tools normalise Arabic too: CAMeL Tools (MIT), PyArabic (GPL), tnkeeh
 
 Code: Apache-2.0 ([LICENSE](LICENSE)). Policy files and conformance fixtures: CC BY 4.0 ([LICENSE-data](LICENSE-data)). Generated Unicode tables: Unicode License V3 ([NOTICE-unicode.txt](NOTICE-unicode.txt)). To cite, use [CITATION.cff](CITATION.cff) and name the policy id and hash you used.
 
-Questions, corrections and takedown requests: open@bayanatlabs.com.
+Questions, corrections and takedown requests: hello@bayanatlabs.com.
 
 **Need production-grade, rights-cleared Arabic data with documented normalisation?** See [Bayanat Labs Knowledge](https://bayanatlabs.com/products/knowledge).

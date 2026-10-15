@@ -1,9 +1,11 @@
 ---
 lang: ar
 dir: rtl
-native_review: independent_ai_review
+native_review: pending
 human_native_review: recommended
 ---
+
+*The Arabic text has not yet been reviewed by a native Arabic writer; the English governs.*
 
 <div dir="rtl" lang="ar">
 
@@ -23,7 +25,7 @@ human_native_review: recommended
 
 ## الاستخدام
 
-السياسة الافتراضية لحقل النص الموحَّد text_norm في مجموعات البيانات التي تنشرها بيانات لابز، ولإزالة التكرار وحساب الإحصاءات. وهي الوصفة الواردة في القسم 5.1 من ملف القواعد RULES.md. ويُحفظ إلى جانبها النص الخام text_raw والنص المشكول text_diac (ناتج raw-safe-v1).
+السياسة الافتراضية لحقل النص الموحَّد text_norm في مجموعات البيانات التي تنشرها بيانات لابز، ولإزالة التكرار وحساب الإحصاءات. ويُحفظ إلى جانبها النص الخام text_raw والنص المشكول text_diac (ناتج raw-safe-v1).
 
 ## المراحل بالترتيب
 

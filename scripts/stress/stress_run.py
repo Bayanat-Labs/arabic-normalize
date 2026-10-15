@@ -8,17 +8,18 @@ Sources:
     pages that are not redirects, one text per article;
   * a TSV file set, one text per row taken from a named column (for example the FLEURS ar_eg transcripts),
     optionally deduplicated by another column and sampled;
-  * a Tanzil "text with aya numbers" file (sura|aya|text per line), optionally sampled.
+  * a delimited text file, one text per line in the last of its fields (for example id|id|text with
+    --delimiter "|"); lines starting with "#" are skipped; optionally sampled.
 
 Every text goes through each pilot policy, in plain and detailed mode. The run records throughput, crashes,
 offset-map and other consistency failures, rule and lossy-flag rates, lossy context classes and word-type merge
-counts. It writes numbers only: no corpus text leaves this process. The corpus files stay outside the repository.
+counts. It writes numbers only: no corpus text leaves this process, and no corpus file is added to the repository.
 
     python -I scripts/stress/stress_run.py --wikipedia-dump DUMP.bz2 --sha256 HEX --out-json PATH [--workers 8]
     python -I scripts/stress/stress_run.py --tsv A.tsv B.tsv --column 3 --unique-by 0 --unit sentence \
         --sample 2000 --seed 20261013 --out-json PATH
-    python -I scripts/stress/stress_run.py --tanzil quran-uthmani.txt --unit verse --sample 2000 --seed 20261013 \
-        --out-json PATH
+    python -I scripts/stress/stress_run.py --delimited TEXT.txt --delimiter "|" --unit line --sample 2000 \
+        --seed 20261013 --out-json PATH
 
 Then scripts/stress/stress_report.py turns the JSON into docs/stress/*.md and *.json.
 """
@@ -279,16 +280,15 @@ def read_tsv_texts(paths, column, unique_by):
     return out
 
 
-def read_tanzil_texts(path):
-    """Verses from a Tanzil 'text with aya numbers' file: sura|aya|text lines; '#' lines are the licence notice."""
+def read_delimited_texts(path, delimiter, fields):
+    """One text per line: the last of `fields` fields split on `delimiter`; empty lines and '#' lines are skipped."""
     out = []
     with open(path, encoding="utf-8") as f:
         for line in f:
             line = line.rstrip("\n")
             if not line or line.startswith("#"):
                 continue
-            sura, aya, text = line.split("|", 2)
-            out.append(text)
+            out.append(line.split(delimiter, fields - 1)[-1] if delimiter else line)
     return out
 
 
@@ -351,11 +351,13 @@ def main():
     src = ap.add_mutually_exclusive_group(required=True)
     src.add_argument("--wikipedia-dump", metavar="DUMP.bz2")
     src.add_argument("--tsv", nargs="+", metavar="FILE")
-    src.add_argument("--tanzil", metavar="FILE")
+    src.add_argument("--delimited", metavar="FILE", help="text file, one text per line (see --delimiter, --fields)")
     ap.add_argument("--sha256", help="expected SHA-256 of the Wikipedia dump (checked against the file)")
     ap.add_argument("--column", type=int, default=3, help="TSV column holding the text (0-based)")
     ap.add_argument("--unique-by", type=int, default=None, help="TSV column used to keep one row per value")
-    ap.add_argument("--unit", default="article", help="what one text is: article, sentence, verse")
+    ap.add_argument("--delimiter", default="", help="field separator of a --delimited file (default: none, whole line)")
+    ap.add_argument("--fields", type=int, default=3, help="fields per line of a --delimited file; the text is the last")
+    ap.add_argument("--unit", default="article", help="what one text is: article, sentence, line")
     ap.add_argument("--sample", type=int, default=0, help="sample this many texts (0 = all)")
     ap.add_argument("--seed", type=int, default=20261013)
     ap.add_argument("--out-json", required=True)
@@ -377,9 +379,9 @@ def main():
             files = [file_record(p) for p in a.tsv]
             kind = "tsv"
         else:
-            pool_texts = read_tanzil_texts(a.tanzil)
-            files = [file_record(a.tanzil)]
-            kind = "tanzil"
+            pool_texts = read_delimited_texts(a.delimited, a.delimiter, a.fields)
+            files = [file_record(a.delimited)]
+            kind = "delimited"
         texts = sample(pool_texts, a.sample, a.seed)
         source = {"kind": kind, "files": files, "column": a.column if a.tsv else None,
                   "unique_by": a.unique_by if a.tsv else None, "unit": a.unit, "texts_available": len(pool_texts),

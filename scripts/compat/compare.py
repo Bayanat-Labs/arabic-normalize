@@ -6,9 +6,10 @@
 Each oracle runs in its own virtual environment, as a subprocess, through a small harness that exchanges JSON lines
 on stdin and stdout. Nothing from an oracle is imported by this script or by the arabic-normalize package.
 
-Harnesses: scripts/compat/harness/{camel,tnkeeh,whisper}_harness.py (the tools are MIT-licensed). The PyArabic
-harness is not in this repository, because PyArabic is GPL: pass it with --harness pyarabic=PATH (the file needs
-_common.py from scripts/compat/harness/ next to it). An oracle whose venv or harness is missing is skipped.
+Harnesses: scripts/compat/harness/{camel,tnkeeh,whisper}_harness.py (the tools are MIT-licensed). No PyArabic
+harness is included, because PyArabic is GPL: to run it, write one on the model of the others and pass it with
+--harness pyarabic=PATH (it needs _common.py from scripts/compat/harness/ next to it). An oracle whose venv or
+harness is missing is skipped.
 
 Set up the venvs (versions as recorded in docs/compat/agreement.json), for example:
     uv venv compat/oracles/camel/.venv && VIRTUAL_ENV=compat/oracles/camel/.venv uv pip install --no-deps \
@@ -58,7 +59,7 @@ ORACLES = {
     "whisper": {"label": "Whisper BasicTextNormalizer (whisper-normalizer 0.1.15)", "licence": "MIT",
                 "pipelines": ["whisper-basic", "whisper-basic-rd"], "analogue": {"asr-eval-v1": "whisper-basic"}},
     "pyarabic": {"label": "PyArabic 0.6.15 (subprocess only)", "licence": "GPL", "pipelines":
-                 ["pyarabic-brief", "pyarabic-norm", "pyarabic-asr"],
+                 ["pyarabic-hamza", "pyarabic-norm", "pyarabic-asr"],
                  "analogue": {"bayanat-norm-v1": "pyarabic-norm", "asr-eval-v1": "pyarabic-asr"}},
 }
 
@@ -73,8 +74,8 @@ PIPELINE_DOC = {
     "tnkeeh-asr": "tnkeeh-norm options plus `remove_special_chars=True`",
     "whisper-basic": "`BasicTextNormalizer()(s)` (the default Whisper basic normaliser)",
     "whisper-basic-rd": "`BasicTextNormalizer(remove_diacritics=True)(s)`",
-    "pyarabic-brief": "`strip_tashkeel` → `strip_tatweel` → `normalize_hamza` (default method) → `normalize_ligature` "
-                      "(the composition the TL-003 brief names for compat-pyarabic-v1)",
+    "pyarabic-hamza": "`strip_tashkeel` → `strip_tatweel` → `normalize_hamza` (default method) → `normalize_ligature` "
+                      "(the composition planned for compat-pyarabic-v1)",
     "pyarabic-norm": "`normalize_ligature` → `strip_diacritics` → `strip_tatweel` → `normalize_alef`",
     "pyarabic-asr": "pyarabic-norm → `normalize_teh`",
 }
@@ -279,7 +280,7 @@ def main():
                     m["ws_punct"] += squeeze_ws_punct(theirs) == squeeze_ws_punct(o)
                 matrix[(pipe, pol)] = m
 
-    # Behaviour probes computed from the same runs (no hand-written numbers).
+    # Behaviour probes computed from the same runs (no number is typed in).
     has_harakat = [fx for fx in fixtures if any(ord(c) in E.HARAKAT for c in fx["input"])]
     wb_split = sum(1 for fx in has_harakat
                    if len(results["whisper"][(fx["fixture_id"], "whisper-basic")]["output"].split())
@@ -326,12 +327,12 @@ def write_markdown(d):
     w("")
     w("Generated %s from the 80 pilot fixtures (64 dev, 16 acceptance) and arabic-normalize %s (UCD %s) by "
       "`scripts/compat/compare.py`. The CAMeL Tools, tnkeeh and Whisper harnesses are in `scripts/compat/harness/`; "
-      "the PyArabic harness is kept outside this repository so that no file here imports a GPL module, and is "
-      "passed to the driver with `--harness pyarabic=PATH`. Every number below is computed by the driver; the "
+      "no PyArabic harness is included, so that no file here imports a GPL module: one is passed to the driver "
+      "with `--harness pyarabic=PATH`. Every number below is computed by the driver; the "
       "machine-readable result is [agreement.json](agreement.json) and the per-fixture table is "
       "[fixtures.md](fixtures.md)." % (d["generated"], d["arabic_normalize_version"], d["unicode_version"]))
     w("")
-    w("This is a pilot comparison on synthetic fixtures, not the brief's compatibility target (paragraph-level "
+    w("This is a pilot comparison on synthetic fixtures, not the compatibility target planned for compat policies (paragraph-level "
       "exact match on 10,000 stress paragraphs for each future `compat-*` policy). The pilot ships no compat "
       "policy; these tables show how far each tool's closest pipeline is from the three pilot policies, and "
       "where, so that compat policies can be designed later.")
@@ -414,7 +415,7 @@ def write_markdown(d):
       "splits vocalised words." % (p["whisper_basic_more_tokens_than_asr_eval_on_harakat_fixtures"],
                                    p["fixtures_with_harakat"]))
     w("- CAMeL Tools `normalize_unicode` (NFKC): on %d of the %d fixtures with U+FDFA or U+FDF2, the honorific "
-      "ligature was expanded into words; `bayanat-norm-v1` keeps it and flags it (DECISIONS D-01)."
+      "ligature was expanded into words; `bayanat-norm-v1` keeps it and flags it (docs/DECISIONS.md, section 1)."
       % (p["camel_norm_expanded_honorific_ligature"], p["fixtures_with_U+FDFA_or_U+FDF2"]))
     w("")
     w("### Behaviour fingerprint")
@@ -435,8 +436,8 @@ def write_markdown(d):
     w("None of the four tools is a drop-in match for a pilot policy, which is expected: the pilot policies keep "
       "punctuation and spacing (bayanat-norm-v1), remove invisible controls and invalid code points, and pin "
       "Unicode data. The `compat-camel-v1`, `compat-whisper-basic-v1` and `compat-pyarabic-v1` policies planned "
-      "for v1.0 must be designed from these divergence classes and then verified on the stress corpus, as the "
-      "brief requires. Lucene was not run in this pass (no Java harness yet).")
+      "for v1.0 must be designed from these divergence classes and then verified on the stress corpus. Lucene "
+      "was not run in this pass (no Java harness yet).")
     w("")
     with open(os.path.join(OUT_DOCS, "README.md"), "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(L))

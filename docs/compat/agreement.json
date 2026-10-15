@@ -80,7 +80,7 @@
    "label": "PyArabic 0.6.15 (subprocess only)",
    "licence": "GPL",
    "pipelines": [
-    "pyarabic-brief",
+    "pyarabic-hamza",
     "pyarabic-norm",
     "pyarabic-asr"
    ],
@@ -108,7 +108,7 @@
   "tnkeeh-asr": "tnkeeh-norm options plus `remove_special_chars=True`",
   "whisper-basic": "`BasicTextNormalizer()(s)` (the default Whisper basic normaliser)",
   "whisper-basic-rd": "`BasicTextNormalizer(remove_diacritics=True)(s)`",
-  "pyarabic-brief": "`strip_tashkeel` → `strip_tatweel` → `normalize_hamza` (default method) → `normalize_ligature` (the composition the TL-003 brief names for compat-pyarabic-v1)",
+  "pyarabic-hamza": "`strip_tashkeel` → `strip_tatweel` → `normalize_hamza` (default method) → `normalize_ligature` (the composition planned for compat-pyarabic-v1)",
   "pyarabic-norm": "`normalize_ligature` → `strip_diacritics` → `strip_tatweel` → `normalize_alef`",
   "pyarabic-asr": "pyarabic-norm → `normalize_teh`"
  },
@@ -380,7 +380,7 @@
    "ws_punct": 21
   },
   {
-   "pipeline": "pyarabic-brief",
+   "pipeline": "pyarabic-hamza",
    "policy_id": "bayanat-norm-v1",
    "n": 80,
    "exact": 29,
@@ -388,7 +388,7 @@
    "ws_punct": 29
   },
   {
-   "pipeline": "pyarabic-brief",
+   "pipeline": "pyarabic-hamza",
    "policy_id": "asr-eval-v1",
    "n": 80,
    "exact": 21,
@@ -396,7 +396,7 @@
    "ws_punct": 23
   },
   {
-   "pipeline": "pyarabic-brief",
+   "pipeline": "pyarabic-hamza",
    "policy_id": "raw-safe-v1",
    "n": 80,
    "exact": 33,
@@ -4137,7 +4137,7 @@
     "tnkeeh-asr": "\\u0649",
     "whisper-basic": "\\u0649",
     "whisper-basic-rd": "\\u0649",
-    "pyarabic-brief": "\\u0649",
+    "pyarabic-hamza": "\\u0649",
     "pyarabic-norm": "\\u0627",
     "pyarabic-asr": "\\u0627"
    }
@@ -4159,7 +4159,7 @@
     "tnkeeh-asr": "\\u0623\\u0625\\u0622\\u0627",
     "whisper-basic": "\\u0623\\u0625\\u0622\\u0671",
     "whisper-basic-rd": "\\u0627\\u0627\\u0627\\u0671",
-    "pyarabic-brief": "\\u0621\\u0621\\u0621\\u0621\\u0671",
+    "pyarabic-hamza": "\\u0621\\u0621\\u0621\\u0621\\u0671",
     "pyarabic-norm": "\\u0627\\u0627\\u0627\\u0627",
     "pyarabic-asr": "\\u0627\\u0627\\u0627\\u0627"
    }
@@ -4181,7 +4181,7 @@
     "tnkeeh-asr": "\\u0629",
     "whisper-basic": "\\u0629",
     "whisper-basic-rd": "\\u0629",
-    "pyarabic-brief": "\\u0629",
+    "pyarabic-hamza": "\\u0629",
     "pyarabic-norm": "\\u0629",
     "pyarabic-asr": "\\u0647"
    }
@@ -4203,7 +4203,7 @@
     "tnkeeh-asr": "\\u0624\\u0626",
     "whisper-basic": "\\u0624\\u0626",
     "whisper-basic-rd": "\\u0648\\u064a",
-    "pyarabic-brief": "\\u0621\\u0621",
+    "pyarabic-hamza": "\\u0621\\u0621",
     "pyarabic-norm": "\\u0624\\u0626",
     "pyarabic-asr": "\\u0624\\u0626"
    }
@@ -4225,7 +4225,7 @@
     "tnkeeh-asr": "\\u0643\\u062a",
     "whisper-basic": "\\u0643\\u0020\\u062a",
     "whisper-basic-rd": "\\u0643\\u062a",
-    "pyarabic-brief": "\\u0643\\u062a",
+    "pyarabic-hamza": "\\u0643\\u062a",
     "pyarabic-norm": "\\u0643\\u062a",
     "pyarabic-asr": "\\u0643\\u062a"
    }
@@ -4247,7 +4247,7 @@
     "tnkeeh-asr": "\\u0647\\u0020\\u0630\\u0627",
     "whisper-basic": "\\u0647\\u0020\\u0630\\u0627",
     "whisper-basic-rd": "\\u0647\\u0630\\u0627",
-    "pyarabic-brief": "\\u0647\\u0670\\u0630\\u0627",
+    "pyarabic-hamza": "\\u0647\\u0670\\u0630\\u0627",
     "pyarabic-norm": "\\u0647\\u0630\\u0627",
     "pyarabic-asr": "\\u0647\\u0630\\u0627"
    }
@@ -4269,7 +4269,7 @@
     "tnkeeh-asr": "\\u0628\\u0628",
     "whisper-basic": "\\u0628\\u0640\\u0628",
     "whisper-basic-rd": "\\u0628\\u0640\\u0628",
-    "pyarabic-brief": "\\u0628\\u0628",
+    "pyarabic-hamza": "\\u0628\\u0628",
     "pyarabic-norm": "\\u0628\\u0628",
     "pyarabic-asr": "\\u0628\\u0628"
    }
@@ -4291,7 +4291,7 @@
     "tnkeeh-asr": "\\u0020",
     "whisper-basic": "\\u0661\\u0662",
     "whisper-basic-rd": "\\u0661\\u0662",
-    "pyarabic-brief": "\\u0661\\u0662",
+    "pyarabic-hamza": "\\u0661\\u0662",
     "pyarabic-norm": "\\u0661\\u0662",
     "pyarabic-asr": "\\u0661\\u0662"
    }
@@ -4313,7 +4313,7 @@
     "tnkeeh-asr": "\\u0644\\u0627",
     "whisper-basic": "\\u0644\\u0627",
     "whisper-basic-rd": "\\u0644\\u0627",
-    "pyarabic-brief": "\\u0644\\u0627",
+    "pyarabic-hamza": "\\u0644\\u0627",
     "pyarabic-norm": "\\u0644\\u0627",
     "pyarabic-asr": "\\u0644\\u0627"
    }
@@ -4335,7 +4335,7 @@
     "tnkeeh-asr": "\\u0020",
     "whisper-basic": "\\u0635\\u0644\\u0649\\u0020\\u0627\\u0644\\u0644\\u0647\\u0020\\u0639\\u0644\\u064a\\u0647\\u0020\\u0648\\u0633\\u0644\\u0645",
     "whisper-basic-rd": "\\u0635\\u0644\\u0649\\u0020\\u0627\\u0644\\u0644\\u0647\\u0020\\u0639\\u0644\\u064a\\u0647\\u0020\\u0648\\u0633\\u0644\\u0645",
-    "pyarabic-brief": "\\ufdfa",
+    "pyarabic-hamza": "\\ufdfa",
     "pyarabic-norm": "\\ufdfa",
     "pyarabic-asr": "\\ufdfa"
    }
@@ -4357,7 +4357,7 @@
     "tnkeeh-asr": "\\u0628\\u0020\\u0628",
     "whisper-basic": "\\u0628\\u200c\\u0628",
     "whisper-basic-rd": "\\u0628\\u200c\\u0628",
-    "pyarabic-brief": "\\u0628\\u200c\\u0628",
+    "pyarabic-hamza": "\\u0628\\u200c\\u0628",
     "pyarabic-norm": "\\u0628\\u200c\\u0628",
     "pyarabic-asr": "\\u0628\\u200c\\u0628"
    }
@@ -4379,7 +4379,7 @@
     "tnkeeh-asr": "\\u0628\\u0020\\u0628",
     "whisper-basic": "\\u0628\\u0020\\u0628",
     "whisper-basic-rd": "\\u0628\\u0020\\u0628",
-    "pyarabic-brief": "\\u0628\\u060c\\u0020\\u0628",
+    "pyarabic-hamza": "\\u0628\\u060c\\u0020\\u0628",
     "pyarabic-norm": "\\u0628\\u060c\\u0020\\u0628",
     "pyarabic-asr": "\\u0628\\u060c\\u0020\\u0628"
    }
@@ -4401,7 +4401,7 @@
     "tnkeeh-asr": "AB",
     "whisper-basic": "ab",
     "whisper-basic-rd": "ab",
-    "pyarabic-brief": "AB",
+    "pyarabic-hamza": "AB",
     "pyarabic-norm": "AB",
     "pyarabic-asr": "AB"
    }

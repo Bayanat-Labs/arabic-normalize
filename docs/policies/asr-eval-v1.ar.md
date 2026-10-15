@@ -1,9 +1,11 @@
 ---
 lang: ar
 dir: rtl
-native_review: independent_ai_review
+native_review: pending
 human_native_review: recommended
 ---
+
+*The Arabic text has not yet been reviewed by a native Arabic writer; the English governs.*
 
 <div dir="rtl" lang="ar">
 

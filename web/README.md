@@ -1,6 +1,6 @@
 # web/: the Arabic Text Normalizer page
 
-A static page that runs the JavaScript port (`js/`) in the browser, in Arabic (right to left, the default) and English: paste text, choose a policy, and see the text before and after, the change log, the lossy flags, the diacritization ratio, the policy SHA-256 and a comparison with a second policy. It is deployed as the Hugging Face Space [Bayanat-Labs/arabic-normalizer](https://huggingface.co/spaces/Bayanat-Labs/arabic-normalizer) and is the tool behind https://www.bayanatlabs.com/tools/arabic-normalizer.
+A static page that runs the JavaScript port (`js/`) in the browser, in English (the default) and Arabic (right to left, with the toggle or `?lang=ar`): paste text, choose a policy, and see the text before and after, the change log, the lossy flags, the diacritization ratio, the policy SHA-256 and a comparison with a second policy. It is deployed as the Hugging Face Space [Bayanat-Labs/arabic-normalizer](https://huggingface.co/spaces/Bayanat-Labs/arabic-normalizer).
 
 ```bash
 node web/build.mjs --out /tmp/arabic-normalizer   # assemble the page, the library, policies, fonts and the Space README

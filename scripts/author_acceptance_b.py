@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
 # Copyright 2026 Bayanat Labs
 # SPDX-License-Identifier: Apache-2.0
-"""Blind acceptance-b candidate set: 16 further acceptance cases written by a second agent session.
+"""Blind acceptance-b candidate set: 16 further acceptance cases written separately, without engine access.
 
-Why: the 16 pilot acceptance fixtures were written by the same session as the dev fixtures (DECISIONS
-D-14). The brief asks for acceptance cases written by a second session or a human without seeing the
-engine. These 16 cases were written on 15 Oct 2026 by a separate agent session (the TL-003 fixes
-session). The author worked only from docs/SPEC.md, the three policy JSON files and the raw UCD 18.0.0
-data files in ucd/18.0.0/. It did not read or run src/arabic_normalize/engine.py, policy.py or _ucd.py,
-or the JavaScript port, before this file was committed. Every expected value below was worked out by
-hand from the spec.
+Why: the 16 pilot acceptance fixtures were written by the same author as the dev fixtures
+(docs/DECISIONS.md, section 14). Acceptance cases are meant to be written by a second author without
+seeing the engine. These 16 cases were written separately on 15 Oct 2026, only from docs/SPEC.md, the
+three policy JSON files and the raw UCD 18.0.0 data files in ucd/18.0.0/. src/arabic_normalize/engine.py,
+policy.py and _ucd.py and the JavaScript port were not read or run before this file was committed. Every
+expected value below was worked out from the spec.
 
 Each case uses a family (and, where possible, a policy and rule combination) that does not occur in the
 dev split. The set is a candidate set: it is not part of the 80 pilot fixtures, the published counts or
-the Hugging Face conformance dataset. The brief's pilot gate keeps the fixture count at 80 until a native
-linguist has reviewed the lossy cases; the set is merged into the acceptance split after that review.
+the Hugging Face conformance dataset. The pilot keeps the fixture count at 80 until a native linguist
+has reviewed the lossy cases; the set is merged into the acceptance split after that review.
 Results of the first run against the engine are in tests/fixtures/candidates/README.md.
 
 Text is original synthetic text written for these cases: no corpus text and no personal data.
@@ -28,7 +27,7 @@ import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "tests", "fixtures", "candidates")
-AUTHOR = "Bayanat Labs (second agent session, written from docs/SPEC.md without engine access)"
+AUTHOR = "Bayanat Labs (written separately from docs/SPEC.md, without engine access)"
 CREATED = "2026-10-15"
 LABEL = "synthetic/illustrative, authored by Bayanat Labs"
 

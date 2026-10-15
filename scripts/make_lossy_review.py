@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Write docs/LOSSY_REVIEW.md: the review of every lossy fixture and every lossy context class of the stress run.
 
-The verdicts and notes below are the review (hand-written). Every count in the output is computed here from the
+The verdicts and notes below are the review (written out, not computed). Every count in the output is computed here from the
 fixture files, the engine's change log and docs/stress/stats.json. The script refuses to run when a lossy
 fixture or a stress class has no verdict, so new cases cannot slip through unreviewed.
 
@@ -52,7 +52,7 @@ FIXTURE_REVIEW = {
     "dev-060": (CONS, "The only flagged change is ٱ → ا, conservative as in dev-011. The real merge in this fixture "
                       "comes from removing the superscript alef: Uthmani ٱلْكِتَٰبُ (al-kitāb, the book) becomes "
                       "الكتب, the spelling of al-kutub (the books). That change is not flagged, because the superscript "
-                      "alef is counted as a vowel mark (DECISIONS D-04). Documented as a limitation (finding L-2)."),
+                      "alef is counted as a vowel mark (docs/DECISIONS.md, section 4). Documented as a limitation (finding L-2)."),
     "dev-062": (OK, "كلمة → كلمه (ة → ه) and أخرى → اخري (أ → ا, ى → ي) under asr-eval-v1."),
     "acc-002": (OK, "مبرمجة → مبرمجه under asr-eval-v1."),
     "acc-006": (OK, "ى → ي applies whatever the neighbouring letters; the Arabic Supplement and Extended-A letters "
@@ -129,7 +129,7 @@ FINDINGS = [
      "None."),
     ("L-2", "Uthmani (Quranic) spelling. Removing the superscript alef leaves the consonantal skeleton (ٱلْكِتَٰبُ → "
             "الكتب), which can coincide with another word (الكتب, the books). It is not flagged, because the "
-            "superscript alef is classed with the vowel marks (DECISIONS D-04) and counted in diacritization_ratio. "
+            "superscript alef is classed with the vowel marks (docs/DECISIONS.md, section 4) and counted in diacritization_ratio. "
             "The classification is consistent for modern text, where the superscript alef appears in words such as "
             "هٰذا and لٰكن and its removal gives the standard spelling. In Uthmani text a hamza written on a tatweel "
             "(يَسْـَٔلُونَ) also stays as a combining hamza on the preceding letter (يسٔلون).",
@@ -198,14 +198,14 @@ def build():
     L = []
     w = L.append
     w("---")
-    w("native_review: independent_ai_review")
-    w("human_linguist_signoff: recommended, not yet done (founder action; sign below and in tests/fixtures/REVIEW.md)")
+    w("native_review: pending")
+    w("human_linguist_signoff: recommended, not yet done (sign below and in tests/fixtures/REVIEW.md)")
     w("reviewed: %s" % REVIEW_DATE)
     w("---")
     w("")
     w("# Review of the lossy substitutions (pilot policies)")
     w("")
-    w("This is an independent Arabic linguistic review of every change that the pilot policies flag as lossy: the "
+    w("This is a review of every change that the pilot policies flag as lossy: the "
       "%d conformance fixtures with a lossy flag and the %d context classes in which lossy changes occurred in the "
       "Arabic Wikipedia stress run ([stress/report.md](stress/report.md)). For each case it asks two questions:"
       % (len(rows), len(classes)))
@@ -213,9 +213,10 @@ def build():
     w("1. Is the substitution correct, that is, is the output the form the rule promises (bare alef, yeh, heh)?")
     w("2. Is the lossy flag justified, that is, can the change make two different words identical?")
     w("")
-    w("Reviewer: an AI reviewer in a separate agent session (TL-003, oracles and stress part) that did not write "
-      "the engine or the fixtures. Arabic is Modern Standard Arabic. This review does not replace the human native "
-      "linguist sign-off that the brief requires; that sign-off is recommended and listed for the founder.")
+    w("The review was made by Bayanat Labs separately from the writing of the engine and the fixtures. Arabic is "
+      "Modern Standard Arabic. It is not a native-speaker review and does not replace the human native linguist "
+      "sign-off at the end of this page, which is still recommended. The Arabic text has not yet been reviewed by "
+      "a native Arabic writer; the English governs.")
     w("")
     w("Verdicts: **%s**: the substitution is right and the flag marks a possible merge. **%s**: the substitution "
       "is right, but in this instance it restores the standard spelling, so the flag over-reports (the safe "
@@ -279,8 +280,8 @@ def build():
     w("The lossy-rule lines and limitations of the six policy cards (`docs/policies/*.md`, English and Arabic) were "
       "read against the rules. The descriptions of alef_variants.map, alef_maqsura.to_yeh and taa_marbuta.to_heh "
       "are accurate in both languages. Two limitation lines were added to bayanat-norm-v1 and asr-eval-v1 (L-2, "
-      "L-3) through `scripts/make_docs.py`. The Arabic of those new lines was written in this session and is "
-      "covered by the cards' own pending native review.")
+      "L-3) through `scripts/make_docs.py`. The Arabic of those new lines is covered by the cards' own pending "
+      "native review.")
     w("")
     w("## Human linguist sign-off (recommended)")
     w("")

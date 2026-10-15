@@ -94,7 +94,6 @@ const STR = {
     ctaH: 'Need production-grade, rights-cleared Arabic data?',
     ctaText: 'Bayanat Labs builds licensed Arabic datasets with documented normalisation.',
     ctaLink: 'See Bayanat Labs Knowledge',
-    pageLink: 'Tool page on bayanatlabs.com',
     licence: 'Code: Apache-2.0. Policy files and examples: CC BY 4.0. Unicode tables: Unicode License V3. Font: IBM Plex Sans Arabic, SIL OFL 1.1.',
     errCap: 'The text is over the 10 MiB limit.',
     outputShort: (n) => `The box shows the first ${fmt(n)} characters. Copy output and the download contain the full text.`,
@@ -103,7 +102,6 @@ const STR = {
     langToggle: 'العربية',
     langToggleLang: 'ar',
     ctaHref: 'https://www.bayanatlabs.com/products/knowledge',
-    pageHref: 'https://www.bayanatlabs.com/tools/arabic-normalizer',
   },
   ar: {
     docTitle: 'توحيد النص العربي وتنظيفه – بيانات لابز',
@@ -182,7 +180,6 @@ const STR = {
     ctaH: 'هل تحتاج إلى بيانات عربية جاهزة للإنتاج وواضحة الحقوق؟',
     ctaText: 'تبني بيانات لابز مجموعات بيانات عربية مرخّصة، مع توثيق طريقة توحيد نصوصها.',
     ctaLink: 'اطّلع على مجموعات البيانات النصية العربية المرخّصة',
-    pageLink: 'صفحة الأداة على موقع بيانات لابز',
     licence: 'الشيفرة البرمجية: Apache-2.0. ملفات السياسات والأمثلة: CC BY 4.0. جداول يونيكود: Unicode License V3. الخط: IBM Plex Sans Arabic بترخيص SIL OFL 1.1.',
     errCap: `النص يتجاوز الحد الأقصى البالغ ${ltr('10 MiB')}.`,
     outputShort: (n) => `يعرض المربع أول ${fmt(n)} من المحارف، أما زر نسخ الناتج والملف المنزَّل ففيهما النص كاملًا.`,
@@ -191,7 +188,6 @@ const STR = {
     langToggle: 'English',
     langToggleLang: 'en',
     ctaHref: 'https://www.bayanatlabs.com/ar/products/knowledge',
-    pageHref: 'https://www.bayanatlabs.com/ar/tools/arabic-normalizer',
   },
 };
 
@@ -351,7 +347,6 @@ function applyLang() {
   toggle.lang = t('langToggleLang');
   toggle.dir = t('langToggleLang') === 'ar' ? 'rtl' : 'ltr';
   $('cta-link').href = t('ctaHref');
-  $('page-link').href = t('pageHref');
   $('version').textContent = `arabic-normalize ${LIB_VERSION} · Unicode ${UNICODE_VERSION}`;
   fillExamples();
   showPolicy();

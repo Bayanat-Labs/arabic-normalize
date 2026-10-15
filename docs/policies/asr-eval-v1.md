@@ -14,7 +14,7 @@
 
 ## Use
 
-Scoring only: WER and CER for Arabic speech recognition. Apply the same policy to the reference and the hypothesis and report the policy id and hash with every score (TL-001 ArabicWER).
+Scoring only: WER and CER for Arabic speech recognition. Apply the same policy to the reference and the hypothesis and report the policy id and hash with every score.
 
 ## Stages (in order)
 

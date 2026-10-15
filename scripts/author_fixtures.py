@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # Copyright 2026 Bayanat Labs
 # SPDX-License-Identifier: Apache-2.0
-"""Hand-authored pilot conformance fixtures for arabic-normalize (80 cases: 64 dev + 16 acceptance)
+"""Authored pilot conformance fixtures for arabic-normalize (80 cases: 64 dev + 16 acceptance)
 and explicit rejected-input examples.
 
-The expected values below were written by hand from docs/SPEC.md before any engine code existed
+The expected values below were written out from docs/SPEC.md before any engine code existed
 (git history: fixtures are committed before src/arabic_normalize/engine.py). This script only
 serialises them; it never calls the engine. Text is original Bayanat Labs text written for the
 fixtures: no corpus text, no personal data. Every fixture is labelled synthetic/illustrative.
@@ -122,7 +122,7 @@ DEV = [
     # --- taa marbuta --------------------------------------------------------------------------
     fx("dev-021", "taa_marbuta", B, "\u0645\u062f\u0631\u0633\u0629", "\u0645\u062f\u0631\u0633\u0629", [],
        flags=[TMF], ratio=0.0,
-       en="bayanat-norm-v1 keeps taa marbuta and raises the taa_marbuta.flag (RULES.md 5.1).",
+       en="bayanat-norm-v1 keeps taa marbuta and raises the taa_marbuta.flag.",
        ar="التوحيد القياسي يُبقي التاء المربوطة ويرفع علامة التنبيه الخاصة بها."),
     fx("dev-022", "taa_marbuta", A, "\u0645\u062f\u0631\u0633\u0629 \u062c\u0645\u064a\u0644\u0629",
        "\u0645\u062f\u0631\u0633\u0647 \u062c\u0645\u064a\u0644\u0647", [TM], lossy=[TM],

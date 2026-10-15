@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 // Builds the static web page (the Hugging Face Space Bayanat-Labs/arabic-normalizer) into an output folder:
-//   web/{index.html, app.js, compute.js, worker.js, style.css} -> the page (hand-written)
+//   web/{index.html, app.js, compute.js, worker.js, style.css} -> the page (copied unchanged)
 //   web/fonts/*                      -> fonts/       (IBM Plex Sans Arabic 1.005, unmodified IBM files, SIL OFL 1.1)
 //   js/src/**                        -> lib/         (the JavaScript port, unchanged; node.js left out)
 //   js/policies/*.json               -> policies/    (byte-identical policy files)
@@ -114,12 +114,11 @@ ${policyRows}
 Conformance: ${nPassJs} of ${nFix} fixtures pass in JavaScript, and ${ref.cases_identical} of ${ref.cases} reference cases (the fixtures under ${ref.policies} policies) give output identical to the Python package, including the offset map and change log. Counts from \`js/conformance.json\` in the GitHub repository.
 
 - Code and documentation: https://github.com/Bayanat-Labs/arabic-normalize
-- Tool page: https://www.bayanatlabs.com/tools/arabic-normalizer
 - Conformance fixtures: https://huggingface.co/datasets/Bayanat-Labs/arabic-normalization-conformance
 
 To cite a normalisation, name the policy id and its hash, for example "normalised with bayanat-norm-v1 (sha256 ${lib.loadPolicy('bayanat-norm-v1').policy_hash.slice(0, 12)}…, arabic-normalize ${lib.LIB_VERSION})".
 
-Licences: code Apache-2.0 (\`LICENSE\`); policy files and examples CC BY 4.0 (\`LICENSE-data\`); generated Unicode tables Unicode License V3 (\`NOTICE-unicode.txt\`); IBM Plex Sans Arabic font (IBM's unmodified files) SIL OFL 1.1 (\`fonts/OFL.txt\`). Contact and takedown requests: open@bayanatlabs.com.
+Licences: code Apache-2.0 (\`LICENSE\`); policy files and examples CC BY 4.0 (\`LICENSE-data\`); generated Unicode tables Unicode License V3 (\`NOTICE-unicode.txt\`); IBM Plex Sans Arabic font (IBM's unmodified files) SIL OFL 1.1 (\`fonts/OFL.txt\`). Contact and takedown requests: hello@bayanatlabs.com.
 
 Need production-grade, rights-cleared Arabic data with documented normalisation? See [Bayanat Labs Knowledge](https://www.bayanatlabs.com/products/knowledge).
 `;

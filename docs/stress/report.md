@@ -54,7 +54,7 @@ One process on one core, first 5000 articles (10903235 UTF-8 bytes), CPU time:
 | asr-eval-v1 | 11.35 | 3.09 |
 | raw-safe-v1 | 62.69 | 9.00 |
 
-The brief's pilot target is at least 5 MB/s per core for bayanat-norm-v1 in Python; plain mode measured 22.16 MB/s and detailed mode 6.49 MB/s.
+The pilot target is at least 5 MB/s per core for bayanat-norm-v1 in Python; plain mode measured 22.16 MB/s and detailed mode 6.49 MB/s.
 
 Full run: 8 worker processes, 170.7 s wall time for all articles, all three policies, both modes and all checks. Summed worker time per policy:
 

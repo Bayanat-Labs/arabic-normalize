@@ -12,7 +12,7 @@ Inputs (no corpus text; nothing here is redistributed):
               under the 3 built-in policies and the 4 custom test policies of make_reference.py. Strings in
               which a high surrogate is directly followed by a low surrogate are skipped, because a JavaScript
               string cannot keep those two apart (they are one code point there);
-  paragraphs: the synthetic paragraphs of work/tl003/scripts/throughput.py (words from the dev fixtures,
+  paragraphs: the synthetic paragraphs of the pilot throughput benchmark (words from the dev fixtures,
               about 4 MB undiacritised and 4 MB diacritised, 2,000-character records), plain and detailed,
               under the 3 built-in policies.
 
@@ -98,7 +98,7 @@ def digest(res):
 
 
 def paragraphs():
-    """The synthetic paragraphs of work/tl003/scripts/throughput.py, rebuilt with the same seed and code."""
+    """The synthetic paragraphs of the pilot throughput benchmark, rebuilt with the same seed and code."""
     rng = random.Random(5)
     words = []
     with open(os.path.join(ROOT, "tests", "fixtures", "dev", "dev.jsonl"), encoding="utf-8") as f:

@@ -28,7 +28,7 @@
   "meta": {
     "title_en": "Arabic normalisation for speech-recognition evaluation, version 1",
     "title_ar": "توحيد النص العربي لتقييم التعرّف الآلي على الكلام، الإصدار 1",
-    "description_en": "bayanat-norm-v1 plus taa marbuta folded to heh, punctuation replaced by spaces and whitespace collapsed. Intended for WER and CER scoring (TL-001 ArabicWER). Lossy: use only for scoring, never as a stored text field.",
+    "description_en": "bayanat-norm-v1 plus taa marbuta folded to heh, punctuation replaced by spaces and whitespace collapsed. Intended for WER and CER scoring. Lossy: use only for scoring, never as a stored text field.",
     "license": "CC-BY-4.0",
     "attribution": "Bayanat Labs (https://bayanatlabs.com)",
     "created": "2026-10-15",

@@ -1,8 +1,8 @@
 # Agreement with other Arabic normalisers on the pilot fixtures
 
-Generated 2026-10-15 from the 80 pilot fixtures (64 dev, 16 acceptance) and arabic-normalize 0.1.0 (UCD 18.0.0) by `scripts/compat/compare.py`. The CAMeL Tools, tnkeeh and Whisper harnesses are in `scripts/compat/harness/`; the PyArabic harness is kept outside this repository so that no file here imports a GPL module, and is passed to the driver with `--harness pyarabic=PATH`. Every number below is computed by the driver; the machine-readable result is [agreement.json](agreement.json) and the per-fixture table is [fixtures.md](fixtures.md).
+Generated 2026-10-15 from the 80 pilot fixtures (64 dev, 16 acceptance) and arabic-normalize 0.1.0 (UCD 18.0.0) by `scripts/compat/compare.py`. The CAMeL Tools, tnkeeh and Whisper harnesses are in `scripts/compat/harness/`; no PyArabic harness is included, so that no file here imports a GPL module: one is passed to the driver with `--harness pyarabic=PATH`. Every number below is computed by the driver; the machine-readable result is [agreement.json](agreement.json) and the per-fixture table is [fixtures.md](fixtures.md).
 
-This is a pilot comparison on synthetic fixtures, not the brief's compatibility target (paragraph-level exact match on 10,000 stress paragraphs for each future `compat-*` policy). The pilot ships no compat policy; these tables show how far each tool's closest pipeline is from the three pilot policies, and where, so that compat policies can be designed later.
+This is a pilot comparison on synthetic fixtures, not the compatibility target planned for compat policies (paragraph-level exact match on 10,000 stress paragraphs for each future `compat-*` policy). The pilot ships no compat policy; these tables show how far each tool's closest pipeline is from the three pilot policies, and where, so that compat policies can be designed later.
 
 ## How the oracles were run
 
@@ -31,7 +31,7 @@ Installation notes: camel-tools was installed without its declared dependencies 
 | `tnkeeh-asr` | tnkeeh-norm options plus `remove_special_chars=True` | `asr-eval-v1` |
 | `whisper-basic` | `BasicTextNormalizer()(s)` (the default Whisper basic normaliser) | `asr-eval-v1` |
 | `whisper-basic-rd` | `BasicTextNormalizer(remove_diacritics=True)(s)` | matrix only |
-| `pyarabic-brief` | `strip_tashkeel` → `strip_tatweel` → `normalize_hamza` (default method) → `normalize_ligature` (the composition the TL-003 brief names for compat-pyarabic-v1) | matrix only |
+| `pyarabic-hamza` | `strip_tashkeel` → `strip_tatweel` → `normalize_hamza` (default method) → `normalize_ligature` (the composition planned for compat-pyarabic-v1) | matrix only |
 | `pyarabic-norm` | `normalize_ligature` → `strip_diacritics` → `strip_tatweel` → `normalize_alef` | `bayanat-norm-v1` |
 | `pyarabic-asr` | pyarabic-norm → `normalize_teh` | `asr-eval-v1` |
 
@@ -65,7 +65,7 @@ Exact: identical output. Spacing: identical after squeezing whitespace runs and 
 | `tnkeeh-asr` | 23 (31 / 33) | 18 (26 / 26) | 13 (20 / 26) |
 | `whisper-basic` | 16 (20 / 20) | 11 (14 / 14) | 26 (28 / 34) |
 | `whisper-basic-rd` | 29 (30 / 33) | 23 (27 / 27) | 18 (19 / 21) |
-| `pyarabic-brief` | 29 (29 / 29) | 21 (21 / 23) | 33 (33 / 33) |
+| `pyarabic-hamza` | 29 (29 / 29) | 21 (21 / 23) | 33 (33 / 33) |
 | `pyarabic-norm` | 46 (46 / 46) | 34 (34 / 39) | 27 (27 / 27) |
 | `pyarabic-asr` | 39 (39 / 39) | 40 (41 / 46) | 21 (21 / 21) |
 
@@ -85,13 +85,13 @@ Character classes involved in the differing segments, counted over the fixtures 
 Behaviour checks computed from the same runs:
 
 - Whisper basic normaliser: on 10 of the 13 fixtures that contain harakat, its output has more space-separated tokens than `asr-eval-v1`, because it replaces every combining mark with a space and so splits vocalised words.
-- CAMeL Tools `normalize_unicode` (NFKC): on 3 of the 3 fixtures with U+FDFA or U+FDF2, the honorific ligature was expanded into words; `bayanat-norm-v1` keeps it and flags it (DECISIONS D-01).
+- CAMeL Tools `normalize_unicode` (NFKC): on 3 of the 3 fixtures with U+FDFA or U+FDF2, the honorific ligature was expanded into words; `bayanat-norm-v1` keeps it and flags it (docs/DECISIONS.md, section 1).
 
 ### Behaviour fingerprint
 
 Short probe strings, each isolating one feature, run through every pipeline. Inputs and outputs are shown as escapes, with a space written as `\u0020`; (empty) means the output is empty.
 
-| Probe | Input | `bayanat-norm-v1` | `asr-eval-v1` | `raw-safe-v1` | `camel-nfc` | `camel-norm` | `camel-asr` | `tnkeeh-default` | `tnkeeh-norm` | `tnkeeh-asr` | `whisper-basic` | `whisper-basic-rd` | `pyarabic-brief` | `pyarabic-norm` | `pyarabic-asr` |
+| Probe | Input | `bayanat-norm-v1` | `asr-eval-v1` | `raw-safe-v1` | `camel-nfc` | `camel-norm` | `camel-asr` | `tnkeeh-default` | `tnkeeh-norm` | `tnkeeh-asr` | `whisper-basic` | `whisper-basic-rd` | `pyarabic-hamza` | `pyarabic-norm` | `pyarabic-asr` |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | alef maqsura | \u0649 | \u064a | \u064a | \u0649 | \u0649 | \u064a | \u064a | \u0649 | \u0649 | \u0649 | \u0649 | \u0649 | \u0649 | \u0627 | \u0627 |
 | alef variants | \u0623\u0625\u0622\u0671 | \u0627\u0627\u0627\u0627 | \u0627\u0627\u0627\u0627 | \u0623\u0625\u0622\u0671 | \u0623\u0625\u0622\u0671 | \u0627\u0627\u0627\u0627 | \u0627\u0627\u0627\u0627 | \u0623\u0625\u0622\u0020\u0671\u0020 | \u0623\u0625\u0622\u0627 | \u0623\u0625\u0622\u0627 | \u0623\u0625\u0622\u0671 | \u0627\u0627\u0627\u0671 | \u0621\u0621\u0621\u0621\u0671 | \u0627\u0627\u0627\u0627 | \u0627\u0627\u0627\u0627 |
@@ -109,4 +109,4 @@ Short probe strings, each isolating one feature, run through every pipeline. Inp
 
 ## What this means for compat policies
 
-None of the four tools is a drop-in match for a pilot policy, which is expected: the pilot policies keep punctuation and spacing (bayanat-norm-v1), remove invisible controls and invalid code points, and pin Unicode data. The `compat-camel-v1`, `compat-whisper-basic-v1` and `compat-pyarabic-v1` policies planned for v1.0 must be designed from these divergence classes and then verified on the stress corpus, as the brief requires. Lucene was not run in this pass (no Java harness yet).
+None of the four tools is a drop-in match for a pilot policy, which is expected: the pilot policies keep punctuation and spacing (bayanat-norm-v1), remove invisible controls and invalid code points, and pin Unicode data. The `compat-camel-v1`, `compat-whisper-basic-v1` and `compat-pyarabic-v1` policies planned for v1.0 must be designed from these divergence classes and then verified on the stress corpus. Lucene was not run in this pass (no Java harness yet).

@@ -74,12 +74,11 @@ def test_lossy_review_up_to_date():
 
 
 def test_other_stress_corpora_records():
-    """Every extra stress corpus (FLEURS now; Tanzil when it is run) is crash-free and consistent."""
+    """Every extra stress corpus (docs/stress/<name>.json other than stats.json) is crash-free and consistent."""
     found = []
-    for name in ("fleurs", "tanzil"):
-        path = os.path.join(ROOT, "docs", "stress", name + ".json")
-        if not os.path.exists(path):
-            continue
+    stress = os.path.join(ROOT, "docs", "stress")
+    for name in sorted(n[:-5] for n in os.listdir(stress) if n.endswith(".json") and n != "stats.json"):
+        path = os.path.join(stress, name + ".json")
         found.append(name)
         with open(path, encoding="utf-8") as f:
             rec = json.load(f)

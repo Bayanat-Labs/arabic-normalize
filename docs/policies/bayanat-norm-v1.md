@@ -14,7 +14,7 @@
 
 ## Use
 
-Default for text_norm columns in Bayanat Labs datasets, deduplication and statistics. The RULES.md section 5.1 recipe. Store `text_raw` (and `text_diac`, the raw-safe-v1 output) next to it.
+Default for text_norm columns in Bayanat Labs datasets, deduplication and statistics. Store `text_raw` (and `text_diac`, the raw-safe-v1 output) next to it.
 
 ## Stages (in order)
 

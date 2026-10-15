@@ -1,4 +1,4 @@
-# Acceptance-b candidates (blind, second session)
+# Acceptance-b candidates (blind, written separately)
 
 Licence: CC BY 4.0, Bayanat Labs. Every record is labelled `synthetic/illustrative, authored by Bayanat Labs`; no corpus text, no personal data.
 
@@ -6,9 +6,9 @@ Licence: CC BY 4.0, Bayanat Labs. Every record is labelled `synthetic/illustrati
 |---|---|---|
 | acceptance-b.jsonl | 16 | Candidates. Not part of the 80 pilot fixtures, the published counts or the Hugging Face dataset |
 
-**Why.** The pilot acceptance fixtures were written by the same agent session as the dev fixtures (docs/DECISIONS.md D-14). The brief asks for acceptance cases written by a second session or a human without seeing the engine.
+**Why.** The pilot acceptance fixtures were written by the same author as the dev fixtures (docs/DECISIONS.md, section 14). Acceptance cases are meant to be written by a second author without seeing the engine.
 
-**How.** A separate agent session wrote these 16 cases on 15 Oct 2026, working only from docs/SPEC.md, the three policy files and the raw UCD 18.0.0 files in ucd/18.0.0/. It did not read or run the engine or the JavaScript port before the cases were committed (commit "Add a blind acceptance-b candidate set written from the spec without engine access"; the engine was first run on them afterwards). The source is `scripts/author_acceptance_b.py`. Every family is new: none occurs in the dev split (checked by `tests/test_acceptance_b.py`).
+**How.** These 16 cases were written separately on 15 Oct 2026, only from docs/SPEC.md, the three policy files and the raw UCD 18.0.0 files in ucd/18.0.0/. The engine and the JavaScript port were not read or run before the cases were committed (commit "Add a blind acceptance-b candidate set written from the spec without engine access"; the engine was first run on them afterwards). The source is `scripts/author_acceptance_b.py`. Every family is new: none occurs in the dev split (checked by `tests/test_acceptance_b.py`).
 
 **First run against the engine (15 Oct 2026).** 16 of 16 pass in Python and 16 of 16 in JavaScript: output text, rule ids, lossy flags, flags, rejected spans, and the offset map and diacritization ratio where asserted. No spec ambiguity or engine change came out of the run. No expected value was edited after the engine was run.
 
@@ -31,4 +31,4 @@ Licence: CC BY 4.0, Bayanat Labs. Every record is labelled `synthetic/illustrati
 | ansi_escape_controls | raw-safe-v1 | ESC and DEL dropped as three rejected spans |
 | marks_outside_harakat | bayanat-norm-v1 | U+0656 removed; U+065F and hamza below after yeh kept |
 
-**Next step.** The brief's pilot gate keeps the fixture count at 80 until a native linguist has reviewed the lossy cases. After that review, these cases get an Arabic rationale and a review verdict and move into the acceptance split, and the dataset, the JavaScript reference and every published count are regenerated.
+**Next step.** The pilot keeps the fixture count at 80 until a native linguist has reviewed the lossy cases. After that review, these cases get an Arabic rationale and a review verdict and move into the acceptance split, and the dataset, the JavaScript reference and every published count are regenerated.

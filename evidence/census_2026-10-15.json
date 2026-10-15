@@ -1,8 +1,9 @@
 {
  "census_date": "2026-10-15",
  "generated_at": "2026-10-15T08:26:22Z",
- "user_agent": "BayanatLabs-OpenData/1.0 (+https://bayanatlabs.com/open; open@bayanatlabs.com)",
- "method": "Public registry/search APIs, unauthenticated, 1 request per 3 s per host. Feature columns are a keyword scan of registry/search text only.",
+ "user_agent": "BayanatLabs-OpenData/1.0",
+ "user_agent_note": "Product token only; the contact comment sent on that day is not kept in this file.",
+ "method": "Public registry/search APIs, unauthenticated, 1 request per 3 s per host. Feature columns are a keyword scan of registry/search text only. GitHub repository descriptions (third-party free text) are not kept in this file; the feature columns were computed from them before they were removed.",
  "pypi": [
   {
    "name": "arabic-normalize",
@@ -2992,7 +2993,6 @@
      "stars": 103,
      "license": "MIT",
      "pushed_at": "2025-03-09T02:14:10Z",
-     "description": "Tanqeeh is a Python library designed to preprocess and clean Arabic text efficiently. It provides a comprehensive set of functions to normalize, remove unwanted",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3009,7 +3009,6 @@
      "stars": 77,
      "license": "MIT",
      "pushed_at": "2023-09-28T16:52:54Z",
-     "description": "Arabic cleaning, normalization and segmentation library. ",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3026,7 +3025,6 @@
      "stars": 41,
      "license": "Apache-2.0",
      "pushed_at": "2026-08-02T21:57:48Z",
-     "description": "🛠  📦  A set of functions for Arabic text processing in golang ",
      "language": "Go",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3043,7 +3041,6 @@
      "stars": 28,
      "license": "MIT",
      "pushed_at": "2021-03-20T18:08:21Z",
-     "description": "A Python package that do stemming, tokenization, sentence breaking, segmentation, normalization, POS tagging for Arabic language.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3060,7 +3057,6 @@
      "stars": 26,
      "license": null,
      "pushed_at": "2014-04-03T12:01:50Z",
-     "description": "A small python script that transliterates Arabic text using the Buckwalter Transliteration Scheme. It allows for multiple decisions to be made around whether or",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3077,7 +3073,6 @@
      "stars": 20,
      "license": "Apache-2.0",
      "pushed_at": "2021-12-16T11:26:19Z",
-     "description": "Arabic light stemmer. Light stemming for Arabic words removes prefixes and suffixes and normalizes words",
      "language": "Java",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3094,7 +3089,6 @@
      "stars": 14,
      "license": null,
      "pushed_at": "2023-09-09T07:57:46Z",
-     "description": "Arabic Text Cleaner",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3111,7 +3105,6 @@
      "stars": 12,
      "license": null,
      "pushed_at": "2024-06-23T22:05:46Z",
-     "description": "Tools for splitting, normalizing, text-shaping Arabic script",
      "language": "TypeScript",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3128,7 +3121,6 @@
      "stars": 9,
      "license": "MIT",
      "pushed_at": "2024-01-09T22:09:00Z",
-     "description": "An npm module that provides Arabic language processing capabilities for JavaScript applications, inspired by the popular Python package pyarabic. With arajs, de",
      "language": "JavaScript",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3145,7 +3137,6 @@
      "stars": 5,
      "license": "MIT",
      "pushed_at": "2024-06-04T23:22:30Z",
-     "description": "Arabic Text Cleaning and Normalization",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3162,7 +3153,6 @@
      "stars": 4,
      "license": "MIT",
      "pushed_at": "2026-07-13T16:59:52Z",
-     "description": "Tiny zero-dependency toolkit for Persian/Farsi text: digit conversion, Arabic→Persian normalization, RTL detection.",
      "language": "TypeScript",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3179,7 +3169,6 @@
      "stars": 4,
      "license": "MIT",
      "pushed_at": "2026-05-12T18:58:41Z",
-     "description": "A Python library designed for normalizing Kashmiri text (Persio-Arabic script). This tool standardizes text by handling character variations, consistent punctua",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3196,7 +3185,6 @@
      "stars": 3,
      "license": "MIT",
      "pushed_at": "2017-11-26T11:12:14Z",
-     "description": "",
      "language": "JavaScript",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3213,7 +3201,6 @@
      "stars": 3,
      "license": "MIT",
      "pushed_at": "2026-07-29T12:09:11Z",
-     "description": "A lightweight Python toolkit for Arabic text preprocessing and normalization.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3230,7 +3217,6 @@
      "stars": 3,
      "license": null,
      "pushed_at": "2023-07-09T00:21:43Z",
-     "description": "Script Normalization for Unconventional Writing of Perso-Arabic scripts (ACL2023)",
      "language": "PLSQL",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3247,7 +3233,6 @@
      "stars": 3,
      "license": "MIT",
      "pushed_at": "2024-07-06T07:45:27Z",
-     "description": "Code, models, and data for \"Exploiting Dialect Identification in Automatic Dialectal Text Normalization\". ArabicNLP 2024, ACL.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3264,7 +3249,6 @@
      "stars": 3,
      "license": "MIT",
      "pushed_at": "2026-09-02T14:00:22Z",
-     "description": "Offset-preserving Arabic text normalization & cleaning for NLP — map cleaned spans back to the original. Pure-Python, typed, reproducible profiles.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "mentioned",
@@ -3281,7 +3265,6 @@
      "stars": 2,
      "license": "Apache-2.0",
      "pushed_at": "2018-08-29T14:37:20Z",
-     "description": "Normalize Names (Arabic and Foreign) in Arabic ",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3298,7 +3281,6 @@
      "stars": 2,
      "license": null,
      "pushed_at": "2026-09-14T11:48:31Z",
-     "description": "Arabic NLP - Java library provides a tokenization and normalization for the arabic words",
      "language": "Java",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3315,7 +3297,6 @@
      "stars": 2,
      "license": "Apache-2.0",
      "pushed_at": "2026-10-11T12:38:26Z",
-     "description": "Moroccan Arabizi transliteration, Arabic normalization and word-level code-switching detection",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3332,7 +3313,6 @@
      "stars": 2,
      "license": null,
      "pushed_at": "2026-02-18T02:57:51Z",
-     "description": "Normalize Quranic/Arabic text by removing diacritics, markers, and decorative characters",
      "language": "TypeScript",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3349,7 +3329,6 @@
      "stars": 2,
      "license": "MIT",
      "pushed_at": "2026-08-03T11:04:02Z",
-     "description": "Normalise Arabic script for comparison: diacritics, pause marks, Persian and Urdu letter variants. Zero dependencies.",
      "language": "TypeScript",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3366,7 +3345,6 @@
      "stars": 2,
      "license": null,
      "pushed_at": "2025-06-29T12:59:18Z",
-     "description": "Build an end-to-end arabic image to text system using a unified pipeline that integrates custom tokenization, data normalization, CNN based feature extraction, ",
      "language": "Jupyter Notebook",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3383,7 +3361,6 @@
      "stars": 2,
      "license": "MIT",
      "pushed_at": "2026-03-05T16:49:18Z",
-     "description": "Hassaniya Arabic text normalizer with CLI and local web UI for variant unification",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3400,7 +3377,6 @@
      "stars": 2,
      "license": "MIT",
      "pushed_at": "2026-07-25T17:56:37Z",
-     "description": "Dependency-free Python utilities for Darija normalization and bidirectional Arabizi transliteration.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3417,7 +3393,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2022-09-13T10:31:16Z",
-     "description": "",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3434,7 +3409,6 @@
      "stars": 1,
      "license": "MIT",
      "pushed_at": "2026-01-30T15:01:04Z",
-     "description": "Lightweight Arabic NLP preprocessing toolkit — cleaning, normalization, tokenization, and stopword removal",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3451,7 +3425,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2025-12-17T20:10:54Z",
-     "description": "A Python toolkit for Arabic NLP: normalization, tokenization, stemming, and automated analysis results saving.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3468,7 +3441,6 @@
      "stars": 1,
      "license": "MIT",
      "pushed_at": "2026-05-22T19:30:23Z",
-     "description": "🇮🇶 The first NLP toolkit for Iraqi Arabic dialect — tokenization, normalization, sentiment, and dialect detection.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3485,7 +3457,6 @@
      "stars": 1,
      "license": "MIT",
      "pushed_at": "2026-07-31T21:18:51Z",
-     "description": "Production-grade Arabic text normalization & stop words management.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3502,7 +3473,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2026-09-28T15:40:14Z",
-     "description": "A modern, accessible Arabic Hangman game built with Vanilla JavaScript, HTML5, and CSS3, featuring Arabic text normalization and pure CSS drawing.",
      "language": "HTML",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3519,7 +3489,6 @@
      "stars": 1,
      "license": "MIT",
      "pushed_at": "2026-03-26T14:58:59Z",
-     "description": "Arabic NLP Toolkit for the Gulf — UAE entity extraction, sentiment analysis, text normalization, root extraction",
      "language": "TypeScript",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3536,7 +3505,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2026-05-14T23:49:21Z",
-     "description": "A github repo containing all code related to the NLP final project \"English–Arabic Code-Switching Normalization to Arabic Using Sequence-to-Sequence Models\"",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3553,7 +3521,6 @@
      "stars": 1,
      "license": "GPL-2.0",
      "pushed_at": "2026-08-11T13:23:04Z",
-     "description": "Makes WordPress search match Arabic: folds diacritics, tatweel, alef and hamza forms on both stored text and query, and searches an indexed shadow copy instead ",
      "language": "PHP",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3570,7 +3537,6 @@
      "stars": 1,
      "license": "NOASSERTION",
      "pushed_at": "2026-09-28T20:47:33Z",
-     "description": "Reproducible Arabic OCR benchmark by Clouda OCR — distorted documents, normalized Arabic CER, model comparisons, methodology, and public audit artifacts.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3587,7 +3553,6 @@
      "stars": 1,
      "license": "MIT",
      "pushed_at": "2026-04-24T23:24:15Z",
-     "description": "It is a Rust-based tool designed to normalize and clean Arabic text.",
      "language": "Rust",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3604,7 +3569,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2026-09-30T10:48:04Z",
-     "description": "Arabic Search Enhancement improves WordPress search functionality for Arabic content by normalizing text variations, diacritics, and letter forms. The plugin ha",
      "language": "PHP",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3621,7 +3585,6 @@
      "stars": 1,
      "license": "MIT",
      "pushed_at": "2026-07-30T10:41:46Z",
-     "description": "Normalize all Unicode decimal digits (Devanagari, Arabic, Thai, etc.) to ASCII numerals. Zero dependencies, performance-first.",
      "language": "JavaScript",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3638,7 +3601,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2026-10-13T20:07:35Z",
-     "description": "AI-powered nutrition agent using NLP, USDA FoodData Central, semantic search, Cross-Encoder re-ranking, and Arabic-English food normalization to retrieve accura",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3655,7 +3617,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2026-07-19T09:46:12Z",
-     "description": "An offline NLP toolkit for Sindhi (Perso-Arabic script) featuring Unicode normalization, tokenization, stopword removal, rule-based stemming, lexicon-based sent",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3672,7 +3633,6 @@
      "stars": 1,
      "license": "MIT",
      "pushed_at": "2026-09-19T18:30:05Z",
-     "description": "Offline, dependency-free CLI for extracting focused context around search terms from Telegram Desktop JSON exports. Supports multiple terms, configurable contex",
      "language": "Go",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3689,7 +3649,6 @@
      "stars": 1,
      "license": "GPL-2.0",
      "pushed_at": "2026-10-06T08:22:48Z",
-     "description": "WordPress content moderation and profanity filtering plugin (development preview) for posts, pages and comments. Use Unicode-aware term matching, Persian/Arabic",
      "language": "PHP",
      "features_keyword_scan": {
       "named_policies": "mentioned",
@@ -3706,7 +3665,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2026-02-21T22:16:53Z",
-     "description": "🚀 AI-powered Egyptian ad generator that turns product images into fully voiced cinematic video ads. Features dynamic Arabic script creation, neural voiceover (a",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3723,7 +3681,6 @@
      "stars": 1,
      "license": "Apache-2.0",
      "pushed_at": "2026-09-13T09:20:23Z",
-     "description": "Drop-in Arabic text normalizer for LLM pipelines: measured token/cost savings, RAG chunking, dialect signal, and safe defaults for religious/legal text — works ",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3740,7 +3697,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2026-05-05T17:15:29Z",
-     "description": "A configurable NLP pipeline for cleaning and processing English and Arabic text. It features a modern dark-themed web interface and a REST API built with FastAP",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3757,7 +3713,6 @@
      "stars": 0,
      "license": "MIT",
      "pushed_at": "2026-02-16T22:25:51Z",
-     "description": "",
      "language": "TypeScript",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3774,7 +3729,6 @@
      "stars": 0,
      "license": "GPL-3.0",
      "pushed_at": "2021-05-07T18:26:00Z",
-     "description": "Arabic text normalization module",
      "language": null,
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3791,7 +3745,6 @@
      "stars": 0,
      "license": "Apache-2.0",
      "pushed_at": "2026-08-02T20:33:37Z",
-     "description": "Production-ready Kotlin toolkit for Arabic text normalization, search, numerals, highlighting, and RTL utilities on Android.",
      "language": "Kotlin",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3808,7 +3761,6 @@
      "stars": 0,
      "license": null,
      "pushed_at": "2026-09-24T21:21:16Z",
-     "description": "",
      "language": "Jupyter Notebook",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3825,7 +3777,6 @@
      "stars": 0,
      "license": "MIT",
      "pushed_at": "2026-07-21T19:17:13Z",
-     "description": "Dependency-free Python toolkit for predictable Arabic text normalization.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3849,7 +3800,6 @@
      "stars": 103,
      "license": "MIT",
      "pushed_at": "2025-03-09T02:14:10Z",
-     "description": "Tanqeeh is a Python library designed to preprocess and clean Arabic text efficiently. It provides a comprehensive set of functions to normalize, remove unwanted",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3866,7 +3816,6 @@
      "stars": 77,
      "license": "MIT",
      "pushed_at": "2023-09-28T16:52:54Z",
-     "description": "Arabic cleaning, normalization and segmentation library. ",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3883,7 +3832,6 @@
      "stars": 28,
      "license": "MIT",
      "pushed_at": "2021-03-20T18:08:21Z",
-     "description": "A Python package that do stemming, tokenization, sentence breaking, segmentation, normalization, POS tagging for Arabic language.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3900,7 +3848,6 @@
      "stars": 26,
      "license": null,
      "pushed_at": "2014-04-03T12:01:50Z",
-     "description": "A small python script that transliterates Arabic text using the Buckwalter Transliteration Scheme. It allows for multiple decisions to be made around whether or",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3917,7 +3864,6 @@
      "stars": 20,
      "license": "Apache-2.0",
      "pushed_at": "2021-12-16T11:26:19Z",
-     "description": "Arabic light stemmer. Light stemming for Arabic words removes prefixes and suffixes and normalizes words",
      "language": "Java",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3934,7 +3880,6 @@
      "stars": 12,
      "license": null,
      "pushed_at": "2024-06-23T22:05:46Z",
-     "description": "Tools for splitting, normalizing, text-shaping Arabic script",
      "language": "TypeScript",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3951,7 +3896,6 @@
      "stars": 9,
      "license": "MIT",
      "pushed_at": "2024-01-09T22:09:00Z",
-     "description": "An npm module that provides Arabic language processing capabilities for JavaScript applications, inspired by the popular Python package pyarabic. With arajs, de",
      "language": "JavaScript",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3968,7 +3912,6 @@
      "stars": 7,
      "license": "LGPL-3.0",
      "pushed_at": "2020-07-13T20:12:02Z",
-     "description": "Segmenter and Orthography Standardazier (SOS) for Classical Arabic (CA)",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -3985,7 +3928,6 @@
      "stars": 7,
      "license": "GPL-3.0",
      "pushed_at": "2020-12-26T13:58:08Z",
-     "description": "A Java-based Library for the Processing of Arabic Text",
      "language": "Java",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4002,7 +3944,6 @@
      "stars": 5,
      "license": "MIT",
      "pushed_at": "2024-06-04T23:22:30Z",
-     "description": "Arabic Text Cleaning and Normalization",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4019,7 +3960,6 @@
      "stars": 4,
      "license": null,
      "pushed_at": "2018-12-06T21:49:06Z",
-     "description": "",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4036,7 +3976,6 @@
      "stars": 4,
      "license": "MIT",
      "pushed_at": "2026-05-12T18:58:41Z",
-     "description": "A Python library designed for normalizing Kashmiri text (Persio-Arabic script). This tool standardizes text by handling character variations, consistent punctua",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4053,7 +3992,6 @@
      "stars": 4,
      "license": "MIT",
      "pushed_at": "2026-07-13T16:59:52Z",
-     "description": "Tiny zero-dependency toolkit for Persian/Farsi text: digit conversion, Arabic→Persian normalization, RTL detection.",
      "language": "TypeScript",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4070,7 +4008,6 @@
      "stars": 3,
      "license": "GPL-2.0",
      "pushed_at": "2017-12-05T14:40:16Z",
-     "description": "Configurable Text normaliser and tokeniser for Arabic texts. It normalises diacritics, Hamaza, digits, etc. It tokenises punctuation, digits, etc from text. It ",
      "language": "JavaScript",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4087,7 +4024,6 @@
      "stars": 3,
      "license": "MIT",
      "pushed_at": "2026-07-29T12:09:11Z",
-     "description": "A lightweight Python toolkit for Arabic text preprocessing and normalization.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4104,7 +4040,6 @@
      "stars": 3,
      "license": null,
      "pushed_at": "2023-07-09T00:21:43Z",
-     "description": "Script Normalization for Unconventional Writing of Perso-Arabic scripts (ACL2023)",
      "language": "PLSQL",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4121,7 +4056,6 @@
      "stars": 3,
      "license": "MIT",
      "pushed_at": "2024-07-06T07:45:27Z",
-     "description": "Code, models, and data for \"Exploiting Dialect Identification in Automatic Dialectal Text Normalization\". ArabicNLP 2024, ACL.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4138,7 +4072,6 @@
      "stars": 3,
      "license": "MIT",
      "pushed_at": "2026-09-02T14:00:22Z",
-     "description": "Offset-preserving Arabic text normalization & cleaning for NLP — map cleaned spans back to the original. Pure-Python, typed, reproducible profiles.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "mentioned",
@@ -4155,7 +4088,6 @@
      "stars": 2,
      "license": "Apache-2.0",
      "pushed_at": "2018-08-29T14:37:20Z",
-     "description": "Normalize Names (Arabic and Foreign) in Arabic ",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4172,7 +4104,6 @@
      "stars": 2,
      "license": "NOASSERTION",
      "pushed_at": "2022-10-10T12:55:25Z",
-     "description": "",
      "language": "C++",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4189,7 +4120,6 @@
      "stars": 2,
      "license": null,
      "pushed_at": "2026-02-18T02:57:51Z",
-     "description": "Normalize Quranic/Arabic text by removing diacritics, markers, and decorative characters",
      "language": "TypeScript",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4206,7 +4136,6 @@
      "stars": 2,
      "license": null,
      "pushed_at": "2026-09-14T11:48:31Z",
-     "description": "Arabic NLP - Java library provides a tokenization and normalization for the arabic words",
      "language": "Java",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4223,7 +4152,6 @@
      "stars": 2,
      "license": "MIT",
      "pushed_at": "2026-03-05T16:49:18Z",
-     "description": "Hassaniya Arabic text normalizer with CLI and local web UI for variant unification",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4240,7 +4168,6 @@
      "stars": 2,
      "license": "Apache-2.0",
      "pushed_at": "2026-10-11T12:38:26Z",
-     "description": "Moroccan Arabizi transliteration, Arabic normalization and word-level code-switching detection",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4257,7 +4184,6 @@
      "stars": 2,
      "license": null,
      "pushed_at": "2025-06-29T12:59:18Z",
-     "description": "Build an end-to-end arabic image to text system using a unified pipeline that integrates custom tokenization, data normalization, CNN based feature extraction, ",
      "language": "Jupyter Notebook",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4274,7 +4200,6 @@
      "stars": 2,
      "license": "MIT",
      "pushed_at": "2026-07-25T17:56:37Z",
-     "description": "Dependency-free Python utilities for Darija normalization and bidirectional Arabizi transliteration.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4291,7 +4216,6 @@
      "stars": 1,
      "license": "MIT",
      "pushed_at": "2026-01-30T15:01:04Z",
-     "description": "Lightweight Arabic NLP preprocessing toolkit — cleaning, normalization, tokenization, and stopword removal",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4308,7 +4232,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2025-12-17T20:10:54Z",
-     "description": "A Python toolkit for Arabic NLP: normalization, tokenization, stemming, and automated analysis results saving.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4325,7 +4248,6 @@
      "stars": 1,
      "license": "MIT",
      "pushed_at": "2026-07-31T21:18:51Z",
-     "description": "Production-grade Arabic text normalization & stop words management.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4342,7 +4264,6 @@
      "stars": 1,
      "license": "MIT",
      "pushed_at": "2026-05-22T19:30:23Z",
-     "description": "🇮🇶 The first NLP toolkit for Iraqi Arabic dialect — tokenization, normalization, sentiment, and dialect detection.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4359,7 +4280,6 @@
      "stars": 1,
      "license": "NOASSERTION",
      "pushed_at": "2026-09-28T20:47:33Z",
-     "description": "Reproducible Arabic OCR benchmark by Clouda OCR — distorted documents, normalized Arabic CER, model comparisons, methodology, and public audit artifacts.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4376,7 +4296,6 @@
      "stars": 1,
      "license": "MIT",
      "pushed_at": "2026-04-24T23:24:15Z",
-     "description": "It is a Rust-based tool designed to normalize and clean Arabic text.",
      "language": "Rust",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4393,7 +4312,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2026-09-28T15:40:14Z",
-     "description": "A modern, accessible Arabic Hangman game built with Vanilla JavaScript, HTML5, and CSS3, featuring Arabic text normalization and pure CSS drawing.",
      "language": "HTML",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4410,7 +4328,6 @@
      "stars": 1,
      "license": "MIT",
      "pushed_at": "2026-03-26T14:58:59Z",
-     "description": "Arabic NLP Toolkit for the Gulf — UAE entity extraction, sentiment analysis, text normalization, root extraction",
      "language": "TypeScript",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4427,7 +4344,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2026-09-30T10:48:04Z",
-     "description": "Arabic Search Enhancement improves WordPress search functionality for Arabic content by normalizing text variations, diacritics, and letter forms. The plugin ha",
      "language": "PHP",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4444,7 +4360,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2026-05-14T23:49:21Z",
-     "description": "A github repo containing all code related to the NLP final project \"English–Arabic Code-Switching Normalization to Arabic Using Sequence-to-Sequence Models\"",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4461,7 +4376,6 @@
      "stars": 1,
      "license": "MIT",
      "pushed_at": "2026-07-30T10:41:46Z",
-     "description": "Normalize all Unicode decimal digits (Devanagari, Arabic, Thai, etc.) to ASCII numerals. Zero dependencies, performance-first.",
      "language": "JavaScript",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4478,7 +4392,6 @@
      "stars": 1,
      "license": "Apache-2.0",
      "pushed_at": "2026-09-13T09:20:23Z",
-     "description": "Drop-in Arabic text normalizer for LLM pipelines: measured token/cost savings, RAG chunking, dialect signal, and safe defaults for religious/legal text — works ",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4495,7 +4408,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2026-10-13T20:07:35Z",
-     "description": "AI-powered nutrition agent using NLP, USDA FoodData Central, semantic search, Cross-Encoder re-ranking, and Arabic-English food normalization to retrieve accura",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4512,7 +4424,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2026-07-19T09:46:12Z",
-     "description": "An offline NLP toolkit for Sindhi (Perso-Arabic script) featuring Unicode normalization, tokenization, stopword removal, rule-based stemming, lexicon-based sent",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4529,7 +4440,6 @@
      "stars": 1,
      "license": "MIT",
      "pushed_at": "2026-09-19T18:30:05Z",
-     "description": "Offline, dependency-free CLI for extracting focused context around search terms from Telegram Desktop JSON exports. Supports multiple terms, configurable contex",
      "language": "Go",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4546,7 +4456,6 @@
      "stars": 1,
      "license": "GPL-2.0",
      "pushed_at": "2026-10-06T08:22:48Z",
-     "description": "WordPress content moderation and profanity filtering plugin (development preview) for posts, pages and comments. Use Unicode-aware term matching, Persian/Arabic",
      "language": "PHP",
      "features_keyword_scan": {
       "named_policies": "mentioned",
@@ -4563,7 +4472,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2026-02-21T22:16:53Z",
-     "description": "🚀 AI-powered Egyptian ad generator that turns product images into fully voiced cinematic video ads. Features dynamic Arabic script creation, neural voiceover (a",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4580,7 +4488,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2026-05-05T17:15:29Z",
-     "description": "A configurable NLP pipeline for cleaning and processing English and Arabic text. It features a modern dark-themed web interface and a REST API built with FastAP",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4597,7 +4504,6 @@
      "stars": 0,
      "license": null,
      "pushed_at": "2017-03-15T08:10:53Z",
-     "description": "",
      "language": "Java",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4614,7 +4520,6 @@
      "stars": 0,
      "license": null,
      "pushed_at": "2019-06-22T07:43:21Z",
-     "description": "Normalize any text that contains Arabic by eliminating the dialects, any other languages and normalize the Arabic characters such as (أ، ا).",
      "language": "Java",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4631,7 +4536,6 @@
      "stars": 0,
      "license": "MIT",
      "pushed_at": "2016-03-29T13:29:01Z",
-     "description": "ArabicNormalizer is pure Ruby port of Arabic Normalizer from Lucene.",
      "language": "Ruby",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4648,7 +4552,6 @@
      "stars": 0,
      "license": "MIT",
      "pushed_at": "2026-09-26T16:45:47Z",
-     "description": "Lightweight, dependency-free Python library + CLI for normalizing Arabic text for search and NLP (alef, yaa, taa marbuta, tashkeel, tatweel, digits).",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4665,7 +4568,6 @@
      "stars": 0,
      "license": "MIT",
      "pushed_at": "2026-10-01T21:49:48Z",
-     "description": "Enterprise-grade high-speed Arabic text normalization, diacritics sanitizer, and orthographic harmonizer in pure PHP",
      "language": "PHP",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4682,7 +4584,6 @@
      "stars": 0,
      "license": "MIT",
      "pushed_at": "2026-08-04T17:13:55Z",
-     "description": "An open-source toolkit for Iraqi Arabic text normalization, spelling correction, and Arabizi-to-Arabic transliteration.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4706,7 +4607,6 @@
      "stars": 15,
      "license": null,
      "pushed_at": "2012-06-03T16:48:28Z",
-     "description": "Quick Javascript RegEx to clean Arabic texts from diacritics.",
      "language": "JavaScript",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4723,7 +4623,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2025-07-12T10:24:48Z",
-     "description": "A GUI tool to remove Arabic diacritics using Python version 3.12.",
      "language": "TeX",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4740,7 +4639,6 @@
      "stars": 1,
      "license": null,
      "pushed_at": "2022-08-24T20:34:44Z",
-     "description": "Description:  Used Dataset  We used an 'Arabic tweets dataset avaliable trough kaggle' it consists of 45275 tweets(22761 \"Positive\", 22514 \"Negative\").  We spli",
      "language": "Jupyter Notebook",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4757,7 +4655,6 @@
      "stars": 0,
      "license": "MIT",
      "pushed_at": "2019-10-29T00:48:08Z",
-     "description": "Python code to remove tashkeel and unnecessary signs from Excel file.",
      "language": "Jupyter Notebook",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4774,7 +4671,6 @@
      "stars": 0,
      "license": null,
      "pushed_at": "2023-11-24T16:44:05Z",
-     "description": "remove tashkeel from arabic letters with rust",
      "language": null,
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4791,7 +4687,6 @@
      "stars": 0,
      "license": null,
      "pushed_at": "2025-01-18T18:28:16Z",
-     "description": "Remove vowels (tashkeel) from arabic text",
      "language": "HTML",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
@@ -4808,7 +4703,6 @@
      "stars": 0,
      "license": null,
      "pushed_at": "2018-10-18T08:14:33Z",
-     "description": "This function removes diacritics (tashkeel) from Arabic text and return a plain text.",
      "language": "Python",
      "features_keyword_scan": {
       "named_policies": "not mentioned",
