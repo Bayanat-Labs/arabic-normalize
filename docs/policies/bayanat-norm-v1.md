@@ -64,6 +64,8 @@ Every lossy change is logged with `lossy: true` and listed in `lossy_flags`.
 - Not for vocalisation, OCR or phonology tasks: use text_raw or raw-safe-v1.
 - Persian and Urdu letters are kept, so mixed Arabic and Persian text is not unified.
 - Arabic presentation forms follow NFKC exactly, so an isolated harakat form such as U+FE70 leaves a space behind.
+- Uthmani (Quranic) spelling is not converted to modern spelling: removing the superscript alef leaves the consonantal skeleton (ٱلْكِتَٰبُ becomes الكتب, not الكتاب), which can coincide with another word. This is not flagged as lossy, because the superscript alef is counted as a vowel mark in diacritization_ratio.
+- The ى to ي rule is meant for Arabic-language text. In some other languages written in Arabic script (for example Uyghur) ى and ي are different letters; the change is still flagged as lossy.
 
 ## Cite
 

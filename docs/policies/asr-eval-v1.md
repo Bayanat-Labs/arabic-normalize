@@ -64,6 +64,8 @@ Every lossy change is logged with `lossy: true` and listed in `lossy_flags`.
 - Lossy by design (ة to ه, ى to ي, alef variants): never store its output as a text field.
 - Arabic decimal and thousands separators are punctuation, so a number such as ١٬٢٥٠ becomes several tokens.
 - Latin letter case is kept.
+- Uthmani (Quranic) spelling is not converted to modern spelling: removing the superscript alef leaves the consonantal skeleton (ٱلْكِتَٰبُ becomes الكتب, not الكتاب), which can coincide with another word. This is not flagged as lossy, because the superscript alef is counted as a vowel mark in diacritization_ratio.
+- The ى to ي rule is meant for Arabic-language text. In some other languages written in Arabic script (for example Uyghur) ى and ي are different letters; the change is still flagged as lossy.
 
 ## Cite
 

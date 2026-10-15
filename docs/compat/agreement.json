@@ -1,0 +1,4410 @@
+{
+ "generated": "2026-10-15",
+ "arabic_normalize_version": "0.1.0",
+ "unicode_version": "18.0.0",
+ "oracles": {
+  "camel": {
+   "label": "CAMeL Tools 1.6.0",
+   "licence": "MIT",
+   "pipelines": [
+    "camel-nfc",
+    "camel-norm",
+    "camel-asr"
+   ],
+   "analogue": {
+    "raw-safe-v1": "camel-nfc",
+    "bayanat-norm-v1": "camel-norm",
+    "asr-eval-v1": "camel-asr"
+   },
+   "env": {
+    "python": "3.12.14",
+    "unicodedata": "15.0.0",
+    "freeze": [
+     "camel-tools==1.6.0",
+     "emoji==2.16.0",
+     "six==1.17.0"
+    ]
+   },
+   "harness_errors": 0
+  },
+  "tnkeeh": {
+   "label": "tnkeeh 0.0.9",
+   "licence": "MIT",
+   "pipelines": [
+    "tnkeeh-default",
+    "tnkeeh-norm",
+    "tnkeeh-asr"
+   ],
+   "analogue": {
+    "raw-safe-v1": "tnkeeh-default",
+    "bayanat-norm-v1": "tnkeeh-norm",
+    "asr-eval-v1": "tnkeeh-asr"
+   },
+   "env": {
+    "python": "3.12.14",
+    "unicodedata": "15.0.0",
+    "freeze": [
+     "numpy==2.5.4",
+     "pandas==3.0.6",
+     "python-dateutil==2.9.0.post0",
+     "six==1.17.0",
+     "tnkeeh==0.0.9"
+    ]
+   },
+   "harness_errors": 0
+  },
+  "whisper": {
+   "label": "Whisper BasicTextNormalizer (whisper-normalizer 0.1.15)",
+   "licence": "MIT",
+   "pipelines": [
+    "whisper-basic",
+    "whisper-basic-rd"
+   ],
+   "analogue": {
+    "asr-eval-v1": "whisper-basic"
+   },
+   "env": {
+    "python": "3.12.14",
+    "unicodedata": "15.0.0",
+    "freeze": [
+     "indic-numtowords==1.1.0",
+     "more-itertools==11.2.1",
+     "regex==2026.9.29",
+     "text2num==3.1.0",
+     "whisper-normalizer==0.1.15"
+    ]
+   },
+   "harness_errors": 0
+  },
+  "pyarabic": {
+   "label": "PyArabic 0.6.15 (subprocess only)",
+   "licence": "GPL",
+   "pipelines": [
+    "pyarabic-brief",
+    "pyarabic-norm",
+    "pyarabic-asr"
+   ],
+   "analogue": {
+    "bayanat-norm-v1": "pyarabic-norm",
+    "asr-eval-v1": "pyarabic-asr"
+   },
+   "env": {
+    "python": "3.12.14",
+    "unicodedata": "15.0.0",
+    "freeze": [
+     "pyarabic==0.6.15",
+     "six==1.17.0"
+    ]
+   },
+   "harness_errors": 0
+  }
+ },
+ "pipelines": {
+  "camel-nfc": "`normalize_unicode(s, compatibility=False)` (NFC)",
+  "camel-norm": "`normalize_unicode(s)` (NFKC plus two ligature fixes) → `dediac_ar` → `normalize_alef_ar` → `normalize_alef_maksura_ar`",
+  "camel-asr": "camel-norm → `normalize_teh_marbuta_ar`",
+  "tnkeeh-default": "`Tnkeeh().clean_raw_text(s)` with every option off (the tool still pads non-letters with spaces and squeezes runs of spaces)",
+  "tnkeeh-norm": "`Tnkeeh(normalize=True, remove_diacritics=True, remove_tatweel=True).clean_raw_text(s)`",
+  "tnkeeh-asr": "tnkeeh-norm options plus `remove_special_chars=True`",
+  "whisper-basic": "`BasicTextNormalizer()(s)` (the default Whisper basic normaliser)",
+  "whisper-basic-rd": "`BasicTextNormalizer(remove_diacritics=True)(s)`",
+  "pyarabic-brief": "`strip_tashkeel` → `strip_tatweel` → `normalize_hamza` (default method) → `normalize_ligature` (the composition the TL-003 brief names for compat-pyarabic-v1)",
+  "pyarabic-norm": "`normalize_ligature` → `strip_diacritics` → `strip_tatweel` → `normalize_alef`",
+  "pyarabic-asr": "pyarabic-norm → `normalize_teh`"
+ },
+ "summary": [
+  {
+   "oracle": "camel",
+   "policy_id": "bayanat-norm-v1",
+   "n": 52,
+   "exact": 30,
+   "ws": 30,
+   "ws_punct": 30
+  },
+  {
+   "oracle": "tnkeeh",
+   "policy_id": "bayanat-norm-v1",
+   "n": 52,
+   "exact": 12,
+   "ws": 16,
+   "ws_punct": 17
+  },
+  {
+   "oracle": "pyarabic",
+   "policy_id": "bayanat-norm-v1",
+   "n": 52,
+   "exact": 30,
+   "ws": 30,
+   "ws_punct": 30
+  },
+  {
+   "oracle": "camel",
+   "policy_id": "raw-safe-v1",
+   "n": 13,
+   "exact": 11,
+   "ws": 11,
+   "ws_punct": 11
+  },
+  {
+   "oracle": "tnkeeh",
+   "policy_id": "raw-safe-v1",
+   "n": 13,
+   "exact": 3,
+   "ws": 5,
+   "ws_punct": 5
+  },
+  {
+   "oracle": "camel",
+   "policy_id": "asr-eval-v1",
+   "n": 15,
+   "exact": 8,
+   "ws": 9,
+   "ws_punct": 12
+  },
+  {
+   "oracle": "tnkeeh",
+   "policy_id": "asr-eval-v1",
+   "n": 15,
+   "exact": 2,
+   "ws": 3,
+   "ws_punct": 3
+  },
+  {
+   "oracle": "whisper",
+   "policy_id": "asr-eval-v1",
+   "n": 15,
+   "exact": 1,
+   "ws": 1,
+   "ws_punct": 1
+  },
+  {
+   "oracle": "pyarabic",
+   "policy_id": "asr-eval-v1",
+   "n": 15,
+   "exact": 6,
+   "ws": 6,
+   "ws_punct": 9
+  }
+ ],
+ "matrix": [
+  {
+   "pipeline": "camel-nfc",
+   "policy_id": "bayanat-norm-v1",
+   "n": 80,
+   "exact": 20,
+   "ws": 20,
+   "ws_punct": 20
+  },
+  {
+   "pipeline": "camel-nfc",
+   "policy_id": "asr-eval-v1",
+   "n": 80,
+   "exact": 12,
+   "ws": 12,
+   "ws_punct": 14
+  },
+  {
+   "pipeline": "camel-nfc",
+   "policy_id": "raw-safe-v1",
+   "n": 80,
+   "exact": 67,
+   "ws": 67,
+   "ws_punct": 67
+  },
+  {
+   "pipeline": "camel-norm",
+   "policy_id": "bayanat-norm-v1",
+   "n": 80,
+   "exact": 48,
+   "ws": 49,
+   "ws_punct": 49
+  },
+  {
+   "pipeline": "camel-norm",
+   "policy_id": "asr-eval-v1",
+   "n": 80,
+   "exact": 33,
+   "ws": 34,
+   "ws_punct": 40
+  },
+  {
+   "pipeline": "camel-norm",
+   "policy_id": "raw-safe-v1",
+   "n": 80,
+   "exact": 26,
+   "ws": 26,
+   "ws_punct": 26
+  },
+  {
+   "pipeline": "camel-asr",
+   "policy_id": "bayanat-norm-v1",
+   "n": 80,
+   "exact": 39,
+   "ws": 40,
+   "ws_punct": 40
+  },
+  {
+   "pipeline": "camel-asr",
+   "policy_id": "asr-eval-v1",
+   "n": 80,
+   "exact": 40,
+   "ws": 43,
+   "ws_punct": 49
+  },
+  {
+   "pipeline": "camel-asr",
+   "policy_id": "raw-safe-v1",
+   "n": 80,
+   "exact": 20,
+   "ws": 20,
+   "ws_punct": 20
+  },
+  {
+   "pipeline": "tnkeeh-default",
+   "policy_id": "bayanat-norm-v1",
+   "n": 80,
+   "exact": 5,
+   "ws": 10,
+   "ws_punct": 12
+  },
+  {
+   "pipeline": "tnkeeh-default",
+   "policy_id": "asr-eval-v1",
+   "n": 80,
+   "exact": 2,
+   "ws": 6,
+   "ws_punct": 8
+  },
+  {
+   "pipeline": "tnkeeh-default",
+   "policy_id": "raw-safe-v1",
+   "n": 80,
+   "exact": 13,
+   "ws": 22,
+   "ws_punct": 29
+  },
+  {
+   "pipeline": "tnkeeh-norm",
+   "policy_id": "bayanat-norm-v1",
+   "n": 80,
+   "exact": 20,
+   "ws": 25,
+   "ws_punct": 27
+  },
+  {
+   "pipeline": "tnkeeh-norm",
+   "policy_id": "asr-eval-v1",
+   "n": 80,
+   "exact": 15,
+   "ws": 19,
+   "ws_punct": 21
+  },
+  {
+   "pipeline": "tnkeeh-norm",
+   "policy_id": "raw-safe-v1",
+   "n": 80,
+   "exact": 11,
+   "ws": 17,
+   "ws_punct": 24
+  },
+  {
+   "pipeline": "tnkeeh-asr",
+   "policy_id": "bayanat-norm-v1",
+   "n": 80,
+   "exact": 23,
+   "ws": 31,
+   "ws_punct": 33
+  },
+  {
+   "pipeline": "tnkeeh-asr",
+   "policy_id": "asr-eval-v1",
+   "n": 80,
+   "exact": 18,
+   "ws": 26,
+   "ws_punct": 26
+  },
+  {
+   "pipeline": "tnkeeh-asr",
+   "policy_id": "raw-safe-v1",
+   "n": 80,
+   "exact": 13,
+   "ws": 20,
+   "ws_punct": 26
+  },
+  {
+   "pipeline": "whisper-basic",
+   "policy_id": "bayanat-norm-v1",
+   "n": 80,
+   "exact": 16,
+   "ws": 20,
+   "ws_punct": 20
+  },
+  {
+   "pipeline": "whisper-basic",
+   "policy_id": "asr-eval-v1",
+   "n": 80,
+   "exact": 11,
+   "ws": 14,
+   "ws_punct": 14
+  },
+  {
+   "pipeline": "whisper-basic",
+   "policy_id": "raw-safe-v1",
+   "n": 80,
+   "exact": 26,
+   "ws": 28,
+   "ws_punct": 34
+  },
+  {
+   "pipeline": "whisper-basic-rd",
+   "policy_id": "bayanat-norm-v1",
+   "n": 80,
+   "exact": 29,
+   "ws": 30,
+   "ws_punct": 33
+  },
+  {
+   "pipeline": "whisper-basic-rd",
+   "policy_id": "asr-eval-v1",
+   "n": 80,
+   "exact": 23,
+   "ws": 27,
+   "ws_punct": 27
+  },
+  {
+   "pipeline": "whisper-basic-rd",
+   "policy_id": "raw-safe-v1",
+   "n": 80,
+   "exact": 18,
+   "ws": 19,
+   "ws_punct": 21
+  },
+  {
+   "pipeline": "pyarabic-brief",
+   "policy_id": "bayanat-norm-v1",
+   "n": 80,
+   "exact": 29,
+   "ws": 29,
+   "ws_punct": 29
+  },
+  {
+   "pipeline": "pyarabic-brief",
+   "policy_id": "asr-eval-v1",
+   "n": 80,
+   "exact": 21,
+   "ws": 21,
+   "ws_punct": 23
+  },
+  {
+   "pipeline": "pyarabic-brief",
+   "policy_id": "raw-safe-v1",
+   "n": 80,
+   "exact": 33,
+   "ws": 33,
+   "ws_punct": 33
+  },
+  {
+   "pipeline": "pyarabic-norm",
+   "policy_id": "bayanat-norm-v1",
+   "n": 80,
+   "exact": 46,
+   "ws": 46,
+   "ws_punct": 46
+  },
+  {
+   "pipeline": "pyarabic-norm",
+   "policy_id": "asr-eval-v1",
+   "n": 80,
+   "exact": 34,
+   "ws": 34,
+   "ws_punct": 39
+  },
+  {
+   "pipeline": "pyarabic-norm",
+   "policy_id": "raw-safe-v1",
+   "n": 80,
+   "exact": 27,
+   "ws": 27,
+   "ws_punct": 27
+  },
+  {
+   "pipeline": "pyarabic-asr",
+   "policy_id": "bayanat-norm-v1",
+   "n": 80,
+   "exact": 39,
+   "ws": 39,
+   "ws_punct": 39
+  },
+  {
+   "pipeline": "pyarabic-asr",
+   "policy_id": "asr-eval-v1",
+   "n": 80,
+   "exact": 40,
+   "ws": 41,
+   "ws_punct": 46
+  },
+  {
+   "pipeline": "pyarabic-asr",
+   "policy_id": "raw-safe-v1",
+   "n": 80,
+   "exact": 21,
+   "ws": 21,
+   "ws_punct": 21
+  }
+ ],
+ "divergence_classes": {
+  "camel": {
+   "invisible_controls": 10,
+   "digits": 6,
+   "punctuation": 6,
+   "whitespace": 5,
+   "tatweel": 4,
+   "alef": 3,
+   "other_arabic": 3,
+   "rejected_code_points": 3,
+   "alef_maqsura_yeh": 2,
+   "taa_marbuta_heh": 2,
+   "honorific": 2,
+   "quranic_marks": 2,
+   "hamza": 2
+  },
+  "tnkeeh": {
+   "whitespace": 51,
+   "alef": 11,
+   "alef_maqsura_yeh": 10,
+   "invisible_controls": 9,
+   "taa_marbuta_heh": 6,
+   "digits": 6,
+   "hamza": 5,
+   "other_arabic": 3,
+   "rejected_code_points": 3,
+   "latin": 2,
+   "other_marks": 2,
+   "quranic_marks": 2,
+   "presentation_forms": 2,
+   "harakat": 1,
+   "superscript_alef": 1,
+   "symbols": 1
+  },
+  "whisper": {
+   "whitespace": 9,
+   "taa_marbuta_heh": 6,
+   "alef": 5,
+   "digits": 3,
+   "alef_maqsura_yeh": 2,
+   "invisible_controls": 2,
+   "latin": 1,
+   "symbols": 1
+  },
+  "pyarabic": {
+   "alef": 8,
+   "alef_maqsura_yeh": 8,
+   "invisible_controls": 8,
+   "digits": 6,
+   "punctuation": 6,
+   "whitespace": 5,
+   "presentation_forms": 4,
+   "rejected_code_points": 3,
+   "other_arabic": 2,
+   "taa_marbuta_heh": 1,
+   "quranic_marks": 1,
+   "honorific": 1,
+   "hamza": 1
+  }
+ },
+ "probes": {
+  "fixtures_with_harakat": 13,
+  "whisper_basic_more_tokens_than_asr_eval_on_harakat_fixtures": 10,
+  "fixtures_with_U+FDFA_or_U+FDF2": 3,
+  "camel_norm_expanded_honorific_ligature": 3
+ },
+ "fixtures": [
+  {
+   "fixture_id": "dev-001",
+   "split": "dev",
+   "family": "diacritics",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0643\\u064e\\u062a\\u064e\\u0628\\u064e",
+   "ours": "\\u0643\\u062a\\u0628",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0643\\u062a\\u0628"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0643\\u062a\\u0628"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0643\\u062a\\u0628"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-002",
+   "split": "dev",
+   "family": "diacritics",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0645\\u064f\\u062f\\u064e\\u0631\\u0650\\u0651\\u0633\\u064c",
+   "ours": "\\u0645\\u062f\\u0631\\u0633",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u062f\\u0631\\u0633"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u062f\\u0631\\u0633"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u062f\\u0631\\u0633"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-003",
+   "split": "dev",
+   "family": "diacritics",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0645\\u064f\\u0639\\u064e\\u0644\\u0651\\u064e\\u0645",
+   "ours": "\\u0645\\u0639\\u0644\\u0645",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u0639\\u0644\\u0645"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u0639\\u0644\\u0645"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u0639\\u0644\\u0645"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-004",
+   "split": "dev",
+   "family": "diacritics",
+   "policy_id": "raw-safe-v1",
+   "input_escaped": "\\u0645\\u064f\\u0639\\u064e\\u0644\\u0651\\u064e\\u0645",
+   "ours": "\\u0645\\u064f\\u0639\\u064e\\u0644\\u064e\\u0651\\u0645",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-nfc",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u064f\\u0639\\u064e\\u0644\\u064e\\u0651\\u0645"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-default",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "harakat"
+     ],
+     "output_escaped": "\\u0645\\u0020\\u064f\\u0020\\u0639\\u0020\\u064e\\u0020\\u0644\\u0020\\u0651\\u0020\\u064e\\u0020\\u0645"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": null
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-005",
+   "split": "dev",
+   "family": "diacritics",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0642\\u064e\\u0644\\u0652\\u0628\\u064b\\u0627",
+   "ours": "\\u0642\\u0644\\u0628\\u0627",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0642\\u0644\\u0628\\u0627"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0642\\u0644\\u0628\\u0627"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0642\\u0644\\u0628\\u0627"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-006",
+   "split": "dev",
+   "family": "diacritics",
+   "policy_id": "asr-eval-v1",
+   "input_escaped": "\\u0627\\u0644\\u0639\\u0650\\u0644\\u0652\\u0645\\u064f \\u0646\\u064f\\u0648\\u0631\\u064c",
+   "ours": "\\u0627\\u0644\\u0639\\u0644\\u0645\\u0020\\u0646\\u0648\\u0631",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-asr",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0627\\u0644\\u0639\\u0644\\u0645\\u0020\\u0646\\u0648\\u0631"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-asr",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0627\\u0644\\u0639\\u0644\\u0645\\u0020\\u0646\\u0648\\u0631"
+    },
+    "whisper": {
+     "pipeline": "whisper-basic",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace"
+     ],
+     "output_escaped": "\\u0627\\u0644\\u0639\\u0020\\u0644\\u0020\\u0645\\u0020\\u0646\\u0020\\u0648\\u0631\\u0020"
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-asr",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0627\\u0644\\u0639\\u0644\\u0645\\u0020\\u0646\\u0648\\u0631"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-007",
+   "split": "dev",
+   "family": "tatweel",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u062c\\u0645\\u0640\\u0640\\u0640\\u064a\\u0644",
+   "ours": "\\u062c\\u0645\\u064a\\u0644",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "tatweel"
+     ],
+     "output_escaped": "\\u062c\\u0645\\u0640\\u0640\\u0640\\u064a\\u0644"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u062c\\u0645\\u064a\\u0644"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u062c\\u0645\\u064a\\u0644"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-008",
+   "split": "dev",
+   "family": "tatweel",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0643\\u0640\\u064e\\u062a\\u0628",
+   "ours": "\\u0643\\u062a\\u0628",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "tatweel"
+     ],
+     "output_escaped": "\\u0643\\u0640\\u062a\\u0628"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0643\\u062a\\u0628"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0643\\u062a\\u0628"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-009",
+   "split": "dev",
+   "family": "tatweel",
+   "policy_id": "raw-safe-v1",
+   "input_escaped": "\\u0633\\u0640\\u0644\\u0627\\u0645",
+   "ours": "\\u0633\\u0640\\u0644\\u0627\\u0645",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-nfc",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0633\\u0640\\u0644\\u0627\\u0645"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-default",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0633\\u0640\\u0644\\u0627\\u0645"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": null
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-010",
+   "split": "dev",
+   "family": "alef_hamza",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0623\\u0645\\u0633 \\u0625\\u0644\\u0649 \\u0622\\u062e\\u0631",
+   "ours": "\\u0627\\u0645\\u0633\\u0020\\u0627\\u0644\\u064a\\u0020\\u0627\\u062e\\u0631",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0627\\u0645\\u0633\\u0020\\u0627\\u0644\\u064a\\u0020\\u0627\\u062e\\u0631"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef",
+      "alef_maqsura_yeh"
+     ],
+     "output_escaped": "\\u0623\\u0645\\u0633\\u0020\\u0625\\u0644\\u0649\\u0020\\u0622\\u062e\\u0631"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef",
+      "alef_maqsura_yeh"
+     ],
+     "output_escaped": "\\u0627\\u0645\\u0633\\u0020\\u0627\\u0644\\u0627\\u0020\\u0627\\u062e\\u0631"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-011",
+   "split": "dev",
+   "family": "alef_hamza",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0671\\u0644\\u0643\\u062a\\u0627\\u0628",
+   "ours": "\\u0627\\u0644\\u0643\\u062a\\u0627\\u0628",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0627\\u0644\\u0643\\u062a\\u0627\\u0628"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0627\\u0644\\u0643\\u062a\\u0627\\u0628"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0627\\u0644\\u0643\\u062a\\u0627\\u0628"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-012",
+   "split": "dev",
+   "family": "alef_hamza",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0627\\u0654\\u0645\\u0631",
+   "ours": "\\u0627\\u0645\\u0631",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0627\\u0645\\u0631"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "hamza"
+     ],
+     "output_escaped": "\\u0627\\u0020\\u0654\\u0020\\u0645\\u0631"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0627\\u0645\\u0631"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-013",
+   "split": "dev",
+   "family": "alef_hamza",
+   "policy_id": "raw-safe-v1",
+   "input_escaped": "\\u0627\\u0654\\u0645\\u0631",
+   "ours": "\\u0623\\u0645\\u0631",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-nfc",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0623\\u0645\\u0631"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-default",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "alef",
+      "hamza"
+     ],
+     "output_escaped": "\\u0627\\u0020\\u0654\\u0020\\u0645\\u0631"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": null
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-014",
+   "split": "dev",
+   "family": "alef_hamza",
+   "policy_id": "asr-eval-v1",
+   "input_escaped": "\\u0625\\u0646\\u0651",
+   "ours": "\\u0627\\u0646",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-asr",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0627\\u0646"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef"
+     ],
+     "output_escaped": "\\u0625\\u0646"
+    },
+    "whisper": {
+     "pipeline": "whisper-basic",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "alef"
+     ],
+     "output_escaped": "\\u0625\\u0646\\u0020"
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-asr",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0627\\u0646"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-015",
+   "split": "dev",
+   "family": "alef_hamza",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0625\\u0650\\u0646\\u064e\\u0651 \\u0623\\u064e\\u0646\\u064e\\u0651",
+   "ours": "\\u0627\\u0646\\u0020\\u0627\\u0646",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0627\\u0646\\u0020\\u0627\\u0646"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef"
+     ],
+     "output_escaped": "\\u0625\\u0646\\u0020\\u0623\\u0646"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0627\\u0646\\u0020\\u0627\\u0646"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-016",
+   "split": "dev",
+   "family": "alef_hamza",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0633\\u0645\\u0627\\u0621 \\u0645\\u0622\\u0630\\u0646",
+   "ours": "\\u0633\\u0645\\u0627\\u0621\\u0020\\u0645\\u0627\\u0630\\u0646",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0633\\u0645\\u0627\\u0621\\u0020\\u0645\\u0627\\u0630\\u0646"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef"
+     ],
+     "output_escaped": "\\u0633\\u0645\\u0627\\u0621\\u0020\\u0645\\u0622\\u0630\\u0646"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0633\\u0645\\u0627\\u0621\\u0020\\u0645\\u0627\\u0630\\u0646"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-017",
+   "split": "dev",
+   "family": "alef_maqsura",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0639\\u0644\\u0649",
+   "ours": "\\u0639\\u0644\\u064a",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0639\\u0644\\u064a"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef_maqsura_yeh"
+     ],
+     "output_escaped": "\\u0639\\u0644\\u0649"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef",
+      "alef_maqsura_yeh"
+     ],
+     "output_escaped": "\\u0639\\u0644\\u0627"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-018",
+   "split": "dev",
+   "family": "alef_maqsura",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0645\\u0635\\u0637\\u0641\\u0649",
+   "ours": "\\u0645\\u0635\\u0637\\u0641\\u064a",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u0635\\u0637\\u0641\\u064a"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef_maqsura_yeh"
+     ],
+     "output_escaped": "\\u0645\\u0635\\u0637\\u0641\\u0649"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef",
+      "alef_maqsura_yeh"
+     ],
+     "output_escaped": "\\u0645\\u0635\\u0637\\u0641\\u0627"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-019",
+   "split": "dev",
+   "family": "alef_maqsura",
+   "policy_id": "raw-safe-v1",
+   "input_escaped": "\\u0645\\u0633\\u062a\\u0634\\u0641\\u0649",
+   "ours": "\\u0645\\u0633\\u062a\\u0634\\u0641\\u0649",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-nfc",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u0633\\u062a\\u0634\\u0641\\u0649"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-default",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u0633\\u062a\\u0634\\u0641\\u0649"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": null
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-020",
+   "split": "dev",
+   "family": "alef_maqsura",
+   "policy_id": "asr-eval-v1",
+   "input_escaped": "\\u0645\\u0628\\u0646\\u0649 \\u0648\\u0645\\u0639\\u0646\\u0649",
+   "ours": "\\u0645\\u0628\\u0646\\u064a\\u0020\\u0648\\u0645\\u0639\\u0646\\u064a",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-asr",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u0628\\u0646\\u064a\\u0020\\u0648\\u0645\\u0639\\u0646\\u064a"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef_maqsura_yeh"
+     ],
+     "output_escaped": "\\u0645\\u0628\\u0646\\u0649\\u0020\\u0648\\u0645\\u0639\\u0646\\u0649"
+    },
+    "whisper": {
+     "pipeline": "whisper-basic",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef_maqsura_yeh"
+     ],
+     "output_escaped": "\\u0645\\u0628\\u0646\\u0649\\u0020\\u0648\\u0645\\u0639\\u0646\\u0649"
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef",
+      "alef_maqsura_yeh"
+     ],
+     "output_escaped": "\\u0645\\u0628\\u0646\\u0627\\u0020\\u0648\\u0645\\u0639\\u0646\\u0627"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-021",
+   "split": "dev",
+   "family": "taa_marbuta",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0645\\u062f\\u0631\\u0633\\u0629",
+   "ours": "\\u0645\\u062f\\u0631\\u0633\\u0629",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u062f\\u0631\\u0633\\u0629"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u062f\\u0631\\u0633\\u0629"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u062f\\u0631\\u0633\\u0629"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-022",
+   "split": "dev",
+   "family": "taa_marbuta",
+   "policy_id": "asr-eval-v1",
+   "input_escaped": "\\u0645\\u062f\\u0631\\u0633\\u0629 \\u062c\\u0645\\u064a\\u0644\\u0629",
+   "ours": "\\u0645\\u062f\\u0631\\u0633\\u0647\\u0020\\u062c\\u0645\\u064a\\u0644\\u0647",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-asr",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u062f\\u0631\\u0633\\u0647\\u0020\\u062c\\u0645\\u064a\\u0644\\u0647"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "taa_marbuta_heh"
+     ],
+     "output_escaped": "\\u0645\\u062f\\u0631\\u0633\\u0629\\u0020\\u062c\\u0645\\u064a\\u0644\\u0629"
+    },
+    "whisper": {
+     "pipeline": "whisper-basic",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "taa_marbuta_heh"
+     ],
+     "output_escaped": "\\u0645\\u062f\\u0631\\u0633\\u0629\\u0020\\u062c\\u0645\\u064a\\u0644\\u0629"
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-asr",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u062f\\u0631\\u0633\\u0647\\u0020\\u062c\\u0645\\u064a\\u0644\\u0647"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-023",
+   "split": "dev",
+   "family": "taa_marbuta",
+   "policy_id": "raw-safe-v1",
+   "input_escaped": "\\u0645\\u0643\\u062a\\u0628\\u0629",
+   "ours": "\\u0645\\u0643\\u062a\\u0628\\u0629",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-nfc",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u0643\\u062a\\u0628\\u0629"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-default",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u0643\\u062a\\u0628\\u0629"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": null
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-024",
+   "split": "dev",
+   "family": "taa_marbuta",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0631\\u0633\\u0627\\u0644\\u0629\\u064c",
+   "ours": "\\u0631\\u0633\\u0627\\u0644\\u0629",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0631\\u0633\\u0627\\u0644\\u0629"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0631\\u0633\\u0627\\u0644\\u0629"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0631\\u0633\\u0627\\u0644\\u0629"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-025",
+   "split": "dev",
+   "family": "hamza_carriers",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0645\\u0624\\u062a\\u0645\\u0631 \\u0648\\u0633\\u0627\\u0626\\u0644",
+   "ours": "\\u0645\\u0624\\u062a\\u0645\\u0631\\u0020\\u0648\\u0633\\u0627\\u0626\\u0644",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u0624\\u062a\\u0645\\u0631\\u0020\\u0648\\u0633\\u0627\\u0626\\u0644"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u0624\\u062a\\u0645\\u0631\\u0020\\u0648\\u0633\\u0627\\u0626\\u0644"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u0624\\u062a\\u0645\\u0631\\u0020\\u0648\\u0633\\u0627\\u0626\\u0644"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-026",
+   "split": "dev",
+   "family": "hamza_carriers",
+   "policy_id": "asr-eval-v1",
+   "input_escaped": "\\u0633\\u0624\\u0627\\u0644",
+   "ours": "\\u0633\\u0624\\u0627\\u0644",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-asr",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0633\\u0624\\u0627\\u0644"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-asr",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0633\\u0624\\u0627\\u0644"
+    },
+    "whisper": {
+     "pipeline": "whisper-basic",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0633\\u0624\\u0627\\u0644"
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-asr",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0633\\u0624\\u0627\\u0644"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-027",
+   "split": "dev",
+   "family": "persian_urdu",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u06a9\\u062a\\u0627\\u0628",
+   "ours": "\\u06a9\\u062a\\u0627\\u0628",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u06a9\\u062a\\u0627\\u0628"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace"
+     ],
+     "output_escaped": "\\u0020\\u06a9\\u0020\\u062a\\u0627\\u0628"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u06a9\\u062a\\u0627\\u0628"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-028",
+   "split": "dev",
+   "family": "persian_urdu",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0641\\u0627\\u0631\\u0633\\u06cc",
+   "ours": "\\u0641\\u0627\\u0631\\u0633\\u06cc",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0641\\u0627\\u0631\\u0633\\u06cc"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef_maqsura_yeh",
+      "other_arabic"
+     ],
+     "output_escaped": "\\u0641\\u0627\\u0631\\u0633\\u0649"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0641\\u0627\\u0631\\u0633\\u06cc"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-029",
+   "split": "dev",
+   "family": "persian_urdu",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0634\\u06c1\\u0631",
+   "ours": "\\u0634\\u06c1\\u0631",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0634\\u06c1\\u0631"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace"
+     ],
+     "output_escaped": "\\u0634\\u0020\\u06c1\\u0020\\u0631"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0634\\u06c1\\u0631"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-030",
+   "split": "dev",
+   "family": "digits",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0661\\u0662\\u0663",
+   "ours": "123",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "digits"
+     ],
+     "output_escaped": "\\u0661\\u0662\\u0663"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "digits"
+     ],
+     "output_escaped": "\\u0020\\u0661\\u0020\\u0662\\u0020\\u0663\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "digits"
+     ],
+     "output_escaped": "\\u0661\\u0662\\u0663"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-031",
+   "split": "dev",
+   "family": "digits",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u06f4\\u06f5\\u06f6",
+   "ours": "456",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "digits"
+     ],
+     "output_escaped": "\\u06f4\\u06f5\\u06f6"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "digits"
+     ],
+     "output_escaped": "\\u0020\\u06f4\\u0020\\u06f5\\u0020\\u06f6\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "digits"
+     ],
+     "output_escaped": "\\u06f4\\u06f5\\u06f6"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-032",
+   "split": "dev",
+   "family": "digits",
+   "policy_id": "raw-safe-v1",
+   "input_escaped": "\\u0662\\u0660\\u0662\\u0666",
+   "ours": "\\u0662\\u0660\\u0662\\u0666",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-nfc",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0662\\u0660\\u0662\\u0666"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-default",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace"
+     ],
+     "output_escaped": "\\u0020\\u0662\\u0020\\u0660\\u0020\\u0662\\u0020\\u0666\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": null
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-033",
+   "split": "dev",
+   "family": "digits",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0663\\u066b\\u0665",
+   "ours": "3\\u066b5",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "digits"
+     ],
+     "output_escaped": "\\u0663\\u066b\\u0665"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "digits"
+     ],
+     "output_escaped": "\\u0020\\u0663\\u0020\\u066b\\u0020\\u0665\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "digits"
+     ],
+     "output_escaped": "\\u0663\\u066b\\u0665"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-034",
+   "split": "dev",
+   "family": "presentation_forms",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\ufefb",
+   "ours": "\\u0644\\u0627",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0644\\u0627"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0644\\u0627"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0644\\u0627"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-035",
+   "split": "dev",
+   "family": "presentation_forms",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\ufef7",
+   "ours": "\\u0644\\u0627",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0644\\u0627"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef"
+     ],
+     "output_escaped": "\\u0644\\u0623"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0644\\u0627"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-036",
+   "split": "dev",
+   "family": "presentation_forms",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\ufe91\\ufef4\\ufe96",
+   "ours": "\\u0628\\u064a\\u062a",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0628\\u064a\\u062a"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0628\\u064a\\u062a"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef_maqsura_yeh",
+      "presentation_forms",
+      "other_arabic"
+     ],
+     "output_escaped": "\\ufe91\\ufef4\\ufe96"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-037",
+   "split": "dev",
+   "family": "presentation_forms",
+   "policy_id": "raw-safe-v1",
+   "input_escaped": "\\ufefb",
+   "ours": "\\ufefb",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-nfc",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\ufefb"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-default",
+     "error": null,
+     "exact": false,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [
+      "whitespace"
+     ],
+     "output_escaped": "\\u0020\\ufefb\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": null
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-038",
+   "split": "dev",
+   "family": "presentation_forms",
+   "policy_id": "asr-eval-v1",
+   "input_escaped": "\\ufee3\\ufeaa\\ufead\\ufeb3\\ufe94",
+   "ours": "\\u0645\\u062f\\u0631\\u0633\\u0647",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-asr",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u062f\\u0631\\u0633\\u0647"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "taa_marbuta_heh"
+     ],
+     "output_escaped": "\\u0645\\u062f\\u0631\\u0633\\u0629"
+    },
+    "whisper": {
+     "pipeline": "whisper-basic",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "taa_marbuta_heh"
+     ],
+     "output_escaped": "\\u0645\\u062f\\u0631\\u0633\\u0629"
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "taa_marbuta_heh",
+      "presentation_forms",
+      "other_arabic"
+     ],
+     "output_escaped": "\\ufee3\\ufeaa\\ufead\\ufeb3\\ufe94"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-039",
+   "split": "dev",
+   "family": "ligatures_honorific",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0627\\u0644\\u0646\\u0628\\u064a \\ufdfa",
+   "ours": "\\u0627\\u0644\\u0646\\u0628\\u064a\\u0020\\ufdfa",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "alef",
+      "alef_maqsura_yeh",
+      "taa_marbuta_heh",
+      "honorific",
+      "other_arabic"
+     ],
+     "output_escaped": "\\u0627\\u0644\\u0646\\u0628\\u064a\\u0020\\u0635\\u0644\\u064a\\u0020\\u0627\\u0644\\u0644\\u0647\\u0020\\u0639\\u0644\\u064a\\u0647\\u0020\\u0648\\u0633\\u0644\\u0645"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [
+      "whitespace"
+     ],
+     "output_escaped": "\\u0627\\u0644\\u0646\\u0628\\u064a\\u0020\\ufdfa\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0627\\u0644\\u0646\\u0628\\u064a\\u0020\\ufdfa"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-040",
+   "split": "dev",
+   "family": "ligatures_honorific",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0628\\u0633\\u0645 \\ufdf2",
+   "ours": "\\u0628\\u0633\\u0645\\u0020\\ufdf2",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef",
+      "taa_marbuta_heh",
+      "honorific",
+      "other_arabic"
+     ],
+     "output_escaped": "\\u0628\\u0633\\u0645\\u0020\\u0627\\u0644\\u0644\\u0647"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [
+      "whitespace"
+     ],
+     "output_escaped": "\\u0628\\u0633\\u0645\\u0020\\ufdf2\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0628\\u0633\\u0645\\u0020\\ufdf2"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-041",
+   "split": "dev",
+   "family": "ligatures_honorific",
+   "policy_id": "raw-safe-v1",
+   "input_escaped": "\\ufdfa",
+   "ours": "\\ufdfa",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-nfc",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\ufdfa"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-default",
+     "error": null,
+     "exact": false,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [
+      "whitespace"
+     ],
+     "output_escaped": "\\u0020\\ufdfa\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": null
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-042",
+   "split": "dev",
+   "family": "zero_width",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0645\\u06cc\\u200c\\u062e\\u0648\\u0627\\u0647\\u0645",
+   "ours": "\\u0645\\u06cc\\u200c\\u062e\\u0648\\u0627\\u0647\\u0645",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u06cc\\u200c\\u062e\\u0648\\u0627\\u0647\\u0645"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "alef_maqsura_yeh",
+      "other_arabic"
+     ],
+     "output_escaped": "\\u0645\\u0649\\u0020\\u200c\\u0020\\u062e\\u0648\\u0627\\u0647\\u0645"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0645\\u06cc\\u200c\\u062e\\u0648\\u0627\\u0647\\u0645"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-043",
+   "split": "dev",
+   "family": "zero_width",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u062f\\u0627\\u0631\\u200c\\u0647\\u0627",
+   "ours": "\\u062f\\u0627\\u0631\\u0647\\u0627",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u062f\\u0627\\u0631\\u200c\\u0647\\u0627"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u062f\\u0627\\u0631\\u0020\\u200c\\u0020\\u0647\\u0627"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u062f\\u0627\\u0631\\u200c\\u0647\\u0627"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-044",
+   "split": "dev",
+   "family": "zero_width",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0643\\u062a\\u0627\\u0628\\u200b \\u062c\\u062f\\u064a\\u062f",
+   "ours": "\\u0643\\u062a\\u0627\\u0628\\u0020\\u062c\\u062f\\u064a\\u062f",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u0643\\u062a\\u0627\\u0628\\u200b\\u0020\\u062c\\u062f\\u064a\\u062f"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u0643\\u062a\\u0627\\u0628\\u0020\\u200b\\u0020\\u062c\\u062f\\u064a\\u062f"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u0643\\u062a\\u0627\\u0628\\u200b\\u0020\\u062c\\u062f\\u064a\\u062f"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-045",
+   "split": "dev",
+   "family": "zero_width",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0647\\u200d \\u0628",
+   "ours": "\\u0647\\u0020\\u0628",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u0647\\u200d\\u0020\\u0628"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u0647\\u0020\\u200d\\u0020\\u0628"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u0647\\u200d\\u0020\\u0628"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-046",
+   "split": "dev",
+   "family": "zero_width",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0643\\u062a\\u0627\\u0628\\u064f\\u200c\\u0647\\u0627",
+   "ours": "\\u0643\\u062a\\u0627\\u0628\\u200c\\u0647\\u0627",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0643\\u062a\\u0627\\u0628\\u200c\\u0647\\u0627"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace"
+     ],
+     "output_escaped": "\\u0643\\u062a\\u0627\\u0628\\u0020\\u200c\\u0020\\u0647\\u0627"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0643\\u062a\\u0627\\u0628\\u200c\\u0647\\u0627"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-047",
+   "split": "dev",
+   "family": "bidi_bom",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u200f\\u0645\\u0631\\u062d\\u0628\\u0627\\u200f",
+   "ours": "\\u0645\\u0631\\u062d\\u0628\\u0627",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u200f\\u0645\\u0631\\u062d\\u0628\\u0627\\u200f"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u0020\\u200f\\u0020\\u0645\\u0631\\u062d\\u0628\\u0627\\u0020\\u200f\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u200f\\u0645\\u0631\\u062d\\u0628\\u0627\\u200f"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-048",
+   "split": "dev",
+   "family": "bidi_bom",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\ufeff\\u0646\\u0635",
+   "ours": "\\u0646\\u0635",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "invisible_controls"
+     ],
+     "output_escaped": "\\ufeff\\u0646\\u0635"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u0020\\ufeff\\u0020\\u0646\\u0635"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "invisible_controls"
+     ],
+     "output_escaped": "\\ufeff\\u0646\\u0635"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-049",
+   "split": "dev",
+   "family": "bidi_bom",
+   "policy_id": "raw-safe-v1",
+   "input_escaped": "\\u0627\\u0644\\u0646\\u0633\\u062e\\u0629 \\u202bv2\\u202c",
+   "ours": "\\u0627\\u0644\\u0646\\u0633\\u062e\\u0629\\u0020v2",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-nfc",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u0627\\u0644\\u0646\\u0633\\u062e\\u0629\\u0020\\u202bv2\\u202c"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-default",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u0627\\u0644\\u0646\\u0633\\u062e\\u0629\\u0020\\u202b\\u0020v2\\u0020\\u202c\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": null
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-050",
+   "split": "dev",
+   "family": "bidi_bom",
+   "policy_id": "asr-eval-v1",
+   "input_escaped": "\\u0627\\u0644\\u0633\\u0627\\u0639\\u0629 \\u0663\\u200e:\\u0663\\u0660",
+   "ours": "\\u0627\\u0644\\u0633\\u0627\\u0639\\u0647\\u00203\\u002030",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "punctuation",
+      "digits",
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u0627\\u0644\\u0633\\u0627\\u0639\\u0647\\u0020\\u0663\\u200e:\\u0663\\u0660"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "taa_marbuta_heh",
+      "digits"
+     ],
+     "output_escaped": "\\u0627\\u0644\\u0633\\u0627\\u0639\\u0629\\u0020"
+    },
+    "whisper": {
+     "pipeline": "whisper-basic",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "taa_marbuta_heh",
+      "digits",
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u0627\\u0644\\u0633\\u0627\\u0639\\u0629\\u0020\\u0663\\u200e\\u0020\\u0663\\u0660"
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "punctuation",
+      "digits",
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u0627\\u0644\\u0633\\u0627\\u0639\\u0647\\u0020\\u0663\\u200e:\\u0663\\u0660"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-051",
+   "split": "dev",
+   "family": "punctuation",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0646\\u0639\\u0645\\u060c \\u0634\\u0643\\u0631\\u0627\\u061b \\u0647\\u0644 \\u0623\\u0646\\u062a \\u0628\\u062e\\u064a\\u0631\\u061f",
+   "ours": "\\u0646\\u0639\\u0645\\u060c\\u0020\\u0634\\u0643\\u0631\\u0627\\u061b\\u0020\\u0647\\u0644\\u0020\\u0627\\u0646\\u062a\\u0020\\u0628\\u062e\\u064a\\u0631\\u061f",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0646\\u0639\\u0645\\u060c\\u0020\\u0634\\u0643\\u0631\\u0627\\u061b\\u0020\\u0647\\u0644\\u0020\\u0627\\u0646\\u062a\\u0020\\u0628\\u062e\\u064a\\u0631\\u061f"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "alef"
+     ],
+     "output_escaped": "\\u0646\\u0639\\u0645\\u0020\\u060c\\u0020\\u0634\\u0643\\u0631\\u0627\\u0020\\u061b\\u0020\\u0647\\u0644\\u0020\\u0623\\u0646\\u062a\\u0020\\u0628\\u062e\\u064a\\u0631\\u0020\\u061f\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0646\\u0639\\u0645\\u060c\\u0020\\u0634\\u0643\\u0631\\u0627\\u061b\\u0020\\u0647\\u0644\\u0020\\u0627\\u0646\\u062a\\u0020\\u0628\\u062e\\u064a\\u0631\\u061f"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-052",
+   "split": "dev",
+   "family": "punctuation",
+   "policy_id": "asr-eval-v1",
+   "input_escaped": "\\u0646\\u0639\\u0645\\u060c \\u0634\\u0643\\u0631\\u0627\\u061b \\u0647\\u0644 \\u0623\\u0646\\u062a \\u0628\\u062e\\u064a\\u0631\\u061f",
+   "ours": "\\u0646\\u0639\\u0645\\u0020\\u0634\\u0643\\u0631\\u0627\\u0020\\u0647\\u0644\\u0020\\u0627\\u0646\\u062a\\u0020\\u0628\\u062e\\u064a\\u0631",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": true,
+     "classes": [
+      "punctuation"
+     ],
+     "output_escaped": "\\u0646\\u0639\\u0645\\u060c\\u0020\\u0634\\u0643\\u0631\\u0627\\u061b\\u0020\\u0647\\u0644\\u0020\\u0627\\u0646\\u062a\\u0020\\u0628\\u062e\\u064a\\u0631\\u061f"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "alef"
+     ],
+     "output_escaped": "\\u0646\\u0639\\u0645\\u0020\\u0634\\u0643\\u0631\\u0627\\u0020\\u0647\\u0644\\u0020\\u0623\\u0646\\u062a\\u0020\\u0628\\u062e\\u064a\\u0631\\u0020"
+    },
+    "whisper": {
+     "pipeline": "whisper-basic",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "alef"
+     ],
+     "output_escaped": "\\u0646\\u0639\\u0645\\u0020\\u0634\\u0643\\u0631\\u0627\\u0020\\u0647\\u0644\\u0020\\u0623\\u0646\\u062a\\u0020\\u0628\\u062e\\u064a\\u0631\\u0020"
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": true,
+     "classes": [
+      "punctuation"
+     ],
+     "output_escaped": "\\u0646\\u0639\\u0645\\u060c\\u0020\\u0634\\u0643\\u0631\\u0627\\u061b\\u0020\\u0647\\u0644\\u0020\\u0627\\u0646\\u062a\\u0020\\u0628\\u062e\\u064a\\u0631\\u061f"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-053",
+   "split": "dev",
+   "family": "punctuation",
+   "policy_id": "asr-eval-v1",
+   "input_escaped": "\\u0665\\u0660\\u066a",
+   "ours": "50",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "punctuation",
+      "digits"
+     ],
+     "output_escaped": "\\u0665\\u0660\\u066a"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "digits"
+     ],
+     "output_escaped": "\\u0020"
+    },
+    "whisper": {
+     "pipeline": "whisper-basic",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "digits"
+     ],
+     "output_escaped": "\\u0665\\u0660\\u0020"
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "punctuation",
+      "digits"
+     ],
+     "output_escaped": "\\u0665\\u0660\\u066a"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-054",
+   "split": "dev",
+   "family": "punctuation",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0642\\u0627\\u0644: \\u00ab\\u0625\\u0644\\u0649 \\u0627\\u0644\\u0644\\u0642\\u0627\\u0621\\u00bb",
+   "ours": "\\u0642\\u0627\\u0644:\\u0020\\u00ab\\u0627\\u0644\\u064a\\u0020\\u0627\\u0644\\u0644\\u0642\\u0627\\u0621\\u00bb",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0642\\u0627\\u0644:\\u0020\\u00ab\\u0627\\u0644\\u064a\\u0020\\u0627\\u0644\\u0644\\u0642\\u0627\\u0621\\u00bb"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "alef",
+      "alef_maqsura_yeh"
+     ],
+     "output_escaped": "\\u0642\\u0627\\u0644\\u0020:\\u0020\\u00ab\\u0020\\u0625\\u0644\\u0649\\u0020\\u0627\\u0644\\u0644\\u0642\\u0627\\u0621\\u0020\\u00bb\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef",
+      "alef_maqsura_yeh"
+     ],
+     "output_escaped": "\\u0642\\u0627\\u0644:\\u0020\\u00ab\\u0627\\u0644\\u0627\\u0020\\u0627\\u0644\\u0644\\u0642\\u0627\\u0621\\u00bb"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-055",
+   "split": "dev",
+   "family": "mixed_latin",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0646\\u0645\\u0648\\u0630\\u062c GPT-4 \\u062c\\u062f\\u064a\\u062f",
+   "ours": "\\u0646\\u0645\\u0648\\u0630\\u062c\\u0020GPT-4\\u0020\\u062c\\u062f\\u064a\\u062f",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0646\\u0645\\u0648\\u0630\\u062c\\u0020GPT-4\\u0020\\u062c\\u062f\\u064a\\u062f"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": true,
+     "classes": [
+      "whitespace"
+     ],
+     "output_escaped": "\\u0646\\u0645\\u0648\\u0630\\u062c\\u0020GPT\\u0020-\\u00204\\u0020\\u062c\\u062f\\u064a\\u062f"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0646\\u0645\\u0648\\u0630\\u062c\\u0020GPT-4\\u0020\\u062c\\u062f\\u064a\\u062f"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-056",
+   "split": "dev",
+   "family": "mixed_latin",
+   "policy_id": "asr-eval-v1",
+   "input_escaped": "\\u0627\\u0633\\u062a\\u062e\\u062f\\u0645\\u062a Python \\u0648 PyTorch.",
+   "ours": "\\u0627\\u0633\\u062a\\u062e\\u062f\\u0645\\u062a\\u0020Python\\u0020\\u0648\\u0020PyTorch",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": true,
+     "classes": [
+      "punctuation"
+     ],
+     "output_escaped": "\\u0627\\u0633\\u062a\\u062e\\u062f\\u0645\\u062a\\u0020Python\\u0020\\u0648\\u0020PyTorch."
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-asr",
+     "error": null,
+     "exact": false,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [
+      "whitespace"
+     ],
+     "output_escaped": "\\u0627\\u0633\\u062a\\u062e\\u062f\\u0645\\u062a\\u0020Python\\u0020\\u0648\\u0020PyTorch\\u0020"
+    },
+    "whisper": {
+     "pipeline": "whisper-basic",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "latin"
+     ],
+     "output_escaped": "\\u0627\\u0633\\u062a\\u062e\\u062f\\u0645\\u062a\\u0020python\\u0020\\u0648\\u0020pytorch\\u0020"
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": true,
+     "classes": [
+      "punctuation"
+     ],
+     "output_escaped": "\\u0627\\u0633\\u062a\\u062e\\u062f\\u0645\\u062a\\u0020Python\\u0020\\u0648\\u0020PyTorch."
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-057",
+   "split": "dev",
+   "family": "mixed_latin",
+   "policy_id": "raw-safe-v1",
+   "input_escaped": "cafe\\u0301 \\u0639\\u0631\\u0628\\u064a",
+   "ours": "caf\\u00e9\\u0020\\u0639\\u0631\\u0628\\u064a",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-nfc",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "caf\\u00e9\\u0020\\u0639\\u0631\\u0628\\u064a"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-default",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "latin",
+      "other_marks"
+     ],
+     "output_escaped": "cafe\\u0020\\u0301\\u0020\\u0639\\u0631\\u0628\\u064a"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": null
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-058",
+   "split": "dev",
+   "family": "quranic_superscript",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0647\\u0670\\u0630\\u0627",
+   "ours": "\\u0647\\u0630\\u0627",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0647\\u0630\\u0627"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "superscript_alef"
+     ],
+     "output_escaped": "\\u0647\\u0020\\u0670\\u0020\\u0630\\u0627"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0647\\u0630\\u0627"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-059",
+   "split": "dev",
+   "family": "quranic_superscript",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0642\\u0627\\u0644\\u064e\\u06d6 \\u0646\\u0639\\u0645\\u06da",
+   "ours": "\\u0642\\u0627\\u0644\\u0020\\u0646\\u0639\\u0645",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "quranic_marks"
+     ],
+     "output_escaped": "\\u0642\\u0627\\u0644\\u06d6\\u0020\\u0646\\u0639\\u0645\\u06da"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "quranic_marks"
+     ],
+     "output_escaped": "\\u0642\\u0627\\u0644\\u0020\\u06d6\\u0020\\u0646\\u0639\\u0645\\u0020\\u06da\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0642\\u0627\\u0644\\u0020\\u0646\\u0639\\u0645"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-060",
+   "split": "dev",
+   "family": "quranic_superscript",
+   "policy_id": "asr-eval-v1",
+   "input_escaped": "\\u0671\\u0644\\u0652\\u0643\\u0650\\u062a\\u064e\\u0670\\u0628\\u064f",
+   "ours": "\\u0627\\u0644\\u0643\\u062a\\u0628",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-asr",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0627\\u0644\\u0643\\u062a\\u0628"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace"
+     ],
+     "output_escaped": "\\u0627\\u0644\\u0643\\u062a\\u0020\\u0628"
+    },
+    "whisper": {
+     "pipeline": "whisper-basic",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "alef"
+     ],
+     "output_escaped": "\\u0671\\u0644\\u0020\\u0643\\u0020\\u062a\\u0020\\u0628\\u0020"
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-asr",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0627\\u0644\\u0643\\u062a\\u0628"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-061",
+   "split": "dev",
+   "family": "quranic_superscript",
+   "policy_id": "raw-safe-v1",
+   "input_escaped": "\\u0646\\u0639\\u0645\\u06da",
+   "ours": "\\u0646\\u0639\\u0645\\u06da",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-nfc",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0646\\u0639\\u0645\\u06da"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-default",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace"
+     ],
+     "output_escaped": "\\u0646\\u0639\\u0645\\u0020\\u06da\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": null
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-062",
+   "split": "dev",
+   "family": "whitespace",
+   "policy_id": "asr-eval-v1",
+   "input_escaped": "  \\u0643\\u0644\\u0645\\u0629\\u0009\\u0009\\u0623\\u062e\\u0631\\u0649 \\u000a ",
+   "ours": "\\u0643\\u0644\\u0645\\u0647\\u0020\\u0627\\u062e\\u0631\\u064a",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-asr",
+     "error": null,
+     "exact": false,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [
+      "whitespace"
+     ],
+     "output_escaped": "\\u0020\\u0020\\u0643\\u0644\\u0645\\u0647\\u0009\\u0009\\u0627\\u062e\\u0631\\u064a\\u0020\\u000a\\u0020"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "alef",
+      "alef_maqsura_yeh",
+      "taa_marbuta_heh"
+     ],
+     "output_escaped": "\\u0020\\u0643\\u0644\\u0645\\u0629\\u0020\\u0623\\u062e\\u0631\\u0649\\u0020\\u000a\\u0020"
+    },
+    "whisper": {
+     "pipeline": "whisper-basic",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "alef",
+      "alef_maqsura_yeh",
+      "taa_marbuta_heh"
+     ],
+     "output_escaped": "\\u0020\\u0643\\u0644\\u0645\\u0629\\u0020\\u0623\\u062e\\u0631\\u0649\\u0020"
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "alef",
+      "alef_maqsura_yeh"
+     ],
+     "output_escaped": "\\u0020\\u0020\\u0643\\u0644\\u0645\\u0647\\u0009\\u0009\\u0627\\u062e\\u0631\\u0627\\u0020\\u000a\\u0020"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-063",
+   "split": "dev",
+   "family": "whitespace",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0643\\u0644\\u0645\\u0629\\u0009\\u0643\\u0644\\u0645\\u0629",
+   "ours": "\\u0643\\u0644\\u0645\\u0629\\u0009\\u0643\\u0644\\u0645\\u0629",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0643\\u0644\\u0645\\u0629\\u0009\\u0643\\u0644\\u0645\\u0629"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [
+      "whitespace"
+     ],
+     "output_escaped": "\\u0643\\u0644\\u0645\\u0629\\u0020\\u0009\\u0020\\u0643\\u0644\\u0645\\u0629"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0643\\u0644\\u0645\\u0629\\u0009\\u0643\\u0644\\u0645\\u0629"
+    }
+   }
+  },
+  {
+   "fixture_id": "dev-064",
+   "split": "dev",
+   "family": "rejected_span",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0646\\u0635\\u0007\\u0646\\u0635",
+   "ours": "\\u0646\\u0635\\u0646\\u0635",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "rejected_code_points"
+     ],
+     "output_escaped": "\\u0646\\u0635\\u0007\\u0646\\u0635"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "rejected_code_points"
+     ],
+     "output_escaped": "\\u0646\\u0635\\u0020\\u0007\\u0020\\u0646\\u0635"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "rejected_code_points"
+     ],
+     "output_escaped": "\\u0646\\u0635\\u0007\\u0646\\u0635"
+    }
+   }
+  },
+  {
+   "fixture_id": "acc-001",
+   "split": "acceptance",
+   "family": "emoji_zwj",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0639\\u0627\\u0626\\u0644\\u0629 \\U0001f468\\u200d\\U0001f469\\u200d\\U0001f467 \\u0633\\u0639\\u064a\\u062f\\u0629",
+   "ours": "\\u0639\\u0627\\u0626\\u0644\\u0629\\u0020\\U0001f468\\u200d\\U0001f469\\u200d\\U0001f467\\u0020\\u0633\\u0639\\u064a\\u062f\\u0629",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0639\\u0627\\u0626\\u0644\\u0629\\u0020\\U0001f468\\u200d\\U0001f469\\u200d\\U0001f467\\u0020\\u0633\\u0639\\u064a\\u062f\\u0629"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace"
+     ],
+     "output_escaped": "\\u0639\\u0627\\u0626\\u0644\\u0629\\u0020\\U0001f468\\u0020\\u200d\\u0020\\U0001f469\\u0020\\u200d\\u0020\\U0001f467\\u0020\\u0633\\u0639\\u064a\\u062f\\u0629"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0639\\u0627\\u0626\\u0644\\u0629\\u0020\\U0001f468\\u200d\\U0001f469\\u200d\\U0001f467\\u0020\\u0633\\u0639\\u064a\\u062f\\u0629"
+    }
+   }
+  },
+  {
+   "fixture_id": "acc-002",
+   "split": "acceptance",
+   "family": "emoji_zwj",
+   "policy_id": "asr-eval-v1",
+   "input_escaped": "\\U0001f469\\U0001f3fd\\u200d\\U0001f4bb \\u0645\\u0628\\u0631\\u0645\\u062c\\u0629",
+   "ours": "\\U0001f469\\U0001f3fd\\u200d\\U0001f4bb\\u0020\\u0645\\u0628\\u0631\\u0645\\u062c\\u0647",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-asr",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\U0001f469\\U0001f3fd\\u200d\\U0001f4bb\\u0020\\u0645\\u0628\\u0631\\u0645\\u062c\\u0647"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "taa_marbuta_heh",
+      "invisible_controls",
+      "symbols"
+     ],
+     "output_escaped": "\\u0020\\u0645\\u0628\\u0631\\u0645\\u062c\\u0629"
+    },
+    "whisper": {
+     "pipeline": "whisper-basic",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "taa_marbuta_heh",
+      "symbols"
+     ],
+     "output_escaped": "\\u0020\\u200d\\u0020\\u0645\\u0628\\u0631\\u0645\\u062c\\u0629"
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-asr",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\U0001f469\\U0001f3fd\\u200d\\U0001f4bb\\u0020\\u0645\\u0628\\u0631\\u0645\\u062c\\u0647"
+    }
+   }
+  },
+  {
+   "fixture_id": "acc-003",
+   "split": "acceptance",
+   "family": "bidi_isolates",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u2067\\u0627\\u0644\\u0631\\u0645\\u0632\\u2069 \\u061c\\u0645\\u062b\\u0627\\u0644",
+   "ours": "\\u0627\\u0644\\u0631\\u0645\\u0632\\u0020\\u0645\\u062b\\u0627\\u0644",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u2067\\u0627\\u0644\\u0631\\u0645\\u0632\\u2069\\u0020\\u061c\\u0645\\u062b\\u0627\\u0644"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u0020\\u2067\\u0020\\u0627\\u0644\\u0631\\u0645\\u0632\\u0020\\u2069\\u0020\\u061c\\u0020\\u0645\\u062b\\u0627\\u0644"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u2067\\u0627\\u0644\\u0631\\u0645\\u0632\\u2069\\u0020\\u061c\\u0645\\u062b\\u0627\\u0644"
+    }
+   }
+  },
+  {
+   "fixture_id": "acc-004",
+   "split": "acceptance",
+   "family": "pf_marks",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0628\\ufe77\\u062a",
+   "ours": "\\u0628\\u062a",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "tatweel"
+     ],
+     "output_escaped": "\\u0628\\u0640\\u062a"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "presentation_forms"
+     ],
+     "output_escaped": "\\u0628\\u0020\\ufe77\\u0020\\u062a"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "presentation_forms"
+     ],
+     "output_escaped": "\\u0628\\ufe77\\u062a"
+    }
+   }
+  },
+  {
+   "fixture_id": "acc-005",
+   "split": "acceptance",
+   "family": "pf_marks",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0643\\u062a\\u0627\\u0628\\u0627\\ufe70",
+   "ours": "\\u0643\\u062a\\u0627\\u0628\\u0627\\u0020",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0643\\u062a\\u0627\\u0628\\u0627\\u0020"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "presentation_forms"
+     ],
+     "output_escaped": "\\u0643\\u062a\\u0627\\u0628\\u0627\\u0020\\ufe70\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "presentation_forms"
+     ],
+     "output_escaped": "\\u0643\\u062a\\u0627\\u0628\\u0627\\ufe70"
+    }
+   }
+  },
+  {
+   "fixture_id": "acc-006",
+   "split": "acceptance",
+   "family": "arabic_extended_letters",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0750\\u08a0\\u0649",
+   "ours": "\\u0750\\u08a0\\u064a",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0750\\u08a0\\u064a"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "alef_maqsura_yeh"
+     ],
+     "output_escaped": "\\u0020\\u0750\\u0020\\u08a0\\u0020\\u0649"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef",
+      "alef_maqsura_yeh"
+     ],
+     "output_escaped": "\\u0750\\u08a0\\u0627"
+    }
+   }
+  },
+  {
+   "fixture_id": "acc-007",
+   "split": "acceptance",
+   "family": "arabic_compat_outside_pf",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0675 \\U0001ee01",
+   "ours": "\\u0675\\u0020\\U0001ee01",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef",
+      "other_arabic"
+     ],
+     "output_escaped": "\\u0627\\u0674\\u0020\\u0628"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [
+      "whitespace"
+     ],
+     "output_escaped": "\\u0020\\u0675\\u0020\\U0001ee01\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0675\\u0020\\U0001ee01"
+    }
+   }
+  },
+  {
+   "fixture_id": "acc-008",
+   "split": "acceptance",
+   "family": "format_controls",
+   "policy_id": "raw-safe-v1",
+   "input_escaped": "\\u0645\\u0639\\u00ad\\u0644\\u0648\\u0645\\u0627\\u062a\\u2060\\u0646\\u0635",
+   "ours": "\\u0645\\u0639\\u0644\\u0648\\u0645\\u0627\\u062a\\u0646\\u0635",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-nfc",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u0645\\u0639\\u00ad\\u0644\\u0648\\u0645\\u0627\\u062a\\u2060\\u0646\\u0635"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-default",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u0645\\u0639\\u0020\\u00ad\\u0020\\u0644\\u0648\\u0645\\u0627\\u062a\\u0020\\u2060\\u0020\\u0646\\u0635"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": null
+    }
+   }
+  },
+  {
+   "fixture_id": "acc-009",
+   "split": "acceptance",
+   "family": "c1_controls",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0633\\u0637\\u0631\\u0085\\u0633\\u0637\\u0631\\u0080",
+   "ours": "\\u0633\\u0637\\u0631\\u0085\\u0633\\u0637\\u0631",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "rejected_code_points"
+     ],
+     "output_escaped": "\\u0633\\u0637\\u0631\\u0085\\u0633\\u0637\\u0631\\u0080"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "rejected_code_points"
+     ],
+     "output_escaped": "\\u0633\\u0637\\u0631\\u0020\\u0085\\u0020\\u0633\\u0637\\u0631\\u0020\\u0080\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "rejected_code_points"
+     ],
+     "output_escaped": "\\u0633\\u0637\\u0631\\u0085\\u0633\\u0637\\u0631\\u0080"
+    }
+   }
+  },
+  {
+   "fixture_id": "acc-010",
+   "split": "acceptance",
+   "family": "surrogates_nonchars",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0646\\u0635\\ud800\\u0646\\u0635\\ufffe",
+   "ours": "\\u0646\\u0635\\u0646\\u0635",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "rejected_code_points"
+     ],
+     "output_escaped": "\\u0646\\u0635\\ud800\\u0646\\u0635\\ufffe"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "rejected_code_points"
+     ],
+     "output_escaped": "\\u0646\\u0635\\u0020\\ud800\\u0020\\u0646\\u0635\\u0020\\ufffe\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "rejected_code_points"
+     ],
+     "output_escaped": "\\u0646\\u0635\\ud800\\u0646\\u0635\\ufffe"
+    }
+   }
+  },
+  {
+   "fixture_id": "acc-011",
+   "split": "acceptance",
+   "family": "honorific_signs_extended_marks",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0631\\u0633\\u0648\\u0644\\u0610 \\u0639\\u0644\\u0645\\u08f0",
+   "ours": "\\u0631\\u0633\\u0648\\u0644\\u0610\\u0020\\u0639\\u0644\\u0645",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "quranic_marks"
+     ],
+     "output_escaped": "\\u0631\\u0633\\u0648\\u0644\\u0610\\u0020\\u0639\\u0644\\u0645\\u08f0"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "quranic_marks"
+     ],
+     "output_escaped": "\\u0631\\u0633\\u0648\\u0644\\u0020\\u0610\\u0020\\u0639\\u0644\\u0645\\u0020\\u08f0\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "quranic_marks",
+      "honorific"
+     ],
+     "output_escaped": "\\u0631\\u0633\\u0648\\u0644\\u0020\\u0639\\u0644\\u0645\\u08f0"
+    }
+   }
+  },
+  {
+   "fixture_id": "acc-012",
+   "split": "acceptance",
+   "family": "nbsp_ornate",
+   "policy_id": "asr-eval-v1",
+   "input_escaped": "\\ufd3f\\u0646\\u0635\\ufd3e\\u00a0\\u202f\\u0622\\u062e\\u0631",
+   "ours": "\\u0646\\u0635\\u0020\\u0627\\u062e\\u0631",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": true,
+     "classes": [
+      "whitespace",
+      "punctuation"
+     ],
+     "output_escaped": "\\ufd3f\\u0646\\u0635\\ufd3e\\u0020\\u0020\\u0627\\u062e\\u0631"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "alef"
+     ],
+     "output_escaped": "\\u0020\\u0646\\u0635\\u0020\\u0622\\u062e\\u0631"
+    },
+    "whisper": {
+     "pipeline": "whisper-basic",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "alef"
+     ],
+     "output_escaped": "\\u0020\\u0646\\u0635\\u0020\\u0622\\u062e\\u0631"
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": true,
+     "classes": [
+      "whitespace",
+      "punctuation"
+     ],
+     "output_escaped": "\\ufd3f\\u0646\\u0635\\ufd3e\\u00a0\\u202f\\u0627\\u062e\\u0631"
+    }
+   }
+  },
+  {
+   "fixture_id": "acc-013",
+   "split": "acceptance",
+   "family": "decomposed_residue",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0627\\u0640\\u0654\\u0645\\u0644",
+   "ours": "\\u0627\\u0645\\u0644",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "tatweel",
+      "hamza"
+     ],
+     "output_escaped": "\\u0627\\u0640\\u0654\\u0645\\u0644"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "hamza"
+     ],
+     "output_escaped": "\\u0627\\u0020\\u0654\\u0020\\u0645\\u0644"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u0627\\u0645\\u0644"
+    }
+   }
+  },
+  {
+   "fixture_id": "acc-014",
+   "split": "acceptance",
+   "family": "final_nfc",
+   "policy_id": "bayanat-norm-v1",
+   "input_escaped": "\\u0634\\u0649\\u0654",
+   "ours": "\\u0634\\u0626",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "hamza",
+      "alef_maqsura_yeh"
+     ],
+     "output_escaped": "\\u0634\\u064a\\u0654"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "hamza",
+      "alef_maqsura_yeh"
+     ],
+     "output_escaped": "\\u0634\\u0649\\u0020\\u0654\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-norm",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "alef",
+      "hamza"
+     ],
+     "output_escaped": "\\u0634\\u0627"
+    }
+   }
+  },
+  {
+   "fixture_id": "acc-015",
+   "split": "acceptance",
+   "family": "nfc_compose_reorder",
+   "policy_id": "raw-safe-v1",
+   "input_escaped": "\\u06d2\\u0654 a\\u0302\\u0323",
+   "ours": "\\u06d3\\u0020\\u1ead",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-nfc",
+     "error": null,
+     "exact": true,
+     "ws": true,
+     "ws_punct": true,
+     "classes": [],
+     "output_escaped": "\\u06d3\\u0020\\u1ead"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-default",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "hamza",
+      "latin",
+      "other_marks",
+      "other_arabic"
+     ],
+     "output_escaped": "\\u0020\\u06d2\\u0020\\u0654\\u0020a\\u0020\\u0302\\u0020\\u0323\\u0020"
+    },
+    "whisper": {
+     "pipeline": null
+    },
+    "pyarabic": {
+     "pipeline": null
+    }
+   }
+  },
+  {
+   "fixture_id": "acc-016",
+   "split": "acceptance",
+   "family": "digits_separators",
+   "policy_id": "asr-eval-v1",
+   "input_escaped": "\\u061c\\u06f1\\u066c\\u06f2\\u06f5\\u06f0\\u066b\\u06f5 \\u0644\\u064a\\u0631\\u0629",
+   "ours": "1\\u0020250\\u00205\\u0020\\u0644\\u064a\\u0631\\u0647",
+   "oracles": {
+    "camel": {
+     "pipeline": "camel-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "punctuation",
+      "digits",
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u061c\\u06f1\\u066c\\u06f2\\u06f5\\u06f0\\u066b\\u06f5\\u0020\\u0644\\u064a\\u0631\\u0647"
+    },
+    "tnkeeh": {
+     "pipeline": "tnkeeh-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "taa_marbuta_heh",
+      "digits"
+     ],
+     "output_escaped": "\\u0020\\u0644\\u064a\\u0631\\u0629"
+    },
+    "whisper": {
+     "pipeline": "whisper-basic",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "taa_marbuta_heh",
+      "digits",
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u061c\\u06f1\\u0020\\u06f2\\u06f5\\u06f0\\u0020\\u06f5\\u0020\\u0644\\u064a\\u0631\\u0629"
+    },
+    "pyarabic": {
+     "pipeline": "pyarabic-asr",
+     "error": null,
+     "exact": false,
+     "ws": false,
+     "ws_punct": false,
+     "classes": [
+      "whitespace",
+      "punctuation",
+      "digits",
+      "invisible_controls"
+     ],
+     "output_escaped": "\\u061c\\u06f1\\u066c\\u06f2\\u06f5\\u06f0\\u066b\\u06f5\\u0020\\u0644\\u064a\\u0631\\u0647"
+    }
+   }
+  }
+ ],
+ "probe_strings": [
+  {
+   "probe": "alef maqsura",
+   "input_escaped": "\\u0649",
+   "ours": {
+    "bayanat-norm-v1": "\\u064a",
+    "asr-eval-v1": "\\u064a",
+    "raw-safe-v1": "\\u0649"
+   },
+   "oracles": {
+    "camel-nfc": "\\u0649",
+    "camel-norm": "\\u064a",
+    "camel-asr": "\\u064a",
+    "tnkeeh-default": "\\u0649",
+    "tnkeeh-norm": "\\u0649",
+    "tnkeeh-asr": "\\u0649",
+    "whisper-basic": "\\u0649",
+    "whisper-basic-rd": "\\u0649",
+    "pyarabic-brief": "\\u0649",
+    "pyarabic-norm": "\\u0627",
+    "pyarabic-asr": "\\u0627"
+   }
+  },
+  {
+   "probe": "alef variants",
+   "input_escaped": "\\u0623\\u0625\\u0622\\u0671",
+   "ours": {
+    "bayanat-norm-v1": "\\u0627\\u0627\\u0627\\u0627",
+    "asr-eval-v1": "\\u0627\\u0627\\u0627\\u0627",
+    "raw-safe-v1": "\\u0623\\u0625\\u0622\\u0671"
+   },
+   "oracles": {
+    "camel-nfc": "\\u0623\\u0625\\u0622\\u0671",
+    "camel-norm": "\\u0627\\u0627\\u0627\\u0627",
+    "camel-asr": "\\u0627\\u0627\\u0627\\u0627",
+    "tnkeeh-default": "\\u0623\\u0625\\u0622\\u0020\\u0671\\u0020",
+    "tnkeeh-norm": "\\u0623\\u0625\\u0622\\u0627",
+    "tnkeeh-asr": "\\u0623\\u0625\\u0622\\u0627",
+    "whisper-basic": "\\u0623\\u0625\\u0622\\u0671",
+    "whisper-basic-rd": "\\u0627\\u0627\\u0627\\u0671",
+    "pyarabic-brief": "\\u0621\\u0621\\u0621\\u0621\\u0671",
+    "pyarabic-norm": "\\u0627\\u0627\\u0627\\u0627",
+    "pyarabic-asr": "\\u0627\\u0627\\u0627\\u0627"
+   }
+  },
+  {
+   "probe": "taa marbuta",
+   "input_escaped": "\\u0629",
+   "ours": {
+    "bayanat-norm-v1": "\\u0629",
+    "asr-eval-v1": "\\u0647",
+    "raw-safe-v1": "\\u0629"
+   },
+   "oracles": {
+    "camel-nfc": "\\u0629",
+    "camel-norm": "\\u0629",
+    "camel-asr": "\\u0647",
+    "tnkeeh-default": "\\u0629",
+    "tnkeeh-norm": "\\u0629",
+    "tnkeeh-asr": "\\u0629",
+    "whisper-basic": "\\u0629",
+    "whisper-basic-rd": "\\u0629",
+    "pyarabic-brief": "\\u0629",
+    "pyarabic-norm": "\\u0629",
+    "pyarabic-asr": "\\u0647"
+   }
+  },
+  {
+   "probe": "hamza carriers",
+   "input_escaped": "\\u0624\\u0626",
+   "ours": {
+    "bayanat-norm-v1": "\\u0624\\u0626",
+    "asr-eval-v1": "\\u0624\\u0626",
+    "raw-safe-v1": "\\u0624\\u0626"
+   },
+   "oracles": {
+    "camel-nfc": "\\u0624\\u0626",
+    "camel-norm": "\\u0624\\u0626",
+    "camel-asr": "\\u0624\\u0626",
+    "tnkeeh-default": "\\u0624\\u0626",
+    "tnkeeh-norm": "\\u0624\\u0626",
+    "tnkeeh-asr": "\\u0624\\u0626",
+    "whisper-basic": "\\u0624\\u0626",
+    "whisper-basic-rd": "\\u0648\\u064a",
+    "pyarabic-brief": "\\u0621\\u0621",
+    "pyarabic-norm": "\\u0624\\u0626",
+    "pyarabic-asr": "\\u0624\\u0626"
+   }
+  },
+  {
+   "probe": "fatha on a letter",
+   "input_escaped": "\\u0643\\u064e\\u062a",
+   "ours": {
+    "bayanat-norm-v1": "\\u0643\\u062a",
+    "asr-eval-v1": "\\u0643\\u062a",
+    "raw-safe-v1": "\\u0643\\u064e\\u062a"
+   },
+   "oracles": {
+    "camel-nfc": "\\u0643\\u064e\\u062a",
+    "camel-norm": "\\u0643\\u062a",
+    "camel-asr": "\\u0643\\u062a",
+    "tnkeeh-default": "\\u0643\\u0020\\u064e\\u0020\\u062a",
+    "tnkeeh-norm": "\\u0643\\u062a",
+    "tnkeeh-asr": "\\u0643\\u062a",
+    "whisper-basic": "\\u0643\\u0020\\u062a",
+    "whisper-basic-rd": "\\u0643\\u062a",
+    "pyarabic-brief": "\\u0643\\u062a",
+    "pyarabic-norm": "\\u0643\\u062a",
+    "pyarabic-asr": "\\u0643\\u062a"
+   }
+  },
+  {
+   "probe": "superscript alef",
+   "input_escaped": "\\u0647\\u0670\\u0630\\u0627",
+   "ours": {
+    "bayanat-norm-v1": "\\u0647\\u0630\\u0627",
+    "asr-eval-v1": "\\u0647\\u0630\\u0627",
+    "raw-safe-v1": "\\u0647\\u0670\\u0630\\u0627"
+   },
+   "oracles": {
+    "camel-nfc": "\\u0647\\u0670\\u0630\\u0627",
+    "camel-norm": "\\u0647\\u0630\\u0627",
+    "camel-asr": "\\u0647\\u0630\\u0627",
+    "tnkeeh-default": "\\u0647\\u0020\\u0670\\u0020\\u0630\\u0627",
+    "tnkeeh-norm": "\\u0647\\u0020\\u0670\\u0020\\u0630\\u0627",
+    "tnkeeh-asr": "\\u0647\\u0020\\u0630\\u0627",
+    "whisper-basic": "\\u0647\\u0020\\u0630\\u0627",
+    "whisper-basic-rd": "\\u0647\\u0630\\u0627",
+    "pyarabic-brief": "\\u0647\\u0670\\u0630\\u0627",
+    "pyarabic-norm": "\\u0647\\u0630\\u0627",
+    "pyarabic-asr": "\\u0647\\u0630\\u0627"
+   }
+  },
+  {
+   "probe": "tatweel",
+   "input_escaped": "\\u0628\\u0640\\u0628",
+   "ours": {
+    "bayanat-norm-v1": "\\u0628\\u0628",
+    "asr-eval-v1": "\\u0628\\u0628",
+    "raw-safe-v1": "\\u0628\\u0640\\u0628"
+   },
+   "oracles": {
+    "camel-nfc": "\\u0628\\u0640\\u0628",
+    "camel-norm": "\\u0628\\u0640\\u0628",
+    "camel-asr": "\\u0628\\u0640\\u0628",
+    "tnkeeh-default": "\\u0628\\u0640\\u0628",
+    "tnkeeh-norm": "\\u0628\\u0628",
+    "tnkeeh-asr": "\\u0628\\u0628",
+    "whisper-basic": "\\u0628\\u0640\\u0628",
+    "whisper-basic-rd": "\\u0628\\u0640\\u0628",
+    "pyarabic-brief": "\\u0628\\u0628",
+    "pyarabic-norm": "\\u0628\\u0628",
+    "pyarabic-asr": "\\u0628\\u0628"
+   }
+  },
+  {
+   "probe": "Arabic-Indic digits",
+   "input_escaped": "\\u0661\\u0662",
+   "ours": {
+    "bayanat-norm-v1": "12",
+    "asr-eval-v1": "12",
+    "raw-safe-v1": "\\u0661\\u0662"
+   },
+   "oracles": {
+    "camel-nfc": "\\u0661\\u0662",
+    "camel-norm": "\\u0661\\u0662",
+    "camel-asr": "\\u0661\\u0662",
+    "tnkeeh-default": "\\u0020\\u0661\\u0020\\u0662\\u0020",
+    "tnkeeh-norm": "\\u0020\\u0661\\u0020\\u0662\\u0020",
+    "tnkeeh-asr": "\\u0020",
+    "whisper-basic": "\\u0661\\u0662",
+    "whisper-basic-rd": "\\u0661\\u0662",
+    "pyarabic-brief": "\\u0661\\u0662",
+    "pyarabic-norm": "\\u0661\\u0662",
+    "pyarabic-asr": "\\u0661\\u0662"
+   }
+  },
+  {
+   "probe": "lam-alef ligature",
+   "input_escaped": "\\ufefb",
+   "ours": {
+    "bayanat-norm-v1": "\\u0644\\u0627",
+    "asr-eval-v1": "\\u0644\\u0627",
+    "raw-safe-v1": "\\ufefb"
+   },
+   "oracles": {
+    "camel-nfc": "\\ufefb",
+    "camel-norm": "\\u0644\\u0627",
+    "camel-asr": "\\u0644\\u0627",
+    "tnkeeh-default": "\\u0020\\ufefb\\u0020",
+    "tnkeeh-norm": "\\u0644\\u0627",
+    "tnkeeh-asr": "\\u0644\\u0627",
+    "whisper-basic": "\\u0644\\u0627",
+    "whisper-basic-rd": "\\u0644\\u0627",
+    "pyarabic-brief": "\\u0644\\u0627",
+    "pyarabic-norm": "\\u0644\\u0627",
+    "pyarabic-asr": "\\u0644\\u0627"
+   }
+  },
+  {
+   "probe": "U+FDFA",
+   "input_escaped": "\\ufdfa",
+   "ours": {
+    "bayanat-norm-v1": "\\ufdfa",
+    "asr-eval-v1": "\\ufdfa",
+    "raw-safe-v1": "\\ufdfa"
+   },
+   "oracles": {
+    "camel-nfc": "\\ufdfa",
+    "camel-norm": "\\u0635\\u0644\\u064a\\u0020\\u0627\\u0644\\u0644\\u0647\\u0020\\u0639\\u0644\\u064a\\u0647\\u0020\\u0648\\u0633\\u0644\\u0645",
+    "camel-asr": "\\u0635\\u0644\\u064a\\u0020\\u0627\\u0644\\u0644\\u0647\\u0020\\u0639\\u0644\\u064a\\u0647\\u0020\\u0648\\u0633\\u0644\\u0645",
+    "tnkeeh-default": "\\u0020\\ufdfa\\u0020",
+    "tnkeeh-norm": "\\u0020\\ufdfa\\u0020",
+    "tnkeeh-asr": "\\u0020",
+    "whisper-basic": "\\u0635\\u0644\\u0649\\u0020\\u0627\\u0644\\u0644\\u0647\\u0020\\u0639\\u0644\\u064a\\u0647\\u0020\\u0648\\u0633\\u0644\\u0645",
+    "whisper-basic-rd": "\\u0635\\u0644\\u0649\\u0020\\u0627\\u0644\\u0644\\u0647\\u0020\\u0639\\u0644\\u064a\\u0647\\u0020\\u0648\\u0633\\u0644\\u0645",
+    "pyarabic-brief": "\\ufdfa",
+    "pyarabic-norm": "\\ufdfa",
+    "pyarabic-asr": "\\ufdfa"
+   }
+  },
+  {
+   "probe": "ZWNJ between joiners",
+   "input_escaped": "\\u0628\\u200c\\u0628",
+   "ours": {
+    "bayanat-norm-v1": "\\u0628\\u200c\\u0628",
+    "asr-eval-v1": "\\u0628\\u200c\\u0628",
+    "raw-safe-v1": "\\u0628\\u200c\\u0628"
+   },
+   "oracles": {
+    "camel-nfc": "\\u0628\\u200c\\u0628",
+    "camel-norm": "\\u0628\\u200c\\u0628",
+    "camel-asr": "\\u0628\\u200c\\u0628",
+    "tnkeeh-default": "\\u0628\\u0020\\u200c\\u0020\\u0628",
+    "tnkeeh-norm": "\\u0628\\u0020\\u200c\\u0020\\u0628",
+    "tnkeeh-asr": "\\u0628\\u0020\\u0628",
+    "whisper-basic": "\\u0628\\u200c\\u0628",
+    "whisper-basic-rd": "\\u0628\\u200c\\u0628",
+    "pyarabic-brief": "\\u0628\\u200c\\u0628",
+    "pyarabic-norm": "\\u0628\\u200c\\u0628",
+    "pyarabic-asr": "\\u0628\\u200c\\u0628"
+   }
+  },
+  {
+   "probe": "Arabic comma",
+   "input_escaped": "\\u0628\\u060c\\u0020\\u0628",
+   "ours": {
+    "bayanat-norm-v1": "\\u0628\\u060c\\u0020\\u0628",
+    "asr-eval-v1": "\\u0628\\u0020\\u0628",
+    "raw-safe-v1": "\\u0628\\u060c\\u0020\\u0628"
+   },
+   "oracles": {
+    "camel-nfc": "\\u0628\\u060c\\u0020\\u0628",
+    "camel-norm": "\\u0628\\u060c\\u0020\\u0628",
+    "camel-asr": "\\u0628\\u060c\\u0020\\u0628",
+    "tnkeeh-default": "\\u0628\\u0020\\u060c\\u0020\\u0628",
+    "tnkeeh-norm": "\\u0628\\u0020\\u060c\\u0020\\u0628",
+    "tnkeeh-asr": "\\u0628\\u0020\\u0628",
+    "whisper-basic": "\\u0628\\u0020\\u0628",
+    "whisper-basic-rd": "\\u0628\\u0020\\u0628",
+    "pyarabic-brief": "\\u0628\\u060c\\u0020\\u0628",
+    "pyarabic-norm": "\\u0628\\u060c\\u0020\\u0628",
+    "pyarabic-asr": "\\u0628\\u060c\\u0020\\u0628"
+   }
+  },
+  {
+   "probe": "Latin capital",
+   "input_escaped": "AB",
+   "ours": {
+    "bayanat-norm-v1": "AB",
+    "asr-eval-v1": "AB",
+    "raw-safe-v1": "AB"
+   },
+   "oracles": {
+    "camel-nfc": "AB",
+    "camel-norm": "AB",
+    "camel-asr": "AB",
+    "tnkeeh-default": "AB",
+    "tnkeeh-norm": "AB",
+    "tnkeeh-asr": "AB",
+    "whisper-basic": "ab",
+    "whisper-basic-rd": "ab",
+    "pyarabic-brief": "AB",
+    "pyarabic-norm": "AB",
+    "pyarabic-asr": "AB"
+   }
+  }
+ ]
+}

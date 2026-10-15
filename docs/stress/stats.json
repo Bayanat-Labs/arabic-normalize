@@ -1,0 +1,221 @@
+{
+ "dump": {
+  "file": "arwiki-latest-pages-articles-multistream5.xml-p5545108p6060732.bz2",
+  "bytes": 89424569,
+  "sha256": "88f45948c778088dfd58b85c46099bb7611a225787cdc914ca0a74b386b09a53",
+  "sha1": "4c11eca350693c158e8f3f7302fbabefde6e48cc",
+  "dated_name": "arwiki-20261001-pages-articles-multistream5.xml-p5545108p6060732.bz2",
+  "deleted_at": "2026-10-15T09:25:10Z",
+  "retrieved_at": "2026-10-15T09:16:20Z"
+ },
+ "machine": {
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "python": "3.12.14",
+  "workers": 8
+ },
+ "lib_version": "0.1.0",
+ "unicode_version": "18.0.0",
+ "pages_seen": 310120,
+ "main_namespace_redirects_skipped": 159855,
+ "articles": 113752,
+ "code_points": 293840444,
+ "utf8_bytes": 401596295,
+ "arabic_letters": 106710510,
+ "wall_seconds_parallel": 170.7,
+ "single_core": {
+  "articles": 5000,
+  "utf8_bytes": 10903235,
+  "policies": {
+   "bayanat-norm-v1": {
+    "plain_cpu_s": 0.492,
+    "detailed_cpu_s": 1.68,
+    "plain_MBps": 22.16,
+    "detailed_MBps": 6.49
+   },
+   "asr-eval-v1": {
+    "plain_cpu_s": 0.96,
+    "detailed_cpu_s": 3.524,
+    "plain_MBps": 11.35,
+    "detailed_MBps": 3.09
+   },
+   "raw-safe-v1": {
+    "plain_cpu_s": 0.174,
+    "detailed_cpu_s": 1.211,
+    "plain_MBps": 62.69,
+    "detailed_MBps": 9.0
+   }
+  }
+ },
+ "parallel_worker_seconds": {
+  "bayanat-norm-v1": {
+   "plain": 36.09,
+   "detailed": 135.27
+  },
+  "asr-eval-v1": {
+   "plain": 64.74,
+   "detailed": 273.09
+  },
+  "raw-safe-v1": {
+   "plain": 10.92,
+   "detailed": 111.3
+  }
+ },
+ "crashes": {},
+ "consistency_failures": {},
+ "plain_detailed_mismatch": {},
+ "not_idempotent": {},
+ "not_nfc": {},
+ "rules": {
+  "bayanat-norm-v1": {
+   "alef_variants.map": 2916169,
+   "alef_maqsura.to_yeh": 223795,
+   "diacritics.strip": 151599,
+   "tatweel.strip": 8469,
+   "reject_invalid.control": 1234,
+   "digits.to_ascii": 1088,
+   "bidi_zw.zwnj": 168,
+   "bidi_zw.bidi_control": 45,
+   "bidi_zw.zwj": 27,
+   "superscript_alef.strip": 16,
+   "strip_controls.format": 12,
+   "quranic_marks.strip": 8,
+   "canonical_order.final": 1
+  },
+  "asr-eval-v1": {
+   "punctuation.strip": 39194733,
+   "whitespace.collapse": 10626781,
+   "taa_marbuta.to_heh": 3441165,
+   "alef_variants.map": 2916169,
+   "alef_maqsura.to_yeh": 223795,
+   "diacritics.strip": 151599,
+   "tatweel.strip": 8469,
+   "reject_invalid.control": 1234,
+   "digits.to_ascii": 1088,
+   "bidi_zw.zwnj": 168,
+   "bidi_zw.bidi_control": 45,
+   "bidi_zw.zwj": 27,
+   "superscript_alef.strip": 16,
+   "strip_controls.format": 12,
+   "quranic_marks.strip": 8,
+   "canonical_order.final": 1
+  },
+  "raw-safe-v1": {
+   "reject_invalid.control": 1234,
+   "bidi_zw.zwnj": 168,
+   "bidi_zw.bidi_control": 45,
+   "bidi_zw.zwj": 27,
+   "strip_controls.format": 12
+  }
+ },
+ "articles_with_rule": {
+  "bayanat-norm-v1": {
+   "alef_variants.map": 112961,
+   "alef_maqsura.to_yeh": 42924,
+   "diacritics.strip": 13540,
+   "tatweel.strip": 3944,
+   "reject_invalid.control": 1219,
+   "digits.to_ascii": 159,
+   "bidi_zw.zwnj": 66,
+   "bidi_zw.zwj": 13,
+   "bidi_zw.bidi_control": 10,
+   "strip_controls.format": 8,
+   "superscript_alef.strip": 5,
+   "quranic_marks.strip": 4,
+   "canonical_order.final": 1
+  },
+  "asr-eval-v1": {
+   "whitespace.collapse": 113752,
+   "punctuation.strip": 113752,
+   "taa_marbuta.to_heh": 113740,
+   "alef_variants.map": 112961,
+   "alef_maqsura.to_yeh": 42924,
+   "diacritics.strip": 13540,
+   "tatweel.strip": 3944,
+   "reject_invalid.control": 1219,
+   "digits.to_ascii": 159,
+   "bidi_zw.zwnj": 66,
+   "bidi_zw.zwj": 13,
+   "bidi_zw.bidi_control": 10,
+   "strip_controls.format": 8,
+   "superscript_alef.strip": 5,
+   "quranic_marks.strip": 4,
+   "canonical_order.final": 1
+  },
+  "raw-safe-v1": {
+   "reject_invalid.control": 1219,
+   "bidi_zw.zwnj": 66,
+   "bidi_zw.zwj": 13,
+   "bidi_zw.bidi_control": 10,
+   "strip_controls.format": 8
+  }
+ },
+ "articles_with_any_lossy": {
+  "bayanat-norm-v1": 112965,
+  "asr-eval-v1": 113752
+ },
+ "flags": {
+  "bayanat-norm-v1": {
+   "taa_marbuta.flag": 113740
+  },
+  "asr-eval-v1": {},
+  "raw-safe-v1": {}
+ },
+ "rejected_spans_by_reason": {
+  "control": 1234
+ },
+ "lossy_classes": {
+  "taa_marbuta.to_heh|U+0629|final": 3438196,
+  "alef_variants.map|U+0623|initial": 1875663,
+  "alef_variants.map|U+0623|stem_initial_after_prefix": 480065,
+  "alef_variants.map|U+0625|initial": 287105,
+  "alef_maqsura.to_yeh|U+0649|final": 223450,
+  "alef_variants.map|U+0625|stem_initial_after_prefix": 165398,
+  "alef_variants.map|U+0623|medial": 55236,
+  "alef_variants.map|U+0622|initial": 30810,
+  "alef_variants.map|U+0622|stem_initial_after_prefix": 12608,
+  "alef_variants.map|U+0623|final": 4917,
+  "taa_marbuta.to_heh|U+0629|alone": 2901,
+  "alef_variants.map|U+0622|medial": 2236,
+  "alef_variants.map|U+0623|alone": 1102,
+  "alef_variants.map|U+0625|medial": 816,
+  "alef_maqsura.to_yeh|U+0649|after_prefix_word_final": 304,
+  "alef_variants.map|U+0625|alone": 136,
+  "taa_marbuta.to_heh|U+0629|medial": 46,
+  "alef_variants.map|U+0622|final": 30,
+  "alef_variants.map|U+0622|alone": 21,
+  "taa_marbuta.to_heh|U+0629|after_prefix_word_final": 20,
+  "alef_maqsura.to_yeh|U+0649|medial": 18,
+  "alef_maqsura.to_yeh|U+0649|alone": 18,
+  "alef_variants.map|U+0623|after_prefix_word_final": 14,
+  "alef_variants.map|U+0625|final": 5,
+  "alef_maqsura.to_yeh|U+0649|final|followed_by_superscript_alef": 4,
+  "alef_variants.map|U+0671|initial": 3,
+  "taa_marbuta.to_heh|U+0629|initial": 2,
+  "alef_variants.map|U+0625|after_prefix_word_final": 2,
+  "alef_maqsura.to_yeh|U+0649|final|followed_by_hamza_or_madda_mark_U+0654": 1,
+  "alef_variants.map|U+0671|medial": 1,
+  "alef_variants.map|U+0671|stem_initial_after_prefix": 1
+ },
+ "word_type_merges": {
+  "bayanat-norm-v1": {
+   "distinct_base_types": 239288,
+   "base_types_merged_with_another": 15845,
+   "share_of_base_types_merged": 0.0662,
+   "tokens": 20840141,
+   "tokens_of_merged_types": 5016880,
+   "share_of_tokens_merged": 0.2407,
+   "output_types": 230661
+  },
+  "asr-eval-v1": {
+   "distinct_base_types": 239288,
+   "base_types_merged_with_another": 19659,
+   "share_of_base_types_merged": 0.0822,
+   "tokens": 20840141,
+   "tokens_of_merged_types": 6361564,
+   "share_of_tokens_merged": 0.3053,
+   "output_types": 228669
+  }
+ },
+ "elapsed_total_seconds": 183.6
+}

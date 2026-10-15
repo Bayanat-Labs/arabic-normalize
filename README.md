@@ -116,7 +116,10 @@ By policy (dev + acceptance): asr-eval-v1 15/15, bayanat-norm-v1 52/52, raw-safe
 JavaScript port (`js/`): 560 of 560 reference cases (the 80 fixtures under 7 policies) and 80 of 80 policy comparisons are identical to the Python engine, including the offset map and change log; counts from `js/conformance.json` (`js/scripts/conformance_counts.mjs`).
 <!-- END:counts -->
 
-The test suite also checks every line of the Unicode 18.0.0 NormalizationTest.txt for NFC, NFD, NFKC and NFKD, every RGI emoji ZWJ sequence, policy hash stability, and properties on random Arabic-heavy strings (idempotence, offset-map consistency, no silent changes). Fixtures are original text written by Bayanat Labs, labelled synthetic/illustrative, and contain no personal data. A native-speaker review of the lossy fixtures is pending (`tests/fixtures/REVIEW.md`).
+The test suite also checks every line of the Unicode 18.0.0 NormalizationTest.txt for NFC, NFD, NFKC and NFKD, every RGI emoji ZWJ sequence, policy hash stability, and properties on random Arabic-heavy strings (idempotence, offset-map consistency, no silent changes). Fixtures are original text written by Bayanat Labs, labelled synthetic/illustrative, and contain no personal data. An independent AI review of every lossy fixture and of the lossy cases met in the stress run is in [docs/LOSSY_REVIEW.md](docs/LOSSY_REVIEW.md); the native-speaker sign-off is pending (`tests/fixtures/REVIEW.md`).
+
+- Stress run on one Arabic Wikipedia dump part (crashes, offset-map checks, throughput, lossy-flag rates; statistics only): [docs/stress/report.md](docs/stress/report.md).
+- Agreement of CAMeL Tools, tnkeeh, Whisper's basic normaliser and PyArabic with the pilot policies on the fixtures (tables only; the tools run outside this repository): [docs/compat/README.md](docs/compat/README.md).
 
 ```bash
 pip install -e ".[test]" && pytest

@@ -127,23 +127,37 @@ USE = {
         "وصفة حقل النص المشكول text_diac، وللعرض، وللنصوص القانونية."),
 }
 
+# Added after the lossy-rule review (docs/LOSSY_REVIEW.md, findings L-2 and L-3).
+UTHMANI_EN = ("Uthmani (Quranic) spelling is not converted to modern spelling: removing the superscript alef leaves the "
+              "consonantal skeleton (ٱلْكِتَٰبُ becomes الكتب, not الكتاب), which can coincide with another word. "
+              "This is not flagged as lossy, because the superscript alef is counted as a vowel mark in diacritization_ratio.")
+UTHMANI_AR = ("لا يُحوَّل الرسم العثماني إلى الرسم الإملائي الحديث: حذف الألف الخنجرية يُبقي الهيكل الحرفي "
+              "(ٱلْكِتَٰبُ تصبح الكتب لا الكتاب)، وقد يطابق ذلك كلمة أخرى. ولا يُسجَّل هذا تغييرًا فاقدًا للمعلومات، "
+              "لأن الألف الخنجرية تُحسب علامةَ تشكيل في نسبة التشكيل diacritization_ratio.")
+MAQSURA_EN = ("The ى to ي rule is meant for Arabic-language text. In some other languages written in Arabic script "
+              "(for example Uyghur) ى and ي are different letters; the change is still flagged as lossy.")
+MAQSURA_AR = ("قاعدة تحويل ى إلى ي مخصصة للنص العربي. ففي بعض اللغات الأخرى المكتوبة بالحرف العربي (مثل الأويغورية) "
+              "تكون ى وي حرفين مختلفين، ويبقى التغيير مسجَّلًا على أنه فاقد للمعلومات.")
+
 LIMITS = {
     "bayanat-norm-v1": (
         ["Words that differ only in the hamza of an alef or in final ى/ي become identical (for example إن/أن, على/علي); some names change spelling.",
          "Not for vocalisation, OCR or phonology tasks: use text_raw or raw-safe-v1.",
          "Persian and Urdu letters are kept, so mixed Arabic and Persian text is not unified.",
-         "Arabic presentation forms follow NFKC exactly, so an isolated harakat form such as U+FE70 leaves a space behind."],
+         "Arabic presentation forms follow NFKC exactly, so an isolated harakat form such as U+FE70 leaves a space behind.",
+         UTHMANI_EN, MAQSURA_EN],
         ["تصبح الكلمات التي لا تختلف إلا في همزة الألف أو في الياء والألف المقصورة في آخرها متطابقة (مثل إن وأن، وعلى وعلي)، وتتغير كتابة بعض الأسماء.",
          "لا تُستخدم في مهام التشكيل أو التعرف الضوئي على الحروف أو الصوتيات؛ استخدم النص الخام أو سياسة raw-safe-v1.",
          "تبقى الحروف الفارسية والأردية كما هي، فلا يُوحَّد النص المختلط بين العربية والفارسية.",
-         "تتبع أشكال العرض العربية NFKC بدقة، ولذلك يترك الشكل المنفصل لعلامات التشكيل مثل U+FE70 مسافة بعد تحويله."]),
+         "تتبع أشكال العرض العربية NFKC بدقة، ولذلك يترك الشكل المنفصل لعلامات التشكيل مثل U+FE70 مسافة بعد تحويله.",
+         UTHMANI_AR, MAQSURA_AR]),
     "asr-eval-v1": (
         ["Lossy by design (ة to ه, ى to ي, alef variants): never store its output as a text field.",
          "Arabic decimal and thousands separators are punctuation, so a number such as ١٬٢٥٠ becomes several tokens.",
-         "Latin letter case is kept."],
+         "Latin letter case is kept.", UTHMANI_EN, MAQSURA_EN],
         ["يفقد بعض المعلومات عمدًا (تحويل التاء المربوطة إلى هاء، والألف المقصورة إلى ياء، وتوحيد صور الألف)، فلا يُخزَّن ناتجه حقلًا نصيًا.",
          "الفاصلتان العشرية والألفية العربيتان علامتا ترقيم، فيتحول عدد مثل ١٬٢٥٠ إلى أكثر من كلمة.",
-         "تبقى حالة الحروف اللاتينية كما هي."]),
+         "تبقى حالة الحروف اللاتينية كما هي.", UTHMANI_AR, MAQSURA_AR]),
     "raw-safe-v1": (
         ["Removes bidi controls, which can change how mixed right-to-left and left-to-right text is displayed: keep text_raw when exact display matters.",
          "Keeps presentation forms, tatweel, harakat and every letter."],
