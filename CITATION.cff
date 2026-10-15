@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use arabic-normalize, please cite it as below and name the policy id and policy hash you used."
+type: software
+title: "arabic-normalize: Arabic text normalisation with named, versioned policies"
+version: "0.1.0"
+license: Apache-2.0
+repository-code: "https://github.com/Bayanat-Labs/arabic-normalize"
+authors:
+  - name: "Bayanat Labs"
+keywords:
+  - arabic
+  - arabic-nlp
+  - text-normalization
+  - unicode
+  - diacritics
+  - speech-recognition-evaluation
+abstract: "A pure-Python library and CLI that applies named, immutable, hash-identified Arabic normalisation policies (bayanat-norm-v1, asr-eval-v1, raw-safe-v1) and returns the normalised text with an offset map, a per-rule change log, lossy flags and a diacritization ratio. Unicode data pinned to UCD 18.0.0."

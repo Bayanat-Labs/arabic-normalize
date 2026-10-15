@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "arabic-normalize"
+dynamic = ["version"]
+description = "Arabic text normalisation with named, versioned, hash-identified policies, by Bayanat Labs."
+readme = "README.md"
+requires-python = ">=3.9"
+license = "Apache-2.0 AND CC-BY-4.0 AND Unicode-3.0"
+license-files = ["LICENSE", "LICENSE-data", "NOTICE", "NOTICE-unicode.txt"]
+authors = [{ name = "Bayanat Labs" }]
+dependencies = []
+keywords = [
+  "arabic",
+  "arabic-nlp",
+  "normalization",
+  "text-normalization",
+  "tashkeel",
+  "diacritics",
+  "unicode",
+  "wer",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "Natural Language :: Arabic",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Text Processing :: Linguistic",
+  "Typing :: Typed",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7", "jsonschema>=4", "hypothesis>=6"]
+
+[project.urls]
+Homepage = "https://github.com/Bayanat-Labs/arabic-normalize"
+Repository = "https://github.com/Bayanat-Labs/arabic-normalize"
+Issues = "https://github.com/Bayanat-Labs/arabic-normalize/issues"
+Specification = "https://github.com/Bayanat-Labs/arabic-normalize/blob/main/docs/SPEC.md"
+
+[project.scripts]
+arnorm = "arabic_normalize.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+packages = ["arabic_normalize", "arabic_normalize.policies", "arabic_normalize.tables"]
+
+[tool.setuptools.package-data]
+arabic_normalize = ["py.typed"]
+"arabic_normalize.policies" = ["*.json"]
+"arabic_normalize.tables" = ["*.json"]
+
+[tool.setuptools.dynamic]
+version = { attr = "arabic_normalize._version.__version__" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-p no:cacheprovider"
