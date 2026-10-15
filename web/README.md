@@ -18,4 +18,4 @@ python web/privacy_check.py /tmp/arabic-normalizer
 
 It checks that the worker runs from a `blob:` URL, that `fetch` and `XMLHttpRequest` fail inside the worker and in the page while the same URL is reachable from outside, and that typing text after load makes no network request and writes nothing to localStorage, sessionStorage, IndexedDB or cookies.
 
-Files: `index.html`, `app.js` (interface and strings), `compute.js` (one normalisation request), `worker.js`, `privacy_check.py`, `style.css`, `fonts/` (IBM Plex Sans Arabic, SIL OFL 1.1, see `fonts/OFL.txt`). Code: Apache-2.0.
+Files: `index.html`, `app.js` (interface and strings), `compute.js` (one normalisation request), `worker.js`, `privacy_check.py`, `style.css`, `fonts/` (IBM Plex Sans Arabic 1.005, the unmodified complete WOFF2 files from IBM's `@ibm/plex-sans-arabic` 1.1.0, SIL OFL 1.1 with Reserved Font Name "Plex", see `fonts/OFL.txt`; provenance rows in `PROVENANCE.jsonl`). Code: Apache-2.0.

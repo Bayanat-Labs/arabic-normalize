@@ -15,6 +15,13 @@ ucd/18.0.0/. These are covered by the Unicode License V3; the full copyright
 and permission notice is in NOTICE-unicode.txt.
 Copyright (c) 1991-2026 Unicode, Inc.
 
+The web page in web/ (the Hugging Face Space) bundles the IBM Plex Sans Arabic
+font, version 1.005: the unmodified files IBMPlexSansArabic-Regular.woff2 and
+IBMPlexSansArabic-SemiBold.woff2 from IBM's npm package @ibm/plex-sans-arabic
+1.1.0. Copyright 2017 IBM Corp. with Reserved Font Name "Plex". Licensed under
+the SIL Open Font License, Version 1.1 (web/fonts/OFL.txt). The font is not part
+of the Python or npm packages.
+
 No third-party code is included. The library has no runtime dependencies.
 No GPL-licensed code (for example PyArabic or Mishkal) is imported, vendored
 or copied.

@@ -4,7 +4,7 @@
 //
 // Builds the static web page (the Hugging Face Space Bayanat-Labs/arabic-normalizer) into an output folder:
 //   web/{index.html, app.js, compute.js, worker.js, style.css} -> the page (hand-written)
-//   web/fonts/*                      -> fonts/       (IBM Plex Sans Arabic, SIL OFL 1.1)
+//   web/fonts/*                      -> fonts/       (IBM Plex Sans Arabic 1.005, unmodified IBM files, SIL OFL 1.1)
 //   js/src/**                        -> lib/         (the JavaScript port, unchanged; node.js left out)
 //   js/policies/*.json               -> policies/    (byte-identical policy files)
 //   selected dev/acceptance fixtures -> examples.js  (Bayanat-authored examples, CC BY 4.0)
@@ -45,7 +45,7 @@ copyTree(join(REPO, 'js', 'policies'), join(SPACE, 'policies'));
 for (const f of ['LICENSE', 'LICENSE-data', 'NOTICE', 'NOTICE-unicode.txt']) copyFileSync(join(REPO, f), join(SPACE, f));
 
 mkdirSync(join(SPACE, 'fonts'), { recursive: true });
-for (const f of ['arabic-400.woff2', 'arabic-600.woff2', 'latin-400.woff2', 'latin-600.woff2', 'OFL.txt']) {
+for (const f of ['IBMPlexSansArabic-Regular.woff2', 'IBMPlexSansArabic-SemiBold.woff2', 'OFL.txt']) {
   copyFileSync(join(FONTS, f), join(SPACE, 'fonts', f));
 }
 
@@ -119,7 +119,7 @@ Conformance: ${nPassJs} of ${nFix} fixtures pass in JavaScript, and ${ref.cases_
 
 To cite a normalisation, name the policy id and its hash, for example "normalised with bayanat-norm-v1 (sha256 ${lib.loadPolicy('bayanat-norm-v1').policy_hash.slice(0, 12)}…, arabic-normalize ${lib.LIB_VERSION})".
 
-Licences: code Apache-2.0 (\`LICENSE\`); policy files and examples CC BY 4.0 (\`LICENSE-data\`); generated Unicode tables Unicode License V3 (\`NOTICE-unicode.txt\`); IBM Plex Sans Arabic font SIL OFL 1.1 (\`fonts/OFL.txt\`). Contact and takedown requests: open@bayanatlabs.com.
+Licences: code Apache-2.0 (\`LICENSE\`); policy files and examples CC BY 4.0 (\`LICENSE-data\`); generated Unicode tables Unicode License V3 (\`NOTICE-unicode.txt\`); IBM Plex Sans Arabic font (IBM's unmodified files) SIL OFL 1.1 (\`fonts/OFL.txt\`). Contact and takedown requests: open@bayanatlabs.com.
 
 Need production-grade, rights-cleared Arabic data with documented normalisation? See [Bayanat Labs Knowledge](https://www.bayanatlabs.com/products/knowledge).
 `;
