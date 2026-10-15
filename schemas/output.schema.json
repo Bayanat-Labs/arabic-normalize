@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "arabic-normalize/output.schema.json",
+  "title": "arabic-normalize detailed result (one record)",
+  "type": "object",
+  "required": ["original_hash", "text_norm", "policy_id", "policy_hash", "lib_version", "unicode_version",
+               "changes", "offset_map", "lossy_flags", "flags", "diacritization_ratio", "stats", "rejected_spans"],
+  "properties": {
+    "record_id": {"type": ["string", "integer", "null"]},
+    "original_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$", "description": "SHA-256 of the input encoded as UTF-8 (lone surrogates encoded with surrogatepass)"},
+    "text_raw": {"type": "string"},
+    "text_norm": {"type": "string"},
+    "text_diac": {"type": ["string", "null"], "description": "raw-safe-v1 output when the input carries harakat or superscript alef; null otherwise"},
+    "policy_id": {"type": "string"},
+    "policy_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "lib_version": {"type": "string"},
+    "unicode_version": {"type": "string"},
+    "changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["stage", "rule_id", "src_start", "src_end", "before", "after", "lossy"],
+        "properties": {
+          "stage": {"type": "string"},
+          "rule_id": {"type": "string", "pattern": "^[a-z_]+\\.[a-z_]+$"},
+          "src_start": {"type": "integer", "minimum": 0},
+          "src_end": {"type": "integer", "minimum": 0},
+          "before": {"type": "string"},
+          "after": {"type": "string"},
+          "lossy": {"type": "boolean"}
+        }
+      }
+    },
+    "offset_map": {
+      "type": "array",
+      "items": {"oneOf": [
+        {"type": "array", "items": {"type": "integer", "minimum": 0}, "minItems": 2, "maxItems": 2},
+        {"type": "null"}
+      ]}
+    },
+    "lossy_flags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "flags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "diacritization_ratio": {"type": "number", "minimum": 0},
+    "stats": {
+      "type": "object",
+      "required": ["rules", "classes"],
+      "properties": {
+        "rules": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+        "classes": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}}
+      }
+    },
+    "rejected_spans": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["start", "end", "reason"],
+        "properties": {
+          "start": {"type": "integer", "minimum": 0},
+          "end": {"type": "integer", "minimum": 0},
+          "reason": {"enum": ["lone_surrogate", "control", "noncharacter"]}
+        }
+      }
+    }
+  }
+}

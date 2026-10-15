@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "arabic-normalize/policy.schema.json",
+  "title": "arabic-normalize policy (spec arabic-normalize-spec-1)",
+  "description": "A named, immutable normalisation policy. The policy hash is the SHA-256 of the canonical JSON of the policy object without its top-level 'meta' member (keys sorted, UTF-8, separators ',' and ':', no whitespace). Stage semantics are defined in docs/SPEC.md. No member may start with '$' and no remote reference is ever resolved.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["policy_id", "version", "spec", "unicode_version", "unicode_form", "idempotent", "stages"],
+  "properties": {
+    "policy_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,62}[a-z0-9]$"},
+    "version": {"type": "integer", "minimum": 1},
+    "spec": {"const": "arabic-normalize-spec-1"},
+    "unicode_version": {"const": "18.0.0"},
+    "unicode_form": {"enum": ["NFC", "NFKC", "none"]},
+    "idempotent": {"type": "boolean"},
+    "stages": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reject_invalid", "strip_controls", "presentation_forms", "ligatures_honorific", "bidi_zw",
+                   "tatweel", "diacritics", "quranic_marks", "superscript_alef", "alef_variants", "alef_maqsura",
+                   "taa_marbuta", "hamza_carriers", "persian_urdu_letters", "digits", "punctuation", "whitespace",
+                   "latin_case"],
+      "properties": {
+        "reject_invalid": {"enum": ["drop", "error"]},
+        "strip_controls": {"enum": ["strip", "keep"]},
+        "presentation_forms": {"enum": ["map", "keep", "flag"]},
+        "ligatures_honorific": {"enum": ["keep", "flag", "expand"]},
+        "bidi_zw": {"enum": ["keep", "strip", "strip-except-zwnj", "strip-except-emoji-zwj", "strip-except-meaningful"]},
+        "tatweel": {"enum": ["strip", "keep"]},
+        "diacritics": {"enum": ["keep", "strip", "strip-except-shadda"]},
+        "quranic_marks": {"enum": ["strip", "keep"]},
+        "superscript_alef": {"enum": ["keep", "strip", "to-alef"]},
+        "alef_variants": {"enum": ["map", "keep"]},
+        "alef_maqsura": {"enum": ["to-yeh", "keep", "flag"]},
+        "taa_marbuta": {"enum": ["keep", "flag", "to-heh"]},
+        "hamza_carriers": {"enum": ["keep", "fold"]},
+        "persian_urdu_letters": {"enum": ["map", "keep"]},
+        "digits": {"enum": ["keep", "ascii", "arabic-indic"]},
+        "punctuation": {"enum": ["keep", "ascii", "strip"]},
+        "whitespace": {"enum": ["collapse", "keep"]},
+        "latin_case": {"enum": ["keep", "lower"]}
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Human-readable metadata. Not part of the policy hash.",
+      "additionalProperties": false,
+      "properties": {
+        "title_en": {"type": "string"},
+        "title_ar": {"type": "string"},
+        "description_en": {"type": "string"},
+        "license": {"type": "string"},
+        "attribution": {"type": "string"},
+        "created": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+        "status": {"type": "string"}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"unicode_form": {"const": "NFKC"}}},
+      "then": {"properties": {"stages": {"properties": {
+        "presentation_forms": {"const": "map"},
+        "ligatures_honorific": {"const": "expand"}
+      }}}}
+    }
+  ]
+}

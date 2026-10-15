@@ -1,0 +1,37 @@
+{
+  "policy_id": "asr-eval-v1",
+  "version": 1,
+  "spec": "arabic-normalize-spec-1",
+  "unicode_version": "18.0.0",
+  "unicode_form": "NFC",
+  "idempotent": true,
+  "stages": {
+    "reject_invalid": "drop",
+    "strip_controls": "strip",
+    "presentation_forms": "map",
+    "ligatures_honorific": "flag",
+    "bidi_zw": "strip-except-meaningful",
+    "tatweel": "strip",
+    "diacritics": "strip",
+    "quranic_marks": "strip",
+    "superscript_alef": "strip",
+    "alef_variants": "map",
+    "alef_maqsura": "to-yeh",
+    "taa_marbuta": "to-heh",
+    "hamza_carriers": "keep",
+    "persian_urdu_letters": "keep",
+    "digits": "ascii",
+    "punctuation": "strip",
+    "whitespace": "collapse",
+    "latin_case": "keep"
+  },
+  "meta": {
+    "title_en": "Arabic normalisation for speech-recognition evaluation, version 1",
+    "title_ar": "توحيد النص العربي لتقييم التعرّف الآلي على الكلام، الإصدار 1",
+    "description_en": "bayanat-norm-v1 plus taa marbuta folded to heh, punctuation replaced by spaces and whitespace collapsed. Intended for WER and CER scoring (TL-001 ArabicWER). Lossy: use only for scoring, never as a stored text field.",
+    "license": "CC-BY-4.0",
+    "attribution": "Bayanat Labs (https://bayanatlabs.com)",
+    "created": "2026-10-15",
+    "status": "pilot"
+  }
+}
