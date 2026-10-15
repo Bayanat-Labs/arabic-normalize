@@ -9,7 +9,7 @@ arabic-normalize applies a *named policy* such as `bayanat-norm-v1` to Arabic te
 - Policies are immutable: a change in behaviour ships as a new policy id, never as an edit.
 - Licence: Apache-2.0 (code); policies and conformance fixtures CC BY 4.0.
 
-Status: v0.1.0 pilot (three policies, 80 conformance fixtures). A TypeScript port, a web cleaner and more policies are planned.
+Status: v0.1.0 pilot (three policies, 80 conformance fixtures, Python and JavaScript). A web cleaner and more policies are planned; a static demo runs in the browser at the Hugging Face Space [Bayanat-Labs/arabic-normalizer](https://huggingface.co/spaces/Bayanat-Labs/arabic-normalizer).
 
 ## Install
 
@@ -18,6 +18,17 @@ pip install arabic-normalize
 ```
 
 Until the first PyPI release, install from a clone of this repository with `pip install .`.
+
+JavaScript (ES module, no runtime dependencies, same output as Python; see [js/README.md](js/README.md)):
+
+```bash
+npm install @bayanat-labs/arabic-normalize
+```
+
+```js
+import { normalize, normalizeDetailed } from '@bayanat-labs/arabic-normalize';
+normalize('إِلَى المَدْرَسَةِ');  // 'الي المدرسة'
+```
 
 ## Worked example
 
@@ -94,13 +105,15 @@ Files are streamed record by record. `--jsonl` adds `text_norm`, `policy_id`, `p
 ## Tests and conformance
 
 <!-- BEGIN:counts -->
-| Split | Fixtures | Passing (Python) |
-|---|---|---|
-| dev | 64 | 64 |
-| acceptance | 16 | 16 |
-| rejected inputs | 20 | 20 |
+| Split | Fixtures | Passing (Python) | Passing (JavaScript) |
+|---|---|---|---|
+| dev | 64 | 64 | 64 |
+| acceptance | 16 | 16 | 16 |
+| rejected inputs | 20 | 20 | 20 |
 
 By policy (dev + acceptance): asr-eval-v1 15/15, bayanat-norm-v1 52/52, raw-safe-v1 13/13. Computed by `scripts/make_docs.py` from the fixture files on 2026-10-15.
+
+JavaScript port (`js/`): 560 of 560 reference cases (the 80 fixtures under 7 policies) and 80 of 80 policy comparisons are identical to the Python engine, including the offset map and change log; counts from `js/conformance.json` (`js/scripts/conformance_counts.mjs`).
 <!-- END:counts -->
 
 The test suite also checks every line of the Unicode 18.0.0 NormalizationTest.txt for NFC, NFD, NFKC and NFKD, every RGI emoji ZWJ sequence, policy hash stability, and properties on random Arabic-heavy strings (idempotence, offset-map consistency, no silent changes). Fixtures are original text written by Bayanat Labs, labelled synthetic/illustrative, and contain no personal data. A native-speaker review of the lossy fixtures is pending (`tests/fixtures/REVIEW.md`).

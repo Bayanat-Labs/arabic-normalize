@@ -1,0 +1,101 @@
+{
+ "generated_by": "js/scripts/parity_check.mjs",
+ "date": "2026-10-15",
+ "lib_version": "0.1.0",
+ "python": "3.12.14",
+ "node": "22.23.2",
+ "n_per_policy_random": 20000,
+ "seed": 20261015,
+ "records": 146816,
+ "identical": 146816,
+ "by_group": {
+  "random/bayanat-norm-v1": {
+   "records": 20000,
+   "identical": 20000
+  },
+  "random/asr-eval-v1": {
+   "records": 20000,
+   "identical": 20000
+  },
+  "random/raw-safe-v1": {
+   "records": 20000,
+   "identical": 20000
+  },
+  "random/test-search-like": {
+   "records": 20000,
+   "identical": 20000
+  },
+  "random/test-nfkc-expand": {
+   "records": 20000,
+   "identical": 20000
+  },
+  "random/test-form-none": {
+   "records": 20000,
+   "identical": 20000
+  },
+  "random/test-emoji-zwj": {
+   "records": 20000,
+   "identical": 20000
+  },
+  "paragraph/undiacritised/bayanat-norm-v1": {
+   "records": 1177,
+   "identical": 1177
+  },
+  "paragraph/undiacritised/asr-eval-v1": {
+   "records": 1177,
+   "identical": 1177
+  },
+  "paragraph/undiacritised/raw-safe-v1": {
+   "records": 1177,
+   "identical": 1177
+  },
+  "paragraph/diacritised/bayanat-norm-v1": {
+   "records": 1095,
+   "identical": 1095
+  },
+  "paragraph/diacritised/asr-eval-v1": {
+   "records": 1095,
+   "identical": 1095
+  },
+  "paragraph/diacritised/raw-safe-v1": {
+   "records": 1095,
+   "identical": 1095
+  }
+ },
+ "mismatches": [],
+ "throughput_js": {
+  "machine": "one core",
+  "results": {
+   "undiacritised/bayanat-norm-v1": {
+    "bytes": 4163711,
+    "normalize_MBps": 76.17,
+    "detailed_MBps": 12.72
+   },
+   "undiacritised/asr-eval-v1": {
+    "bytes": 4163711,
+    "normalize_MBps": 57.67,
+    "detailed_MBps": 9.96
+   },
+   "undiacritised/raw-safe-v1": {
+    "bytes": 4163711,
+    "normalize_MBps": 139.48,
+    "detailed_MBps": 17.48
+   },
+   "diacritised/bayanat-norm-v1": {
+    "bytes": 4088390,
+    "normalize_MBps": 28.69,
+    "detailed_MBps": 6.98
+   },
+   "diacritised/asr-eval-v1": {
+    "bytes": 4088390,
+    "normalize_MBps": 30.59,
+    "detailed_MBps": 6.47
+   },
+   "diacritised/raw-safe-v1": {
+    "bytes": 4088390,
+    "normalize_MBps": 31.38,
+    "detailed_MBps": 8.33
+   }
+  }
+ }
+}

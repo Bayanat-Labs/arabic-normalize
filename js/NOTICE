@@ -1,0 +1,23 @@
+arabic-normalize by Bayanat Labs
+Copyright 2026 Bayanat Labs
+
+This product includes software developed by Bayanat Labs (https://bayanatlabs.com).
+
+The code in this repository is licensed under the Apache License 2.0 (LICENSE).
+The normalisation policies and the conformance fixtures listed in LICENSE-data
+are licensed under the Creative Commons Attribution 4.0 International License.
+
+This product includes data derived from the Unicode Character Database,
+version 18.0.0 (https://www.unicode.org/Public/18.0.0/ucd/):
+src/arabic_normalize/tables/ucd_tables.json is generated from it by
+scripts/build_tables.py, and verbatim copies of the input files are kept in
+ucd/18.0.0/. These are covered by the Unicode License V3; the full copyright
+and permission notice is in NOTICE-unicode.txt.
+Copyright (c) 1991-2026 Unicode, Inc.
+
+No third-party code is included. The library has no runtime dependencies.
+No GPL-licensed code (for example PyArabic or Mishkal) is imported, vendored
+or copied.
+
+The Bayanat Labs name, logo and project branding are not licensed under the
+Apache License 2.0 or under any data license in this repository.

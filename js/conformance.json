@@ -1,0 +1,42 @@
+{
+  "generated_by": "js/scripts/conformance_counts.mjs",
+  "package": "@bayanat-labs/arabic-normalize",
+  "lib_version": "0.1.0",
+  "by_split": {
+    "acceptance": {
+      "fixtures": 16,
+      "passing_js": 16
+    },
+    "dev": {
+      "fixtures": 64,
+      "passing_js": 64
+    }
+  },
+  "by_policy": {
+    "asr-eval-v1": {
+      "fixtures": 15,
+      "passing_js": 15
+    },
+    "bayanat-norm-v1": {
+      "fixtures": 52,
+      "passing_js": 52
+    },
+    "raw-safe-v1": {
+      "fixtures": 13,
+      "passing_js": 13
+    }
+  },
+  "rejected": {
+    "fixtures": 20,
+    "rejected_with_documented_reason": 20
+  },
+  "python_reference": {
+    "file": "js/test/reference/python-reference.json",
+    "policies": 7,
+    "policy_hashes_identical": 7,
+    "cases": 560,
+    "cases_identical": 560,
+    "diffs": 80,
+    "diffs_identical": 80
+  }
+}

@@ -57,3 +57,30 @@ jobs:
           echo "إِلَى المَدْرَسَةِ الجَدِيدَةِ ١٢٣" | "$RUNNER_TEMP/wheel-env/bin/arnorm" normalize
           "$RUNNER_TEMP/wheel-env/bin/arnorm" version
           "$RUNNER_TEMP/wheel-env/bin/python" -m pytest "$GITHUB_WORKSPACE/tests" -p no:cacheprovider
+
+  javascript:
+    name: JavaScript port (Node on the runner image)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Generated data matches the Python package files
+        working-directory: js
+        run: |
+          node --version
+          node scripts/build.mjs --check
+      - name: Tests (conformance with the Python reference, rejected inputs, UCD tables, NormalizationTest.txt, properties)
+        working-directory: js
+        run: node --test test/*.test.mjs
+      - name: Conformance counts are up to date
+        working-directory: js
+        run: node scripts/conformance_counts.mjs --check
+      - name: Python reference outputs are up to date
+        run: |
+          python3 -I js/scripts/make_reference.py
+          git diff --exit-code js/test/reference/python-reference.json
+      - name: Package builds
+        working-directory: js
+        run: npm pack --dry-run

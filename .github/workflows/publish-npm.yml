@@ -1,0 +1,38 @@
+name: Publish to npm
+
+# Publishes js/ as @bayanat-labs/arabic-normalize when a GitHub release is published.
+# Uses npm trusted publishing (OIDC): configure the trusted publisher for this repository and workflow on
+# npmjs.com first (FOUNDER ACTION); no token is stored in the repository.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: npm
+      url: https://www.npmjs.com/package/@bayanat-labs/arabic-normalize
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Check, test and match the release tag
+        working-directory: js
+        run: |
+          node scripts/build.mjs --check
+          node --test test/*.test.mjs
+          tag="${GITHUB_REF_NAME#v}"
+          test "$(node -p "require('./package.json').version")" = "$tag" || { echo "package.json version does not match ${GITHUB_REF_NAME}"; exit 1; }
+      - name: Publish with provenance (npm trusted publishing needs npm 11.5.1 or later)
+        working-directory: js
+        run: |
+          npm install -g npm@11.6.2
+          npm publish --provenance --access public

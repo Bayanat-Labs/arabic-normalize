@@ -1,0 +1,69 @@
+{
+  "name": "@bayanat-labs/arabic-normalize",
+  "version": "0.1.0",
+  "description": "Arabic text normalisation with named, versioned, hash-identified policies, an offset map, a change log and lossy flags. JavaScript port of arabic-normalize by Bayanat Labs.",
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./node": {
+      "types": "./node.d.ts",
+      "default": "./src/node.js"
+    },
+    "./policies/*.json": "./policies/*.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src/",
+    "policies/",
+    "index.d.ts",
+    "node.d.ts",
+    "README.md",
+    "LICENSE",
+    "LICENSE-data",
+    "NOTICE",
+    "NOTICE-unicode.txt"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check",
+    "reference": "python3 -I scripts/make_reference.py",
+    "test": "node --test test/*.test.mjs",
+    "bench": "node scripts/bench.mjs"
+  },
+  "keywords": [
+    "arabic",
+    "arabic-nlp",
+    "normalization",
+    "normalisation",
+    "unicode",
+    "diacritics",
+    "tashkeel",
+    "text-normalization",
+    "wer"
+  ],
+  "author": "Bayanat Labs (https://www.bayanatlabs.com)",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/Bayanat-Labs/arabic-normalize/tree/main/js#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bayanat-Labs/arabic-normalize.git",
+    "directory": "js"
+  },
+  "bugs": {
+    "url": "https://github.com/Bayanat-Labs/arabic-normalize/issues",
+    "email": "open@bayanatlabs.com"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
