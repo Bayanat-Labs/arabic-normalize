@@ -9,7 +9,7 @@ arabic-normalize applies a *named policy* such as `bayanat-norm-v1` to Arabic te
 - Policies are immutable: a change in behaviour ships as a new policy id, never as an edit.
 - Licence: Apache-2.0 (code); policies and conformance fixtures CC BY 4.0.
 
-Status: v0.1.0 pilot (three policies, 80 conformance fixtures, Python and JavaScript). A web cleaner and more policies are planned; a static demo runs in the browser at the Hugging Face Space [Bayanat-Labs/arabic-normalizer](https://huggingface.co/spaces/Bayanat-Labs/arabic-normalizer).
+Status: v0.1.0 pilot (three policies, 80 conformance fixtures, Python and JavaScript). The web page in `web/` runs in the browser as the Hugging Face Space [Bayanat-Labs/arabic-normalizer](https://huggingface.co/spaces/Bayanat-Labs/arabic-normalizer); more policies (compatibility policies, a search policy) are planned.
 
 ## Install
 
