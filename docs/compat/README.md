@@ -1,6 +1,6 @@
 # Agreement with other Arabic normalisers on the pilot fixtures
 
-Generated 2026-10-15 from the 80 pilot fixtures (64 dev, 16 acceptance) and arabic-normalize 0.1.0 (UCD 18.0.0) by a comparison driver that Bayanat Labs keeps with the oracle harnesses outside this repository, so that no file here imports a GPL module. Every number below is computed by that driver; the machine-readable result is [agreement.json](agreement.json) and the per-fixture table is [fixtures.md](fixtures.md).
+Generated 2026-10-15 from the 80 pilot fixtures (64 dev, 16 acceptance) and arabic-normalize 0.1.0 (UCD 18.0.0) by `scripts/compat/compare.py`. The CAMeL Tools, tnkeeh and Whisper harnesses are in `scripts/compat/harness/`; the PyArabic harness is kept outside this repository so that no file here imports a GPL module, and is passed to the driver with `--harness pyarabic=PATH`. Every number below is computed by the driver; the machine-readable result is [agreement.json](agreement.json) and the per-fixture table is [fixtures.md](fixtures.md).
 
 This is a pilot comparison on synthetic fixtures, not the brief's compatibility target (paragraph-level exact match on 10,000 stress paragraphs for each future `compat-*` policy). The pilot ships no compat policy; these tables show how far each tool's closest pipeline is from the three pilot policies, and where, so that compat policies can be designed later.
 

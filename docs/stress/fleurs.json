@@ -1,0 +1,282 @@
+{
+ "corpus": "FLEURS ar_eg transcripts",
+ "source_url": "https://huggingface.co/datasets/google/fleurs (revision 70bb2e84b976b7e960aa89f1c648e09c59f894dd, data/ar_eg/train.tsv, dev.tsv and test.tsv)",
+ "licence": "CC BY 4.0 (Google FLEURS, Conneau et al. 2022)",
+ "retrieved_at": "2026-10-15T10:44:59Z",
+ "runs": [
+  {
+   "label": "transcription column",
+   "source": {
+    "kind": "tsv",
+    "files": [
+     {
+      "file": "ar_eg_train.tsv",
+      "bytes": 1528714,
+      "sha256": "416fbb37f2d4226b5e1e393dafa12920c5ea596cada371d115e3a1c13b9b8c8b"
+     },
+     {
+      "file": "ar_eg_dev.tsv",
+      "bytes": 214607,
+      "sha256": "3c9ea61dfd884a47e03ee33c4ef601bed0a1142ce7e5b279cccd0cf321792913"
+     },
+     {
+      "file": "ar_eg_test.tsv",
+      "bytes": 324236,
+      "sha256": "af9b9aa3f99c39f90e7f8417f10f2f45a7f783441c6a27abfc2c1bededed4af1"
+     }
+    ],
+    "column": 3,
+    "unique_by": 0,
+    "unit": "sentence",
+    "texts_available": 1702,
+    "sample_requested": 2000,
+    "seed": 20261013,
+    "texts_selected": 1702
+   },
+   "machine": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.12.14",
+    "workers": 8
+   },
+   "lib_version": "0.1.0",
+   "unicode_version": "18.0.0",
+   "texts": 1702,
+   "code_points": 183855,
+   "utf8_bytes": 336060,
+   "arabic_letters": 149845,
+   "crashes": {},
+   "consistency_failures": {},
+   "plain_detailed_mismatch": {},
+   "not_idempotent": {},
+   "not_nfc": {},
+   "rules": {
+    "bayanat-norm-v1": {
+     "alef_variants.map": 4760,
+     "diacritics.strip": 2120,
+     "alef_maqsura.to_yeh": 1478,
+     "digits.to_ascii": 49,
+     "tatweel.strip": 8
+    },
+    "asr-eval-v1": {
+     "taa_marbuta.to_heh": 4957,
+     "alef_variants.map": 4760,
+     "diacritics.strip": 2120,
+     "alef_maqsura.to_yeh": 1478,
+     "punctuation.strip": 333,
+     "whitespace.collapse": 227,
+     "digits.to_ascii": 49,
+     "tatweel.strip": 8
+    },
+    "raw-safe-v1": {}
+   },
+   "texts_with_rule": {
+    "bayanat-norm-v1": {
+     "alef_variants.map": 1563,
+     "alef_maqsura.to_yeh": 950,
+     "diacritics.strip": 943,
+     "digits.to_ascii": 10,
+     "tatweel.strip": 7
+    },
+    "asr-eval-v1": {
+     "alef_variants.map": 1563,
+     "taa_marbuta.to_heh": 1519,
+     "alef_maqsura.to_yeh": 950,
+     "diacritics.strip": 943,
+     "punctuation.strip": 174,
+     "whitespace.collapse": 126,
+     "digits.to_ascii": 10,
+     "tatweel.strip": 7
+    },
+    "raw-safe-v1": {}
+   },
+   "texts_with_any_lossy": {
+    "bayanat-norm-v1": 1613,
+    "asr-eval-v1": 1683
+   },
+   "flags": {
+    "bayanat-norm-v1": {
+     "taa_marbuta.flag": 1519
+    },
+    "asr-eval-v1": {},
+    "raw-safe-v1": {}
+   },
+   "rejected_spans_by_reason": {},
+   "lossy_classes": {
+    "taa_marbuta.to_heh|U+0629|final": 4957,
+    "alef_variants.map|U+0623|initial": 2048,
+    "alef_maqsura.to_yeh|U+0649|final": 1473,
+    "alef_variants.map|U+0623|stem_initial_after_prefix": 1079,
+    "alef_variants.map|U+0625|initial": 837,
+    "alef_variants.map|U+0625|stem_initial_after_prefix": 386,
+    "alef_variants.map|U+0623|medial": 180,
+    "alef_variants.map|U+0622|initial": 95,
+    "alef_variants.map|U+0622|stem_initial_after_prefix": 79,
+    "alef_variants.map|U+0623|final": 50,
+    "alef_variants.map|U+0622|medial": 6,
+    "alef_maqsura.to_yeh|U+0649|after_prefix_word_final": 5
+   },
+   "word_type_merges": {
+    "bayanat-norm-v1": {
+     "distinct_base_types": 11244,
+     "base_types_merged_with_another": 133,
+     "share_of_base_types_merged": 0.0118,
+     "tokens": 31357,
+     "tokens_of_merged_types": 3261,
+     "share_of_tokens_merged": 0.104,
+     "output_types": 11175
+    },
+    "asr-eval-v1": {
+     "distinct_base_types": 11244,
+     "base_types_merged_with_another": 157,
+     "share_of_base_types_merged": 0.014,
+     "tokens": 31357,
+     "tokens_of_merged_types": 3335,
+     "share_of_tokens_merged": 0.1064,
+     "output_types": 11162
+    }
+   }
+  },
+  {
+   "label": "raw_transcription column",
+   "source": {
+    "kind": "tsv",
+    "files": [
+     {
+      "file": "ar_eg_train.tsv",
+      "bytes": 1528714,
+      "sha256": "416fbb37f2d4226b5e1e393dafa12920c5ea596cada371d115e3a1c13b9b8c8b"
+     },
+     {
+      "file": "ar_eg_dev.tsv",
+      "bytes": 214607,
+      "sha256": "3c9ea61dfd884a47e03ee33c4ef601bed0a1142ce7e5b279cccd0cf321792913"
+     },
+     {
+      "file": "ar_eg_test.tsv",
+      "bytes": 324236,
+      "sha256": "af9b9aa3f99c39f90e7f8417f10f2f45a7f783441c6a27abfc2c1bededed4af1"
+     }
+    ],
+    "column": 2,
+    "unique_by": 0,
+    "unit": "sentence",
+    "texts_available": 1702,
+    "sample_requested": 2000,
+    "seed": 20261013,
+    "texts_selected": 1702
+   },
+   "machine": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.12.14",
+    "workers": 8
+   },
+   "lib_version": "0.1.0",
+   "unicode_version": "18.0.0",
+   "texts": 1702,
+   "code_points": 187801,
+   "utf8_bytes": 341330,
+   "arabic_letters": 149845,
+   "crashes": {},
+   "consistency_failures": {},
+   "plain_detailed_mismatch": {},
+   "not_idempotent": {},
+   "not_nfc": {},
+   "rules": {
+    "bayanat-norm-v1": {
+     "alef_variants.map": 4760,
+     "diacritics.strip": 2130,
+     "alef_maqsura.to_yeh": 1478,
+     "digits.to_ascii": 49,
+     "canonical_order.nfc": 27,
+     "tatweel.strip": 18
+    },
+    "asr-eval-v1": {
+     "taa_marbuta.to_heh": 4957,
+     "alef_variants.map": 4760,
+     "punctuation.strip": 4242,
+     "whitespace.collapse": 3927,
+     "diacritics.strip": 2130,
+     "alef_maqsura.to_yeh": 1478,
+     "digits.to_ascii": 49,
+     "canonical_order.nfc": 27,
+     "tatweel.strip": 18
+    },
+    "raw-safe-v1": {
+     "canonical_order.nfc": 27
+    }
+   },
+   "texts_with_rule": {
+    "bayanat-norm-v1": {
+     "alef_variants.map": 1563,
+     "alef_maqsura.to_yeh": 950,
+     "diacritics.strip": 945,
+     "canonical_order.nfc": 24,
+     "tatweel.strip": 17,
+     "digits.to_ascii": 10
+    },
+    "asr-eval-v1": {
+     "whitespace.collapse": 1699,
+     "punctuation.strip": 1699,
+     "alef_variants.map": 1563,
+     "taa_marbuta.to_heh": 1519,
+     "alef_maqsura.to_yeh": 950,
+     "diacritics.strip": 945,
+     "canonical_order.nfc": 24,
+     "tatweel.strip": 17,
+     "digits.to_ascii": 10
+    },
+    "raw-safe-v1": {
+     "canonical_order.nfc": 24
+    }
+   },
+   "texts_with_any_lossy": {
+    "bayanat-norm-v1": 1613,
+    "asr-eval-v1": 1683
+   },
+   "flags": {
+    "bayanat-norm-v1": {
+     "taa_marbuta.flag": 1519
+    },
+    "asr-eval-v1": {},
+    "raw-safe-v1": {}
+   },
+   "rejected_spans_by_reason": {},
+   "lossy_classes": {
+    "taa_marbuta.to_heh|U+0629|final": 4957,
+    "alef_variants.map|U+0623|initial": 2048,
+    "alef_maqsura.to_yeh|U+0649|final": 1473,
+    "alef_variants.map|U+0623|stem_initial_after_prefix": 1079,
+    "alef_variants.map|U+0625|initial": 837,
+    "alef_variants.map|U+0625|stem_initial_after_prefix": 386,
+    "alef_variants.map|U+0623|medial": 180,
+    "alef_variants.map|U+0622|initial": 95,
+    "alef_variants.map|U+0622|stem_initial_after_prefix": 79,
+    "alef_variants.map|U+0623|final": 50,
+    "alef_variants.map|U+0622|medial": 6,
+    "alef_maqsura.to_yeh|U+0649|after_prefix_word_final": 5
+   },
+   "word_type_merges": {
+    "bayanat-norm-v1": {
+     "distinct_base_types": 11244,
+     "base_types_merged_with_another": 133,
+     "share_of_base_types_merged": 0.0118,
+     "tokens": 31357,
+     "tokens_of_merged_types": 3261,
+     "share_of_tokens_merged": 0.104,
+     "output_types": 11175
+    },
+    "asr-eval-v1": {
+     "distinct_base_types": 11244,
+     "base_types_merged_with_another": 157,
+     "share_of_base_types_merged": 0.014,
+     "tokens": 31357,
+     "tokens_of_merged_types": 3335,
+     "share_of_tokens_merged": 0.1064,
+     "output_types": 11162
+    }
+   }
+  }
+ ]
+}

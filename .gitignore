@@ -7,4 +7,5 @@ dist/
 .pytest_cache/
 .hypothesis/
 compat/oracles/
+compat/runs/
 *.checkpoint

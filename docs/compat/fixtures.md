@@ -1,6 +1,6 @@
 # Per-fixture agreement with other normalisers
 
-Generated 2026-10-15 by the oracle comparison driver (see [README.md](README.md)). Each cell compares the oracle's closest pipeline for the fixture's policy (see [README.md](README.md)) with the fixture's expected output, which arabic-normalize reproduces. `=` exact match; `≈ws` equal after squeezing spaces; `≈p` equal after also dropping punctuation; `≠` different, followed by the character classes that differ. n/a: the tool has no counterpart of that policy. Oracle outputs, as escapes, are in [agreement.json](agreement.json).
+Generated 2026-10-15 by `scripts/compat/compare.py` (see [README.md](README.md)). Each cell compares the oracle's closest pipeline for the fixture's policy (see [README.md](README.md)) with the fixture's expected output, which arabic-normalize reproduces. `=` exact match; `≈ws` equal after squeezing spaces; `≈p` equal after also dropping punctuation; `≠` different, followed by the character classes that differ. n/a: the tool has no counterpart of that policy. Oracle outputs, as escapes, are in [agreement.json](agreement.json).
 
 | Fixture | Family | Policy | CAMeL Tools | tnkeeh | Whisper basic | PyArabic |
 |---|---|---|---|---|---|---|

@@ -10,6 +10,7 @@ engine run on the fixture files or from the policy files. `--check` fails if any
 Run: python scripts/make_docs.py [--check]
 """
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -379,6 +380,15 @@ def claims(by_split, by_policy, rej, rej_ok):
         h = an.load_policy(pid).policy_hash
         L.append('| TL-003-%s | "arabic-normalize (Bayanat Labs, Apache-2.0) applies named, versioned Arabic normalisation policies; any result normalised with %s can be reproduced exactly from policy hash %s. Version %s, %d conformance cases passing in %s, as of %s." | fixtures in tests/fixtures/{dev,acceptance} that pass every assertion | %d of %d | code Apache-2.0; policies and fixtures CC BY 4.0 | %s | tests/fixtures, src/arabic_normalize/policies/%s.json | %s | draft |' % (
             pid, pid, h, an.__version__, n_pass, langs, DOC_DATE, n_pass, n_fix, DOC_DATE, pid, count_script))
+    st_path = os.path.join(ROOT, "docs", "stress", "stats.json")
+    with open(st_path, encoding="utf-8") as f:
+        st = json.load(f)
+    n_art = st["articles"]
+    n_lossy = st["articles_with_any_lossy"]["bayanat-norm-v1"]
+    n_crash = sum(st["crashes"].values())
+    L.append('| TL-003-stress-wikipedia | "In a stress test on {:,} Arabic Wikipedia articles, bayanat-norm-v1 made at least one lossy change in {:,} of them ({:.1f}%), with {} crashes." | main-namespace, non-redirect articles of one arwiki dump part ({}), raw wikitext; an article counts when its change log has any lossy rule | {:,} of {:,} | Wikipedia text CC BY-SA 4.0, statistics only, nothing redistributed | {} | docs/stress/stats.json (sha256 {}) | scripts/stress/stress_run.py, scripts/stress/stress_report.py | draft |'.format(
+        n_art, n_lossy, 100.0 * n_lossy / n_art, n_crash, st["dump"].get("dated_name", st["dump"]["file"]), n_lossy, n_art,
+        st["dump"]["retrieved_at"][:10], sha256_file(st_path)))
     L += ["", "No 'first', 'only', 'largest' or 'best' wording is used. A 'first/only open Arabic normaliser with hash-identified policies and offset maps' claim would need the full RULES.md section 10 search (Hugging Face, Masader, Kaggle, Zenodo, ACL Anthology, arXiv) and is not made.", "",
           "## 2. Name availability (15 Oct 2026)", "",
           "| Registry | Name | HTTP status | Registered |", "|---|---|---|---|"]
@@ -409,12 +419,42 @@ def claims(by_split, by_policy, rej, rej_ok):
     L += ["", "Feature comparison: arabic-normalize provides named immutable policies with a SHA-256 identity, an offset map, a change log with lossy flags and pinned Unicode data. For the comparators above, `evidence/census_2026-10-15.json` records a keyword scan of registry descriptions only; it is not evidence that a tool lacks a feature, and no comparative claim is made from it. " + (
               "The JavaScript port (`js/`, npm `@bayanat-labs/arabic-normalize`) gives the same output as the Python engine on every fixture (`js/conformance.json`). The compatibility policies (compat-camel, compat-lucene, compat-whisper, compat-pyarabic) are not part of v0.1." if js_all_pass(js) else
               "The JavaScript port and compatibility policies (compat-camel, compat-lucene, compat-whisper, compat-pyarabic) are not part of v0.1."), "",
-          "## 4. Gates", "",
+          "## 4. Script-computed QA records", "",
+          "Every number in these files is computed by the script named next to it from the inputs named there. The hashes identify the exact files the numbers above and the public pages quote.", "",
+          "| File | SHA-256 | Produced by | Inputs |", "|---|---|---|---|"] + qa_records() + ["",
+          "## 5. Gates", "",
           "- [x] Counts computed by script from the released files (`scripts/make_docs.py`)",
           "- [x] Licence class and date stated with the claim",
           "- [x] No superlative used",
           "- [ ] Founder approval of the claim wording (RULES.md section 13)", ""]
     return "\n".join(L)
+
+
+def sha256_file(path):
+    with open(path, "rb") as f:
+        return hashlib.sha256(f.read()).hexdigest()
+
+
+QA_RECORDS = [
+    ("docs/stress/report.md", "scripts/stress/stress_report.py", "the stress_run.py JSON of one arwiki dump part (deleted after the run)"),
+    ("docs/stress/stats.json", "scripts/stress/stress_run.py, scripts/stress/stress_report.py", "one arwiki dump part (sha256 in the file)"),
+    ("docs/stress/fleurs.md", "scripts/stress/stress_report.py", "the stress_run.py JSON of the FLEURS ar_eg transcripts"),
+    ("docs/stress/fleurs.json", "scripts/stress/stress_run.py, scripts/stress/stress_report.py", "FLEURS ar_eg train, dev and test TSV files (sha256 in the file)"),
+    ("docs/stress/tanzil.md", "scripts/stress/stress_report.py", "the stress_run.py JSON of the Tanzil Uthmani text"),
+    ("docs/stress/tanzil.json", "scripts/stress/stress_run.py, scripts/stress/stress_report.py", "Tanzil Uthmani text with aya numbers (sha256 in the file)"),
+    ("docs/compat/agreement.json", "scripts/compat/compare.py with scripts/compat/harness/ (PyArabic harness kept outside)", "tests/fixtures/{dev,acceptance}, oracle venvs listed in the file"),
+    ("docs/compat/README.md", "scripts/compat/compare.py", "docs/compat/agreement.json data"),
+    ("docs/compat/fixtures.md", "scripts/compat/compare.py", "docs/compat/agreement.json data"),
+]
+
+
+def qa_records():
+    rows = []
+    for rel, script, inputs in QA_RECORDS:
+        path = os.path.join(ROOT, rel)
+        if os.path.exists(path):
+            rows.append("| %s | `%s` | %s | %s |" % (rel, sha256_file(path), script, inputs))
+    return rows
 
 
 def main():
