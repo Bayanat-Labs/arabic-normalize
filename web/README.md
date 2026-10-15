@@ -7,6 +7,15 @@ node web/build.mjs --out /tmp/arabic-normalizer   # assemble the page, the libra
 python3 -m http.server 8765 --bind 127.0.0.1 --directory /tmp/arabic-normalizer
 ```
 
-Privacy: all processing happens in the browser tab, in a Web Worker when available. The page loads nothing from other hosts and its Content-Security-Policy forbids network connections (`connect-src 'none'`), so it keeps working offline once loaded. The text is never put in the URL or in browser storage; only the chosen interface language is remembered.
+Privacy: all processing happens in the browser tab, in a Web Worker when available. The page loads nothing from other hosts and its Content-Security-Policy forbids network connections (`connect-src 'none'`), so it keeps working offline once loaded. The worker is started from a `blob:` URL, so it inherits the page's policy: the code that processes the text cannot open a network connection either (a worker loaded from its own URL would take its policy from the HTTP response, and static hosts such as Hugging Face send none). The text is never put in the URL or in browser storage; only the chosen interface language is remembered.
 
-Files: `index.html`, `app.js` (interface and strings), `compute.js` (one normalisation request), `worker.js`, `style.css`, `fonts/` (IBM Plex Sans Arabic, SIL OFL 1.1, see `fonts/OFL.txt`). Code: Apache-2.0.
+Privacy check (Playwright, headless Chromium; also run in CI):
+
+```bash
+node web/build.mjs --out /tmp/arabic-normalizer
+python web/privacy_check.py /tmp/arabic-normalizer
+```
+
+It checks that the worker runs from a `blob:` URL, that `fetch` and `XMLHttpRequest` fail inside the worker and in the page while the same URL is reachable from outside, and that typing text after load makes no network request and writes nothing to localStorage, sessionStorage, IndexedDB or cookies.
+
+Files: `index.html`, `app.js` (interface and strings), `compute.js` (one normalisation request), `worker.js`, `privacy_check.py`, `style.css`, `fonts/` (IBM Plex Sans Arabic, SIL OFL 1.1, see `fonts/OFL.txt`). Code: Apache-2.0.

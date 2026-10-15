@@ -284,11 +284,19 @@ function el(tag, attrs = {}, ...children) {
 }
 
 // --- Worker (falls back to the main thread) ----------------------------------------------------------
+// The worker is started from a blob: URL whose only line imports worker.js. A worker created from a
+// blob: URL inherits this page's Content-Security-Policy (connect-src 'none'), so the code that processes
+// the text cannot open network connections either. A worker loaded from its own URL would take its policy
+// from the HTTP response instead, and static hosts such as Hugging Face Spaces send none.
 let worker = null;
 const pending = new Map();
 try {
-  worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
+  const workerModule = new URL('./worker.js', import.meta.url).href;
+  const workerBlobUrl = URL.createObjectURL(
+    new Blob([`import ${JSON.stringify(workerModule)};\n`], { type: 'text/javascript' }));
+  worker = new Worker(workerBlobUrl, { type: 'module' });
   worker.onmessage = (ev) => {
+    URL.revokeObjectURL(workerBlobUrl);
     const cb = pending.get(ev.data.id);
     pending.delete(ev.data.id);
     if (cb) cb(ev.data);
