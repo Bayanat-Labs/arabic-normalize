@@ -84,3 +84,5 @@ jobs:
       - name: Package builds
         working-directory: js
         run: npm pack --dry-run
+      - name: Web page (Hugging Face Space) builds
+        run: node web/build.mjs --out "$RUNNER_TEMP/space"
