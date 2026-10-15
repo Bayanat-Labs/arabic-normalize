@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'none'; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
-<title>توحيد النص العربي وتنظيفه – بيانات لابز</title>
+<title>Arabic Text Normalizer – Bayanat Labs</title>
 <meta name="description" content="Normalise Arabic text with a named, hash-identified policy and see every change: before and after, change log, lossy flags and the policy SHA-256. Runs in your browser.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='%230b0b0d'%3E%3Cpath d='M32 6 A26 26 0 0 0 32 58 Z'/%3E%3Ccircle cx='38' cy='16' r='3'/%3E%3Ccircle cx='38' cy='32' r='3'/%3E%3Ccircle cx='38' cy='48' r='3'/%3E%3Ccircle cx='46' cy='24' r='3'/%3E%3Ccircle cx='46' cy='40' r='3'/%3E%3C/g%3E%3Ccircle cx='54' cy='32' r='3' fill='%236366f1'/%3E%3C/svg%3E">
 <link rel="preload" href="fonts/IBMPlexSansArabic-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -14,7 +14,7 @@
 <script type="module" src="app.js"></script>
 </head>
 <body>
-<a class="skip" href="#input" data-i18n="skip">انتقل إلى الأداة</a>
+<a class="skip" href="#input" data-i18n="skip">Skip to the tool</a>
 <header class="top">
   <div class="wrap top-row">
     <a class="brand" href="https://www.bayanatlabs.com" rel="noopener" target="_blank">
@@ -26,72 +26,72 @@
         </g>
         <g class="mark-accent"><circle cx="54" cy="24" r="2.6"/><circle cx="54" cy="32" r="2.6"/><circle cx="54" cy="40" r="2.6"/></g>
       </svg>
-      <span data-i18n="brand">بيانات لابز</span>
+      <span data-i18n="brand">Bayanat Labs</span>
     </a>
-    <button type="button" id="lang-toggle" class="lang" lang="en" dir="ltr">English</button>
+    <button type="button" id="lang-toggle" class="lang" lang="ar" dir="rtl">العربية</button>
   </div>
 </header>
 
 <main class="wrap">
   <section class="intro">
-    <h1 data-i18n="title">توحيد النص العربي وتنظيفه</h1>
-    <p class="lede" data-i18n="lede">طبّق على نصك العربي سياسة توحيد مسمّاة ذات بصمة ثابتة، وشاهد كل تغيير: النص قبل التوحيد وبعده، وسجل التغييرات، والتغييرات الفاقدة للمعلومات، وبصمة SHA-256 للسياسة.</p>
-    <p class="privacy" data-i18n="privacy">يجري التوحيد داخل متصفحك، فلا يُرفع نصك ولا يُخزَّن ولا يُسجَّل.</p>
+    <h1 data-i18n="title">Arabic Text Normalizer</h1>
+    <p class="lede" data-i18n="lede">Apply a named, hash-identified normalisation policy to Arabic text and see every change: before and after, the change log, the lossy changes and the policy SHA-256.</p>
+    <p class="privacy" data-i18n="privacy">Normalisation runs in your browser. Your text is not uploaded, stored or logged.</p>
   </section>
 
   <section class="grid" aria-labelledby="input-h">
     <div class="card" id="input-card">
-      <h2 id="input-h" data-i18n="inputH">النص</h2>
-      <label class="sr" for="input" data-i18n="inputLabel">النص المراد توحيده</label>
-      <textarea id="input" dir="auto" rows="7" spellcheck="false" autocomplete="off" data-i18n-placeholder="placeholder" placeholder="الصق نصًا عربيًا هنا"></textarea>
+      <h2 id="input-h" data-i18n="inputH">Text</h2>
+      <label class="sr" for="input" data-i18n="inputLabel">Text to normalise</label>
+      <textarea id="input" dir="auto" rows="7" spellcheck="false" autocomplete="off" data-i18n-placeholder="placeholder" placeholder="Paste Arabic text here"></textarea>
       <div class="row tools">
-        <button type="button" id="worked" class="btn primary" data-i18n="worked">المثال المشروح</button>
-        <label class="sr" for="examples" data-i18n="moreExamples">أمثلة أخرى</label>
+        <button type="button" id="worked" class="btn primary" data-i18n="worked">Worked example</button>
+        <label class="sr" for="examples" data-i18n="moreExamples">More examples</label>
         <select id="examples"></select>
-        <button type="button" id="clear" class="btn" data-i18n="clear">مسح</button>
+        <button type="button" id="clear" class="btn" data-i18n="clear">Clear</button>
         <span class="count" id="count" aria-live="polite"></span>
       </div>
       <p class="note" id="example-note" hidden></p>
 
       <div class="policy">
-        <label for="policy" class="lbl" data-i18n="policyLabel">السياسة</label>
+        <label for="policy" class="lbl" data-i18n="policyLabel">Policy</label>
         <select id="policy"></select>
         <p class="policy-title" id="policy-title"></p>
         <div class="hash-row">
-          <span class="lbl" data-i18n="hashLabel">بصمة SHA-256 للسياسة</span>
+          <span class="lbl" data-i18n="hashLabel">Policy SHA-256</span>
           <code id="policy-hash" class="hash" dir="ltr"></code>
-          <button type="button" class="btn small" id="copy-hash" data-i18n="copy">نسخ</button>
+          <button type="button" class="btn small" id="copy-hash" data-i18n="copy">Copy</button>
         </div>
-        <p class="lossy-rules"><span class="lbl" data-i18n="lossyRules">القواعد الفاقدة للمعلومات في هذه السياسة:</span> <span id="policy-lossy"></span></p>
+        <p class="lossy-rules"><span class="lbl" data-i18n="lossyRules">Lossy rules in this policy:</span> <span id="policy-lossy"></span></p>
         <details class="canon">
-          <summary data-i18n="canonSummary">ممّ تُحسب البصمة؟</summary>
-          <p data-i18n="canonText">البصمة هي قيمة SHA-256 لنص JSON القانوني للسياسة بعد حذف الحقل meta: مفاتيح مرتبة، بلا مسافات، بترميز UTF-8.</p>
+          <summary data-i18n="canonSummary">What is hashed?</summary>
+          <p data-i18n="canonText">The hash is the SHA-256 of the policy’s canonical JSON without its meta member: keys sorted, no whitespace, UTF-8.</p>
           <pre id="policy-canonical" dir="ltr"></pre>
-          <button type="button" class="btn small" id="download-policy" data-i18n="downloadPolicy">تنزيل ملف السياسة (JSON)</button>
+          <button type="button" class="btn small" id="download-policy" data-i18n="downloadPolicy">Download the policy file (JSON)</button>
         </details>
       </div>
     </div>
 
     <div class="card" id="output-card" aria-live="polite">
-      <h2 data-i18n="outputH">النص الموحَّد</h2>
+      <h2 data-i18n="outputH">Normalised text</h2>
       <p class="error" id="error" role="alert" hidden></p>
-      <label class="sr" for="output" data-i18n="outputLabel">النص بعد التوحيد</label>
+      <label class="sr" for="output" data-i18n="outputLabel">Normalised text</label>
       <textarea id="output" dir="auto" rows="7" readonly></textarea>
       <p class="note" id="output-note" hidden></p>
       <div class="row tools">
-        <button type="button" class="btn" id="copy-output" data-i18n="copyOutput">نسخ الناتج</button>
-        <button type="button" class="btn" id="download-result" data-i18n="downloadResult">تنزيل النتيجة المفصّلة (JSON)</button>
+        <button type="button" class="btn" id="copy-output" data-i18n="copyOutput">Copy output</button>
+        <button type="button" class="btn" id="download-result" data-i18n="downloadResult">Download the detailed result (JSON)</button>
       </div>
       <dl class="stats">
-        <div><dt data-i18n="statChanges">التغييرات</dt><dd id="s-changes">0</dd></div>
-        <div><dt data-i18n="statLossy">التغييرات الفاقدة للمعلومات</dt><dd id="s-lossy">0</dd></div>
-        <div><dt data-i18n="statRatio">نسبة التشكيل</dt><dd id="s-ratio" dir="ltr">0</dd></div>
-        <div><dt data-i18n="statLen">نقاط الترميز قبل ← بعد</dt><dd id="s-len" dir="ltr">0 → 0</dd></div>
+        <div><dt data-i18n="statChanges">Changes</dt><dd id="s-changes">0</dd></div>
+        <div><dt data-i18n="statLossy">Lossy changes</dt><dd id="s-lossy">0</dd></div>
+        <div><dt data-i18n="statRatio">Diacritization ratio</dt><dd id="s-ratio" dir="ltr">0</dd></div>
+        <div><dt data-i18n="statLen">Code points before → after</dt><dd id="s-len" dir="ltr">0 → 0</dd></div>
       </dl>
       <div class="flags">
-        <h3 data-i18n="lossyH">تنبيهات فقد المعلومات</h3>
+        <h3 data-i18n="lossyH">Lossy flags</h3>
         <ul id="lossy-flags" class="badges"></ul>
-        <h3 data-i18n="flagsH">تنبيهات لا تغيّر النص</h3>
+        <h3 data-i18n="flagsH">Informational flags</h3>
         <ul id="flags" class="badges"></ul>
         <p class="note" id="rejected" hidden></p>
       </div>
@@ -100,35 +100,35 @@
 
   <section class="card" aria-labelledby="diff-h">
     <div class="row between">
-      <h2 id="diff-h" data-i18n="diffH">قبل التوحيد وبعده</h2>
-      <label class="check"><input type="checkbox" id="show-invisible" checked> <span data-i18n="showInvisible">إظهار المحارف غير المرئية</span></label>
+      <h2 id="diff-h" data-i18n="diffH">Before and after</h2>
+      <label class="check"><input type="checkbox" id="show-invisible" checked> <span data-i18n="showInvisible">Show invisible characters</span></label>
     </div>
     <p class="legend">
-      <span class="key chg" data-i18n="legendChanged">تغيير</span>
-      <span class="key lossy" data-i18n="legendLossy">تغيير فاقد للمعلومات</span>
-      <span class="key del" data-i18n="legendRemoved">محذوف</span>
-      <span class="key inv">ZWNJ</span> <span data-i18n="legendInvisible">محرف غير مرئي</span>
+      <span class="key chg" data-i18n="legendChanged">changed</span>
+      <span class="key lossy" data-i18n="legendLossy">lossy change</span>
+      <span class="key del" data-i18n="legendRemoved">removed</span>
+      <span class="key inv">ZWNJ</span> <span data-i18n="legendInvisible">invisible character</span>
     </p>
     <div class="diff">
-      <div class="pane"><h3 data-i18n="before">قبل</h3><div id="before" class="text" dir="auto"></div></div>
-      <div class="pane"><h3 data-i18n="after">بعد</h3><div id="after" class="text" dir="auto"></div></div>
+      <div class="pane"><h3 data-i18n="before">Before</h3><div id="before" class="text" dir="auto"></div></div>
+      <div class="pane"><h3 data-i18n="after">After</h3><div id="after" class="text" dir="auto"></div></div>
     </div>
     <p class="note" id="diff-note" hidden></p>
   </section>
 
   <section class="card" aria-labelledby="log-h">
-    <h2 id="log-h" data-i18n="logH">سجل التغييرات</h2>
-    <p class="note" data-i18n="logNote">سطر لكل محرف تغيّر، بالترتيب الذي جرت به المراحل. تُعدّ المواضع بنقاط الترميز في النص الأصلي.</p>
+    <h2 id="log-h" data-i18n="logH">Change log</h2>
+    <p class="note" data-i18n="logNote">One row per changed character, in the order the stages ran. Positions count code points in the original text.</p>
     <div class="table-wrap">
       <table id="log">
         <thead><tr>
           <th scope="col">#</th>
-          <th scope="col" data-i18n="colStage">المرحلة</th>
-          <th scope="col" data-i18n="colRule">القاعدة</th>
-          <th scope="col" data-i18n="colSpan">الموضع في المدخل</th>
-          <th scope="col" data-i18n="colBefore">قبل</th>
-          <th scope="col" data-i18n="colAfter">بعد</th>
-          <th scope="col" data-i18n="colLossy">فاقد للمعلومات</th>
+          <th scope="col" data-i18n="colStage">Stage</th>
+          <th scope="col" data-i18n="colRule">Rule</th>
+          <th scope="col" data-i18n="colSpan">Position in input</th>
+          <th scope="col" data-i18n="colBefore">Before</th>
+          <th scope="col" data-i18n="colAfter">After</th>
+          <th scope="col" data-i18n="colLossy">Lossy</th>
         </tr></thead>
         <tbody></tbody>
       </table>
@@ -137,16 +137,16 @@
   </section>
 
   <section class="card" aria-labelledby="cmp-h">
-    <h2 id="cmp-h" data-i18n="cmpH">قارن بسياسة أخرى</h2>
+    <h2 id="cmp-h" data-i18n="cmpH">Compare with another policy</h2>
     <div class="row">
-      <label for="policy-b" class="lbl" data-i18n="cmpWith">السياسة المقارَن بها</label>
+      <label for="policy-b" class="lbl" data-i18n="cmpWith">Compare with</label>
       <select id="policy-b"></select>
     </div>
     <p id="cmp-summary"></p>
     <div class="table-wrap">
       <table id="cmp">
         <thead><tr>
-          <th scope="col" data-i18n="cmpSource">المدخل</th>
+          <th scope="col" data-i18n="cmpSource">Input</th>
           <th scope="col" id="cmp-a-h"></th>
           <th scope="col" id="cmp-b-h"></th>
         </tr></thead>
@@ -156,33 +156,33 @@
   </section>
 
   <section class="card how" aria-labelledby="how-h">
-    <h2 id="how-h" data-i18n="howH">كيف يُحسب الناتج</h2>
+    <h2 id="how-h" data-i18n="howH">How it is computed</h2>
     <ol>
-      <li data-i18n="how1">تحدد السياسة وضعًا لكل مرحلة من مراحل التوحيد الثماني عشرة، وتجري المراحل دائمًا بالترتيب نفسه.</li>
-      <li data-i18n="how2">تأتي خصائص المحارف من قاعدة بيانات يونيكود 18.0.0 المضمّنة في المكتبة، فلا يتغير الناتج بتغيّر المتصفح.</li>
-      <li data-i18n="how3">يُسجَّل كل تغيير مع موضعه في النص الأصلي، وتربط خريطة الإزاحات كل محرف في الناتج بموضعه في المدخل.</li>
-      <li data-i18n="how4">التغييرات التي قد تجعل كلمتين مختلفتين متطابقتين، مثل تحويل ى إلى ي، تُعلَّم بأنها فاقدة للمعلومات.</li>
-      <li data-i18n="how5">تعرّف بصمة SHA-256 السياسة تعريفًا تامًّا: اذكر معرّف السياسة وبصمتها ليتمكن غيرك من إعادة إنتاج الناتج نفسه.</li>
+      <li data-i18n="how1">A policy sets one mode for each of the 18 normalisation stages; the stages always run in the same order.</li>
+      <li data-i18n="how2">Character data comes from the Unicode 18.0.0 database bundled with the library, so the output does not change from one browser to another.</li>
+      <li data-i18n="how3">Every change is logged with its position in the original text, and the offset map links each output character to its position in the input.</li>
+      <li data-i18n="how4">Changes that can make two different words identical, such as ⁧ى⁩ to ⁧ي⁩, are flagged as lossy.</li>
+      <li data-i18n="how5">The SHA-256 identifies the policy exactly: cite the policy id and its hash, and anyone can reproduce the same output.</li>
     </ol>
-    <p data-i18n="howLib">تعمل هذه الصفحة بمكتبة JavaScript ‏⁦@bayanat-labs/arabic-normalize⁩، وهي تعطي الناتج نفسه الذي تعطيه مكتبة Python ‏⁦arabic-normalize⁩ في جميع حالات الاختبار.</p>
+    <p data-i18n="howLib">This page runs the JavaScript library @bayanat-labs/arabic-normalize, which gives the same output as the Python library arabic-normalize on every conformance case.</p>
   </section>
 
   <section class="cta">
-    <h2 data-i18n="ctaH">هل تحتاج إلى بيانات عربية جاهزة للإنتاج وواضحة الحقوق؟</h2>
-    <p data-i18n="ctaText">تبني بيانات لابز مجموعات بيانات عربية مرخّصة، مع توثيق طريقة توحيد نصوصها.</p>
-    <a class="btn primary" id="cta-link" href="https://www.bayanatlabs.com/ar/products/knowledge" target="_blank" rel="noopener" data-i18n="ctaLink">اطّلع على مجموعات البيانات النصية العربية المرخّصة</a>
+    <h2 data-i18n="ctaH">Need production-grade, rights-cleared Arabic data?</h2>
+    <p data-i18n="ctaText">Bayanat Labs builds licensed Arabic datasets with documented normalisation.</p>
+    <a class="btn primary" id="cta-link" href="https://www.bayanatlabs.com/ar/products/knowledge" target="_blank" rel="noopener" data-i18n="ctaLink">See Bayanat Labs Knowledge</a>
   </section>
 </main>
 
 <footer class="foot">
   <div class="wrap foot-row">
-    <p><strong data-i18n="brand">بيانات لابز</strong> · <span id="version" dir="ltr"></span></p>
+    <p><strong data-i18n="brand">Bayanat Labs</strong> · <span id="version" dir="ltr"></span></p>
     <p class="links">
       <a href="https://github.com/Bayanat-Labs/arabic-normalize" target="_blank" rel="noopener">GitHub</a>
-      <a id="page-link" href="https://www.bayanatlabs.com/tools/arabic-normalizer" target="_blank" rel="noopener" data-i18n="pageLink">صفحة الأداة على موقع بيانات لابز</a>
+      <a id="page-link" href="https://www.bayanatlabs.com/tools/arabic-normalizer" target="_blank" rel="noopener" data-i18n="pageLink">Tool page on bayanatlabs.com</a>
       <a href="mailto:open@bayanatlabs.com">open@bayanatlabs.com</a>
     </p>
-    <p class="fine" data-i18n="licence">الشيفرة البرمجية: Apache-2.0. ملفات السياسات والأمثلة: CC BY 4.0. جداول يونيكود: Unicode License V3. الخط: IBM Plex Sans Arabic بترخيص SIL OFL 1.1.</p>
+    <p class="fine" data-i18n="licence">Code: Apache-2.0. Policy files and examples: CC BY 4.0. Unicode tables: Unicode License V3. Font: IBM Plex Sans Arabic, SIL OFL 1.1.</p>
   </div>
 </footer>
 </body>

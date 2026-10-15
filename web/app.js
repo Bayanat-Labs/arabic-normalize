@@ -257,7 +257,7 @@ const els = {
   diffNote: $('diff-note'), cmpBody: document.querySelector('#cmp tbody'), cmpSummary: $('cmp-summary'),
 };
 const POLICIES = listPolicies().map((id) => loadPolicy(id));
-let lang = 'ar';
+let lang = 'en';
 let last = null; // {text, policy, compare, response}
 let seq = 0;
 let currentExample = null;
@@ -333,7 +333,7 @@ function initialLang() {
     const saved = localStorage.getItem('arnorm.lang');
     if (saved === 'en' || saved === 'ar') return saved;
   } catch (e) { /* storage may be blocked */ }
-  return 'ar';
+  return 'en';
 }
 
 function applyLang() {
