@@ -71,9 +71,10 @@ BIDI = Bidi_Control code points (U+061C, U+200E, U+200F, U+202A..U+202E, U+2066.
 - `strip-except-emoji-zwj`: remove BIDI, ZWSP, ZWNJ and every ZWJ that is not meaningful.
 - `strip-except-meaningful`: remove BIDI, ZWSP and every ZWNJ or ZWJ that is not meaningful.
 
-**Context.** For a ZWNJ or ZWJ at position i, *prev* is the nearest code point before i and *next* the nearest after i, skipping code points of joining type T and code points that a later stage of the same policy will delete (U+0640 when `tatweel: strip`; the quranic set Q when `quranic_marks: strip`).
-- A ZWNJ is **meaningful** when prev has joining type D, L or C and next has joining type D, R or C (the ZWNJ really prevents a cursive join), or when the code point immediately before it has canonical combining class 9 (a virama).
-- A ZWJ is **meaningful** when it is part of an emoji ZWJ sequence: the nearest code point before it, skipping U+FE0E, U+FE0F, Emoji_Modifier code points and tag characters U+E0020..U+E007F, is Extended_Pictographic, and the code point after it is Extended_Pictographic; or when the code point immediately before it has canonical combining class 9.
+**Context.** For a ZWNJ at position i, *prev* is the nearest code point before i and *next* the nearest after i, skipping the context-skip set: code points of joining type T, U+200B, U+200C, U+200D, U+0640 tatweel and the Quranic set Q (4.9). The skip set is the same for every policy, so a ZWNJ gets the same decision whatever the policy deletes later, and every policy stays idempotent. A presentation form (4.3) takes the joining type of the letters it maps to: its first letter when it is *next*, its last letter when it is *prev*.
+- A ZWNJ is **meaningful** when prev has joining type D, L or C and next has joining type D, R or C (the ZWNJ really prevents a cursive join), or when the run of marks directly before it contains a virama (canonical combining class 9).
+- A ZWJ is **meaningful** when it is part of an emoji ZWJ sequence: the nearest code point before it, skipping U+FE0E, U+FE0F, Emoji_Modifier code points and tag characters U+E0020..U+E007F, is Extended_Pictographic, and the code point after it is Extended_Pictographic; or when the run of marks directly before it contains a virama.
+- Known edge: a ZWNJ directly before a tatweel that is followed by a non-joining character is removed even by policies that keep tatweel.
 
 Rules: `bidi_zw.bidi_control`, `bidi_zw.zwsp`, `bidi_zw.zwnj`, `bidi_zw.zwj`.
 
