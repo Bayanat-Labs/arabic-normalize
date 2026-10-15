@@ -82,6 +82,8 @@ Code is Apache-2.0 (brief; claude-research Bucket B rule). Policy JSON files and
 
 The brief asks for acceptance fixtures "written by a second agent session or a human without seeing the engine". The 16 acceptance fixtures were written by the same agent session as the dev fixtures, but before any engine code existed (they are in an earlier commit than `engine.py`), using code-point families and rule combinations that do not occur in the dev split. Independence of authorship is therefore partial. A second reviewer, ideally the native linguist named in the brief's founder action, should review both splits and sign `tests/fixtures/REVIEW.md`. No acceptance fixture was edited after the engine was written without being listed in the QA notes.
 
+Follow-up, 15 Oct 2026: a separate agent session wrote 16 further acceptance cases from SPEC.md, the policy files and the raw UCD files only, and committed them before running the engine on them (`tests/fixtures/candidates/acceptance-b.jsonl`, `scripts/author_acceptance_b.py`). All 16 pass in Python and JavaScript. They stay outside the 80 pilot fixtures until the linguist review (the brief's pilot gate), then move into the acceptance split.
+
 ## D-15. Counsel
 
 The brief marks this item green and says counsel review is not needed (no Medium or High risk source). Per the 15 Oct 2026 amendment to RULES §0, no counsel document was prepared.

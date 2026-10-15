@@ -20,7 +20,7 @@ Results of the first run against the engine are in tests/fixtures/candidates/REA
 Text is original synthetic text written for these cases: no corpus text and no personal data.
 Fixture data (tests/fixtures/**) is licensed CC BY 4.0 (Bayanat Labs); this script is Apache-2.0.
 
-Run: python scripts/author_acceptance_b.py   (writes tests/fixtures/candidates/acceptance-b.jsonl)
+Run: python scripts/author_acceptance_b.py   (writes tests/fixtures/candidates/acceptance-b.jsonl and\ntests/fixtures/candidates/PROVENANCE.jsonl, one row per case with the SHA-256 of its line)
 """
 import hashlib
 import json
@@ -153,6 +153,12 @@ def main():
     path = os.path.join(OUT, "acceptance-b.jsonl")
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines) + "\n")
+    prov = [json.dumps({"fixture_id": c["fixture_id"], "split": "acceptance-b", "author": AUTHOR, "created": CREATED,
+                        "label": LABEL, "license": "CC-BY-4.0",
+                        "sha256": hashlib.sha256(line.encode("utf-8")).hexdigest()}, sort_keys=True, separators=(",", ":"))
+            for c, line in zip(CASES, lines)]
+    with open(os.path.join(OUT, "PROVENANCE.jsonl"), "w", encoding="utf-8", newline="\n") as f:
+        f.write("\n".join(prov) + "\n")
     with open(path, "rb") as f:
         print("wrote %s: %d cases, sha256 %s" % (os.path.relpath(path, ROOT), len(lines),
                                                  hashlib.sha256(f.read()).hexdigest()))
