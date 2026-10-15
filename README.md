@@ -16,7 +16,7 @@ Status: v0.1.0 pilot (three policies, 80 conformance fixtures, Python and JavaSc
 The PyPI and npm packages have not been released yet. Until they are, install from GitHub, pinned to a commit:
 
 ```bash
-pip install "git+https://github.com/Bayanat-Labs/arabic-normalize@da128047f20b802489adcd765c6e8c412ee44d48"
+pip install "git+https://github.com/Bayanat-Labs/arabic-normalize@3ad22326a66596e8dc413321017251eed6e60439"
 ```
 
 From a clone of this repository, `pip install .` does the same.
@@ -25,7 +25,7 @@ JavaScript (ES module, no runtime dependencies, same output as Python; see [js/R
 
 ```bash
 git clone https://github.com/Bayanat-Labs/arabic-normalize.git
-git -C arabic-normalize checkout da128047f20b802489adcd765c6e8c412ee44d48
+git -C arabic-normalize checkout 3ad22326a66596e8dc413321017251eed6e60439
 npm install ./arabic-normalize/js
 ```
 

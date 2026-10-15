@@ -17,7 +17,7 @@ The npm package has not been released yet. Until it is, install the `js/` folder
 
 ```bash
 git clone https://github.com/Bayanat-Labs/arabic-normalize.git
-git -C arabic-normalize checkout da128047f20b802489adcd765c6e8c412ee44d48
+git -C arabic-normalize checkout 3ad22326a66596e8dc413321017251eed6e60439
 npm install ./arabic-normalize/js
 ```
 
