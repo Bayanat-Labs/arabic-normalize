@@ -82,6 +82,23 @@ def test_normalize_csv(tmp_path):
     assert rows[0]["policy_id"] == "asr-eval-v1"
 
 
+def test_csv_export_identifies_policy_library_and_unicode(tmp_path):
+    """Every export carries policy_id, policy_hash, lib_version and unicode_version (quality gate)."""
+    from arabic_normalize import UNICODE_VERSION, __version__, load_policy
+    src = tmp_path / "in.csv"
+    src.write_text('id,text\n1,"إِلَى المَدْرَسَةِ"\n', encoding="utf-8")
+    for extra in ([], ["--detailed"]):
+        code, out, err = run_cli(["normalize", "--csv"] + extra + [str(src)])
+        assert code == 0, err
+        rows = list(csv.DictReader(io.StringIO(out)))
+        assert len(rows) == 1
+        r = rows[0]
+        assert r["policy_id"] == "bayanat-norm-v1"
+        assert r["policy_hash"] == load_policy("bayanat-norm-v1").policy_hash
+        assert r["lib_version"] == __version__
+        assert r["unicode_version"] == UNICODE_VERSION
+
+
 def test_invalid_utf8_and_on_error(tmp_path):
     src = tmp_path / "bad.txt"
     src.write_bytes("نص\n".encode("utf-8") + b"\xff\xfe\n" + "على\n".encode("utf-8"))

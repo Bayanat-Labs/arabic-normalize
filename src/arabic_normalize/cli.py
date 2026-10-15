@@ -185,7 +185,7 @@ def _normalize_csv(args, policy, path, out, counters):
         reader = csv.DictReader(text_stream)
         if reader.fieldnames is None or args.field not in reader.fieldnames:
             raise SystemExit("arnorm: %s: CSV has no column %r" % (path, args.field))
-        extra = [args.out_field, "policy_id", "policy_hash"]
+        extra = [args.out_field, "policy_id", "policy_hash", "lib_version", "unicode_version"]
         if args.detailed:
             extra += ["lossy_flags", "flags", "diacritization_ratio", "n_changes", "rejected"]
         names = list(reader.fieldnames) + [c for c in extra if c not in reader.fieldnames]
@@ -212,7 +212,8 @@ def _normalize_csv(args, policy, path, out, counters):
                                 "n_changes": len(res.changes), "rejected": len(res.rejected_spans)})
                 else:
                     row[args.out_field] = engine.normalize(text, policy, strict=args.strict)
-                row.update({"policy_id": policy.policy_id, "policy_hash": policy.policy_hash})
+                row.update({"policy_id": policy.policy_id, "policy_hash": policy.policy_hash,
+                            "lib_version": __version__, "unicode_version": UNICODE_VERSION})
                 writer.writerow(row)
                 counters["records"] += 1
             except ArabicNormalizeError as e:

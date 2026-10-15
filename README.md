@@ -100,7 +100,7 @@ arnorm policy list | show ID | export ID [--canonical] | hash ID_OR_FILE
 arnorm version
 ```
 
-Files are streamed record by record. `--jsonl` adds `text_norm`, `policy_id`, `policy_hash`, `lib_version` and `unicode_version` to each record (`--detailed` adds the offset map, change log and flags). `--csv` adds columns. `--resume` continues an interrupted text or JSONL run from `OUT.checkpoint`. A rejected record stops the run with exit code 2 unless `--on-error skip` or `--on-error record` is given.
+Files are streamed record by record. `--jsonl` adds `text_norm`, `policy_id`, `policy_hash`, `lib_version` and `unicode_version` to each record (`--detailed` adds the offset map, change log and flags). `--csv` adds the same five columns (`--detailed` adds lossy flags, flags, the diacritization ratio and change and rejection counts). `--resume` continues an interrupted text or JSONL run from `OUT.checkpoint`. A rejected record stops the run with exit code 2 unless `--on-error skip` or `--on-error record` is given.
 
 ## Tests and conformance
 
