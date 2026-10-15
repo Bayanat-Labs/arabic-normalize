@@ -49,8 +49,8 @@ DATE = "2026-10-15"
 # the commit this build records.
 HISTORY = [
     ("v0.1", "2026-10-15", "First release: 80 fixtures (dev 64, acceptance 16) from arabic-normalize 0.1.0", "3eb539074bde"),
-    ("v0.1", "2026-10-15", "Card revision: wording, contact address and review status; the English rationale of "
-                           "dev-021 reworded. No input or expected value changed", None),
+    ("v0.1", "2026-10-15", "Card revision: wording, contact address and review status, and the English rationale "
+                           "of dev-021; no input or expected value changed", None),
 ]
 CONFIGS = ["dev", "acceptance"]
 CROISSANT = os.path.join(REPO, "docs", "dataset", "croissant.json")
@@ -255,7 +255,7 @@ def main():
     write_text("README.ar.md", card_ar(stats))
     write_text("CITATION.cff", citation())
     write_text("CHANGELOG.md", "# Changelog\n\n| Version | Date | Change |\n|---|---|---|\n" + "".join(
-        "| %s | %s | %s, repository commit %s. |\n" % (v, d, c, sha or commit[:12]) for v, d, c, sha in HISTORY))
+        "| %s | %s | %s (repository commit %s). |\n" % (v, d, c, sha or commit[:12]) for v, d, c, sha in HISTORY))
     write_text("CLAIMS.md", claims(stats))
     with open(os.path.join(REPO, "LICENSE-data"), encoding="utf-8") as f:
         write_text("LICENSE", f.read())
@@ -466,7 +466,7 @@ Offsets are code-point indices into `input`, zero-based and end-exclusive (not U
 
 ## 8. Creation
 
-- Written in `scripts/author_fixtures.py` of {GITHUB} before the engine existed (commit recorded in `MANIFEST.json`); the authoring script never calls the engine. The `expected_*` fields are the authored expectations; `reference_*` fields were added by `scripts/build_conformance_dataset.py`, which also checks that the reference output meets every expectation.
+- Written in `scripts/author_fixtures.py` of {GITHUB} (source commit recorded in `MANIFEST.json`). The expected values were written before the engine existed, and the authoring script never calls the engine. The `expected_*` fields are the authored expectations; `reference_*` fields were added by `scripts/build_conformance_dataset.py`, which also checks that the reference output meets every expectation.
 - Unicode data: UCD {an.UNICODE_VERSION}. Specification: `docs/SPEC.md` (arabic-normalize-spec-1).
 - No web collection, no crawler, no third-party text.
 
