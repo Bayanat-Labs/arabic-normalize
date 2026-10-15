@@ -109,6 +109,16 @@ def test_bayanat_norm_equals_raw_safe_then_bayanat_norm():
         assert normalize(normalize(s, "raw-safe-v1"), "bayanat-norm-v1") == normalize(s, "bayanat-norm-v1"), ascii(s)
 
 
+def test_regressions_found_by_property_runs():
+    # ZWNJ before a presentation form that maps only to tatweel + shadda (found by the 100,000-string run).
+    s = "\u062c\u200c\ufe7d\u0624"
+    assert normalize(normalize(s, "raw-safe-v1"), "bayanat-norm-v1") == normalize(s, "bayanat-norm-v1") == "\u062c\u200c\u0624"
+    # Virama before an Arabic honorific sign: the ZWNJ decision must not depend on mark order.
+    s = "\u066a\u0611\u094d\u200c\u062c"
+    out = normalize(s, "raw-safe-v1")
+    assert normalize(out, "raw-safe-v1") == out
+
+
 def test_no_super_linear_runtime():
     import time
     for chunk in ("ـ", "َ", "‌", " ", "أ", "ﻻ"):

@@ -8,7 +8,7 @@ import os
 
 import pytest
 
-from arabic_normalize import Policy, PolicyError, canonical_json, list_policies, load_policy, normalize, policy_hash
+from arabic_normalize import Policy, PolicyError, list_policies, load_policy, normalize, policy_hash
 from arabic_normalize.policy import POLICY_DIR, STAGE_MODES, STAGE_ORDER
 
 from conftest import ROOT

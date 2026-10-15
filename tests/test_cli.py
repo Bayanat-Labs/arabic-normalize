@@ -9,7 +9,6 @@ import os
 import subprocess
 import sys
 
-import pytest
 
 from arabic_normalize import load_policy, normalize
 from arabic_normalize.cli import main
@@ -18,9 +17,11 @@ WORKED = "إِلَى المَدْرَسَةِ ١٢"
 
 
 def run_cli(args, stdin=b""):
+    import arabic_normalize
     env = dict(os.environ)
-    src = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src")
-    env["PYTHONPATH"] = src + os.pathsep + env.get("PYTHONPATH", "")
+    # Run the same package the test process imported (the source tree or an installed wheel).
+    pkg_parent = os.path.dirname(os.path.dirname(os.path.abspath(arabic_normalize.__file__)))
+    env["PYTHONPATH"] = pkg_parent + os.pathsep + env.get("PYTHONPATH", "")
     r = subprocess.run([sys.executable, "-m", "arabic_normalize"] + args, input=stdin, capture_output=True, env=env)
     return r.returncode, r.stdout.decode("utf-8"), r.stderr.decode("utf-8")
 

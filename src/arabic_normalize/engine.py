@@ -16,7 +16,7 @@ from collections import namedtuple
 from . import _ucd as U
 from ._version import __version__
 from .errors import InputRejected
-from .policy import Policy, load_policy
+from .policy import load_policy
 
 MAX_TEXT_BYTES = 10 * 1024 * 1024
 MAX_RECORDS = 10000
@@ -41,7 +41,7 @@ def _cps(*ranges):
 
 
 def _re(cps):
-    return re.compile(U.char_class(cps))
+    return U.CharMatcher(cps)
 
 
 # --- Character sets (docs/SPEC.md section 4) -----------------------------------------------------------
@@ -90,7 +90,6 @@ PF_RE = _re(PF)
 HONORIFIC_RE = _re(HONORIFIC)
 H_REMAIN_RE = _re(HONORIFIC - set(H_EXPAND))
 ARABIC_LETTER_RE = _re(U.ARABIC_LETTERS)
-RATIO_MARKS = HARAKAT | {SUPERSCRIPT_ALEF}
 PF_TRANS = {c: v for c, v in PF_MAP.items()}
 
 
@@ -111,6 +110,8 @@ class _MapStage(object):
         if not self.reps:
             return s
         if not ctx.detailed:
+            if self.regex.search(s) is None:
+                return s
             return s.translate(self.trans)
         edits = []
         for m in self.regex.finditer(s):
@@ -231,7 +232,10 @@ def _stage_reject(ctx, s, mode):
 # Code points skipped when looking for the letters around a ZWNJ: transparent (joining type T), the zero-width
 # characters themselves, tatweel and Quranic marks (docs/SPEC.md 4.5). The set does not depend on the policy, so a
 # ZWNJ gets the same decision under every policy and every policy stays idempotent.
-CTX_SKIP = frozenset(c for c, t in U.JOINING.items() if t == "T") | {ZWSP, ZWNJ, ZWJ, TATWEEL} | QURANIC
+_CTX_SKIP_BASE = frozenset(c for c, t in U.JOINING.items() if t == "T") | {ZWSP, ZWNJ, ZWJ, TATWEEL} | QURANIC
+# A presentation form that maps only to skipped code points (for example U+FE7D, shadda medial form, maps to
+# tatweel + shadda) is skipped too.
+CTX_SKIP = _CTX_SKIP_BASE | frozenset(c for c, m in PF_MAP.items() if all(ord(x) in _CTX_SKIP_BASE for x in m))
 # Presentation forms take the joining behaviour of the letters they map to (first letter on their right side,
 # last letter on their left side), so mapping them first or keeping them gives the same ZWNJ decision.
 _JT_PREV = {}
@@ -422,58 +426,95 @@ def _stage_whitespace(ctx, s):
     return ctx.apply(s, edits, "whitespace")
 
 
-def _flag_if(ctx, s, cond, flag):
-    if ctx.detailed and cond(s):
-        ctx.flags.add(flag)
+def _flag_step(flag, test):
+    def step(ctx, s):
+        if ctx.detailed and test(s):
+            ctx.flags.add(flag)
+        return s
+    return step
+
+
+def _compose(a, b):
+    """One _MapStage equal to applying ``a`` then ``b`` (both per-code-point maps)."""
+    mapping = {}
+    for c in set(a.reps) | set(b.reps):
+        first = a.reps.get(c, chr(c))
+        out = "".join(b.reps.get(ord(x), x) for x in first)
+        if out != chr(c):
+            mapping[c] = (out, "composed")
+    return _MapStage("composed", mapping)
+
+
+_PLANS = {}
+
+
+def _plan(policy, detailed):
+    """The ordered steps for a policy. In plain mode adjacent per-code-point maps are merged into one table;
+    flags are not computed. Both plans give the same text (tested)."""
+    key = (policy.policy_hash, detailed)
+    plan = _PLANS.get(key)
+    if plan is not None:
+        return plan
+    st = policy.stages
+    steps = [lambda ctx, s: _stage_reject(ctx, s, st["reject_invalid"])]
+    if st["strip_controls"] == "strip":
+        steps.append(_STAGES[("strip_controls", "strip")])
+    if st["presentation_forms"] == "map":
+        steps.append(_STAGES[("presentation_forms", "map")])
+    elif st["presentation_forms"] == "flag":
+        steps.append(_flag_step("presentation_forms.flag", lambda x: PF_RE.search(x) is not None))
+    if st["ligatures_honorific"] == "expand":
+        steps.append(_STAGES[("ligatures_honorific", "expand")])
+        steps.append(_flag_step("ligatures_honorific.flag", lambda x: H_REMAIN_RE.search(x) is not None))
+    elif st["ligatures_honorific"] == "flag":
+        steps.append(_flag_step("ligatures_honorific.flag", lambda x: HONORIFIC_RE.search(x) is not None))
+    steps.append(lambda ctx, s: _stage_bidi_zw(ctx, s, st["bidi_zw"]))
+    form = policy.unicode_form
+    steps.append(lambda ctx, s: _stage_canonical(ctx, s, form, final=False))
+    for stage in ("tatweel", "diacritics", "quranic_marks", "superscript_alef"):
+        if (stage, st[stage]) in _STAGES:
+            steps.append(_STAGES[(stage, st[stage])])
+    if st["alef_variants"] == "map":
+        steps.append(_stage_alef)
+    if st["alef_maqsura"] == "to-yeh":
+        steps.append(_STAGES[("alef_maqsura", "to-yeh")])
+    elif st["alef_maqsura"] == "flag":
+        steps.append(_flag_step("alef_maqsura.flag", lambda x: chr(ALEF_MAQSURA) in x))
+    if st["taa_marbuta"] == "to-heh":
+        steps.append(_STAGES[("taa_marbuta", "to-heh")])
+    elif st["taa_marbuta"] == "flag":
+        steps.append(_flag_step("taa_marbuta.flag", lambda x: chr(TAA_MARBUTA) in x))
+    if st["hamza_carriers"] == "fold":
+        steps.append(_stage_hamza)
+    for stage in ("persian_urdu_letters", "digits", "punctuation"):
+        if (stage, st[stage]) in _STAGES:
+            steps.append(_STAGES[(stage, st[stage])])
+    if st["whitespace"] == "collapse":
+        steps.append(_stage_whitespace)
+    if st["latin_case"] == "lower":
+        steps.append(_STAGES[("latin_case", "lower")])
+    if form != "none":
+        steps.append(lambda ctx, s: _stage_canonical(ctx, s, "NFC", final=True))
+    if not detailed:
+        merged = []
+        for step in steps:
+            if getattr(step, "__name__", "") == "step":  # flag checks do nothing in plain mode
+                continue
+            if isinstance(step, _MapStage) and merged and isinstance(merged[-1], _MapStage):
+                merged[-1] = _compose(merged[-1], step)
+            else:
+                merged.append(step)
+        steps = merged
+    plan = [step.run if isinstance(step, _MapStage) else step for step in steps]
+    _PLANS[key] = plan
+    return plan
 
 
 def _run(text, policy, detailed, strict):
     ctx = _Ctx(detailed, strict, policy, len(text))
-    st = policy.stages
-    s = _stage_reject(ctx, text, st["reject_invalid"])
-    if st["strip_controls"] == "strip":
-        s = _STAGES[("strip_controls", "strip")].run(ctx, s)
-    mode = st["presentation_forms"]
-    if mode == "map":
-        s = _STAGES[("presentation_forms", "map")].run(ctx, s)
-    elif mode == "flag":
-        _flag_if(ctx, s, lambda x: PF_RE.search(x) is not None, "presentation_forms.flag")
-    mode = st["ligatures_honorific"]
-    if mode == "expand":
-        s = _STAGES[("ligatures_honorific", "expand")].run(ctx, s)
-        _flag_if(ctx, s, lambda x: H_REMAIN_RE.search(x) is not None, "ligatures_honorific.flag")
-    elif mode == "flag":
-        _flag_if(ctx, s, lambda x: HONORIFIC_RE.search(x) is not None, "ligatures_honorific.flag")
-    s = _stage_bidi_zw(ctx, s, st["bidi_zw"])
-    s = _stage_canonical(ctx, s, policy.unicode_form, final=False)
-    for stage in ("tatweel", "diacritics", "quranic_marks", "superscript_alef"):
-        ms = _STAGES.get((stage, st[stage]))
-        if ms is not None:
-            s = ms.run(ctx, s)
-    if st["alef_variants"] == "map":
-        s = _stage_alef(ctx, s)
-    mode = st["alef_maqsura"]
-    if mode == "to-yeh":
-        s = _STAGES[("alef_maqsura", "to-yeh")].run(ctx, s)
-    elif mode == "flag":
-        _flag_if(ctx, s, lambda x: chr(ALEF_MAQSURA) in x, "alef_maqsura.flag")
-    mode = st["taa_marbuta"]
-    if mode == "to-heh":
-        s = _STAGES[("taa_marbuta", "to-heh")].run(ctx, s)
-    elif mode == "flag":
-        _flag_if(ctx, s, lambda x: chr(TAA_MARBUTA) in x, "taa_marbuta.flag")
-    if st["hamza_carriers"] == "fold":
-        s = _stage_hamza(ctx, s)
-    for stage in ("persian_urdu_letters", "digits", "punctuation"):
-        ms = _STAGES.get((stage, st[stage]))
-        if ms is not None:
-            s = ms.run(ctx, s)
-    if st["whitespace"] == "collapse":
-        s = _stage_whitespace(ctx, s)
-    if st["latin_case"] == "lower":
-        s = _STAGES[("latin_case", "lower")].run(ctx, s)
-    if policy.unicode_form != "none":
-        s = _stage_canonical(ctx, s, "NFC", final=True)
+    s = text
+    for step in _plan(policy, detailed):
+        s = step(ctx, s)
     return s, ctx
 
 

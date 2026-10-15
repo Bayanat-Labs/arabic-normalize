@@ -51,6 +51,48 @@ def _esc(cp):
     return "\\U%08x" % cp if cp > 0xFFFF else "\\u%04x" % cp
 
 
+_ASTRAL = re.compile("[\\U00010000-\\U0010ffff]")
+
+
+class CharMatcher(object):
+    """Fast regex search over a code-point set.
+
+    Python's re engine tests large astral ranges slowly, so the set is split: a BMP class (fast table lookup) is
+    used alone when the text has no astral code point, and a combined pattern otherwise.
+    """
+
+    __slots__ = ("bmp", "full", "has_astral")
+
+    def __init__(self, cps):
+        cps = sorted(set(cps))
+        bmp = [c for c in cps if c < 0x10000]
+        ast = [c for c in cps if c >= 0x10000]
+        self.has_astral = bool(ast)
+        self.bmp = re.compile(char_class(bmp)) if bmp else None
+        if bmp and ast:
+            self.full = re.compile("(?:%s|(?=[\\U00010000-\\U0010ffff])%s)" % (char_class(bmp), char_class(ast)))
+        elif ast:
+            self.full = re.compile(char_class(ast))
+        else:
+            self.full = self.bmp
+
+    def _pick(self, s):
+        if self.has_astral and _ASTRAL.search(s) is not None:
+            return self.full
+        return self.bmp
+
+    def search(self, s):
+        r = self._pick(s)
+        return r.search(s) if r is not None else None
+
+    def finditer(self, s):
+        r = self._pick(s)
+        return r.finditer(s) if r is not None else iter(())
+
+    def match(self, s):
+        return self.full.match(s) if self.full is not None else None
+
+
 # --- General category (bisect over ranges) -------------------------------------------------------------
 _GC_STARTS = [r[0] for r in _T["gc_ranges"]]
 _GC_RANGES = _T["gc_ranges"]
@@ -90,7 +132,7 @@ for _t, _ranges in _T["joining_type"].items():
     for _lo, _hi in _ranges:
         for _c in range(_lo, _hi + 1):
             JOINING[_c] = _t
-LATIN_LOWER = {c: l for c, l in _T["latin_lower"]}
+LATIN_LOWER = {c: low for c, low in _T["latin_lower"]}
 NAMES = {c: n for c, n in _T["names"]}
 COMPAT_DECOMPOSABLE = frozenset(_T["compat_decomposable"])
 
@@ -199,7 +241,7 @@ class _FormData(object):
         else:
             unstable = set(_QC_NO_DECOMP[form]) | set(CCC) | set(range(S_BASE, S_BASE + S_COUNT))
         self.unstable = frozenset(unstable)
-        self.unstable_re = re.compile(char_class(unstable))
+        self.unstable_re = CharMatcher(unstable)
 
 
 _FORMS = {}

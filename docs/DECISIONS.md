@@ -31,7 +31,7 @@ RULES §5.1 maps أ إ آ ٱ → ا and ى → ي in text_norm. Both can merge d
 
 ## D-05. Zero-width joiners: keep them only where they change rendering
 
-RULES and the brief say "strip zero-width and bidi controls except a meaningful ZWNJ" and warn that stripping ZWJ breaks emoji sequences. Mode `strip-except-meaningful` keeps a ZWNJ only when it really prevents a cursive join (the letter before can join forward and the letter after can join backward, by ArabicShaping.txt joining types, skipping marks, tatweel and Quranic marks), or when it follows a virama; it keeps a ZWJ only inside an emoji ZWJ sequence (Extended_Pictographic on both sides, skipping variation selectors and skin-tone modifiers) or after a virama. The skip set is the same for all policies, and presentation forms take the joining type of the letters they map to, so raw-safe-v1 and bayanat-norm-v1 make the same decision for every ZWNJ (normalising `text_diac` with bayanat-norm-v1 gives `text_norm`; tested on random strings). The property tests found two earlier versions of this rule that were not idempotent (a virama check made before canonical reordering, and a policy-dependent skip set); both were fixed before release. Every RGI emoji ZWJ sequence of Unicode 18.0 survives all three pilot policies unchanged (tested).
+RULES and the brief say "strip zero-width and bidi controls except a meaningful ZWNJ" and warn that stripping ZWJ breaks emoji sequences. Mode `strip-except-meaningful` keeps a ZWNJ only when it really prevents a cursive join (the letter before can join forward and the letter after can join backward, by ArabicShaping.txt joining types, skipping marks, tatweel and Quranic marks), or when it follows a virama; it keeps a ZWJ only inside an emoji ZWJ sequence (Extended_Pictographic on both sides, skipping variation selectors and skin-tone modifiers) or after a virama. The skip set is the same for all policies, and presentation forms take the joining type of the letters they map to, so raw-safe-v1 and bayanat-norm-v1 make the same decision for every ZWNJ (normalising `text_diac` with bayanat-norm-v1 gives `text_norm`; tested on random strings). The property tests found three problems in earlier versions of this rule (a virama check made before canonical reordering, a policy-dependent skip set, and a presentation form that maps only to tatweel and shadda); all three were fixed before release and have regression tests. Every RGI emoji ZWJ sequence of Unicode 18.0 survives all three pilot policies unchanged (tested).
 
 ## D-06. Stage order differs from the brief's list in two places
 
@@ -72,7 +72,7 @@ normref was written to time the text stage, not as the specification. The librar
 | Ratio | raw input, letters U+0621–U+063A, U+0641–U+064A, U+0671–U+06D3 | input after presentation-form mapping, letters = Lo and Script=Arabic | Counts letters in ligatures and all Arabic-script letters |
 | Final NFC | none | final NFC pass | Output is always NFC; idempotence |
 
-On ordinary Arabic text (letters, harakat, digits, Arabic punctuation) the two give the same `text_norm` and the same diacritization ratio.
+On ordinary Arabic text (letters, harakat, tatweel, alef variants, ى, ة, Arabic-Indic digits, spaces, ، ؛ ؟) the two give the same `text_norm` and the same diacritization ratio: identical results on 20,000 random strings for each of bayanat-norm-v1 and asr-eval-v1 (check run on 15 Oct 2026 with normref as written by the BR-009 agent).
 
 ## D-13. Licences
 

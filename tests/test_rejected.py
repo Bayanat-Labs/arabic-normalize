@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: Apache-2.0
 """Every explicit rejected-input example is rejected with its documented reason."""
 import copy
-import json
 
 import pytest
 
