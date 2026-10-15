@@ -17,7 +17,6 @@ Needs pyarrow (development only). Run from anywhere:
 """
 import argparse
 import collections
-import datetime
 import hashlib
 import json
 import os
