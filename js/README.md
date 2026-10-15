@@ -13,11 +13,14 @@ Not affiliated with the unrelated npm package `arabic-normalize` (unscoped).
 
 ## Install
 
+The npm release is coming. Until then, install the `js/` folder of a clone of the repository. npm links the package to that folder, so keep it.
+
 ```bash
-npm install @bayanat-labs/arabic-normalize
+git clone https://github.com/Bayanat-Labs/arabic-normalize.git
+npm install ./arabic-normalize/js
 ```
 
-Until the first npm release, install from a clone: `cd js && npm pack`, then `npm install ./bayanat-labs-arabic-normalize-0.1.0.tgz`.
+To install a copy instead of a link, run `npm pack` in `arabic-normalize/js` and install the `.tgz` file it writes.
 
 ## Worked example
 

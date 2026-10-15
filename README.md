@@ -13,16 +13,19 @@ Status: v0.1.0 pilot (three policies, 80 conformance fixtures, Python and JavaSc
 
 ## Install
 
+PyPI and npm releases are coming. Until then, install from GitHub:
+
 ```bash
-pip install arabic-normalize
+pip install "git+https://github.com/Bayanat-Labs/arabic-normalize"
 ```
 
-Until the first PyPI release, install from a clone of this repository with `pip install .`.
+From a clone of this repository, `pip install .` does the same.
 
-JavaScript (ES module, no runtime dependencies, same output as Python; see [js/README.md](js/README.md)):
+JavaScript (ES module, no runtime dependencies, same output as Python; see [js/README.md](js/README.md)): install the `js/` folder of a clone. npm links the package to that folder, so keep it.
 
 ```bash
-npm install @bayanat-labs/arabic-normalize
+git clone https://github.com/Bayanat-Labs/arabic-normalize.git
+npm install ./arabic-normalize/js
 ```
 
 ```js
