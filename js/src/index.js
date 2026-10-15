@@ -3,7 +3,7 @@
 //
 // @bayanat-labs/arabic-normalize: Arabic text normalisation with named, immutable, hash-identified
 // policies. The JavaScript port of the Python package arabic-normalize by Bayanat Labs. No runtime
-// dependencies; Unicode data pinned to UCD 18.0.0; works in Node 18+ and in browsers (ES module).
+// dependencies; Unicode data pinned to UCD 18.0.0; works in Node 20+ and in browsers (ES module).
 //
 //   import { normalize, normalizeDetailed } from '@bayanat-labs/arabic-normalize';
 //   normalize('إِلَى المَدْرَسَةِ');   // 'الي المدرسة'

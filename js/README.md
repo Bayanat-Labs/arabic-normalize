@@ -4,7 +4,7 @@
 
 This is the JavaScript port of the Python package [arabic-normalize](https://github.com/Bayanat-Labs/arabic-normalize). It reads the same policy files and the same pinned Unicode tables, and gives the same output as the Python engine: the normalised text, an offset map from every output character back to the input, a per-rule change log, lossy flags (for example ى → ي), a diacritization ratio and the SHA-256 of the policy.
 
-- ES module, no runtime dependencies. Node 18 or later, and current browsers.
+- ES module, no runtime dependencies. Node 20 or later (the CI matrix runs Node 20, 22 and 24), and current browsers.
 - Unicode data pinned to UCD 18.0.0 and shipped with the package. `String.prototype.normalize` is never used, so the output does not depend on the ICU version of the JavaScript engine.
 - Same output as Python on every conformance fixture: the 80 fixtures under 7 policies (560 cases) and 80 policy comparisons are identical, including the offset map and change log (`conformance.json`, `test/conformance.test.mjs`).
 - Licence: Apache-2.0 (code). Policy files: CC BY 4.0. Generated Unicode tables: Unicode License V3.
