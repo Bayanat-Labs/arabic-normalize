@@ -35,8 +35,8 @@
 <main class="wrap">
   <section class="intro">
     <h1 data-i18n="title">توحيد النص العربي وتنظيفه</h1>
-    <p class="lede" data-i18n="lede">طبّق سياسة توحيد مسمّاة ذات بصمة ثابتة على نص عربي، وشاهد كل تغيير: النص قبل التوحيد وبعده، وسجل التغييرات، والتغييرات الفاقدة للمعلومات، وبصمة SHA-256 للسياسة.</p>
-    <p class="privacy" data-i18n="privacy">يعمل التوحيد داخل متصفحك. لا يُرفع نصك ولا يُخزَّن ولا يُسجَّل.</p>
+    <p class="lede" data-i18n="lede">طبّق على نصك العربي سياسة توحيد مسمّاة ذات بصمة ثابتة، وشاهد كل تغيير: النص قبل التوحيد وبعده، وسجل التغييرات، والتغييرات الفاقدة للمعلومات، وبصمة SHA-256 للسياسة.</p>
+    <p class="privacy" data-i18n="privacy">يجري التوحيد داخل متصفحك، فلا يُرفع نصك ولا يُخزَّن ولا يُسجَّل.</p>
   </section>
 
   <section class="grid" aria-labelledby="input-h">
@@ -64,8 +64,8 @@
         </div>
         <p class="lossy-rules"><span class="lbl" data-i18n="lossyRules">القواعد الفاقدة للمعلومات في هذه السياسة:</span> <span id="policy-lossy"></span></p>
         <details class="canon">
-          <summary data-i18n="canonSummary">ما الذي تُحسب منه البصمة؟</summary>
-          <p data-i18n="canonText">البصمة هي SHA-256 لنص JSON القانوني للسياسة بعد حذف الحقل meta: المفاتيح مرتبة، بلا مسافات، بترميز UTF-8.</p>
+          <summary data-i18n="canonSummary">ممّ تُحسب البصمة؟</summary>
+          <p data-i18n="canonText">البصمة هي قيمة SHA-256 لنص JSON القانوني للسياسة بعد حذف الحقل meta: مفاتيح مرتبة، بلا مسافات، بترميز UTF-8.</p>
           <pre id="policy-canonical" dir="ltr"></pre>
           <button type="button" class="btn small" id="download-policy" data-i18n="downloadPolicy">تنزيل ملف السياسة (JSON)</button>
         </details>
@@ -73,20 +73,20 @@
     </div>
 
     <div class="card" id="output-card" aria-live="polite">
-      <h2 data-i18n="outputH">النص الموحّد</h2>
+      <h2 data-i18n="outputH">النص الموحَّد</h2>
       <p class="error" id="error" role="alert" hidden></p>
       <label class="sr" for="output" data-i18n="outputLabel">النص بعد التوحيد</label>
       <textarea id="output" dir="auto" rows="7" readonly></textarea>
       <p class="note" id="output-note" hidden></p>
       <div class="row tools">
         <button type="button" class="btn" id="copy-output" data-i18n="copyOutput">نسخ الناتج</button>
-        <button type="button" class="btn" id="download-result" data-i18n="downloadResult">تنزيل النتيجة المفصلة (JSON)</button>
+        <button type="button" class="btn" id="download-result" data-i18n="downloadResult">تنزيل النتيجة المفصّلة (JSON)</button>
       </div>
       <dl class="stats">
         <div><dt data-i18n="statChanges">التغييرات</dt><dd id="s-changes">0</dd></div>
-        <div><dt data-i18n="statLossy">تغييرات فاقدة للمعلومات</dt><dd id="s-lossy">0</dd></div>
+        <div><dt data-i18n="statLossy">التغييرات الفاقدة للمعلومات</dt><dd id="s-lossy">0</dd></div>
         <div><dt data-i18n="statRatio">نسبة التشكيل</dt><dd id="s-ratio" dir="ltr">0</dd></div>
-        <div><dt data-i18n="statLen">المحارف قبل ← بعد</dt><dd id="s-len" dir="ltr">0 → 0</dd></div>
+        <div><dt data-i18n="statLen">نقاط الترميز قبل ← بعد</dt><dd id="s-len" dir="ltr">0 → 0</dd></div>
       </dl>
       <div class="flags">
         <h3 data-i18n="lossyH">تنبيهات فقد المعلومات</h3>
@@ -100,7 +100,7 @@
 
   <section class="card" aria-labelledby="diff-h">
     <div class="row between">
-      <h2 id="diff-h" data-i18n="diffH">قبل وبعد</h2>
+      <h2 id="diff-h" data-i18n="diffH">قبل التوحيد وبعده</h2>
       <label class="check"><input type="checkbox" id="show-invisible" checked> <span data-i18n="showInvisible">إظهار المحارف غير المرئية</span></label>
     </div>
     <p class="legend">
@@ -118,17 +118,17 @@
 
   <section class="card" aria-labelledby="log-h">
     <h2 id="log-h" data-i18n="logH">سجل التغييرات</h2>
-    <p class="note" data-i18n="logNote">سطر لكل محرف تغيّر، بالترتيب الذي طُبّقت به المراحل. الإزاحات بعدد نقاط الترميز في النص الأصلي.</p>
+    <p class="note" data-i18n="logNote">سطر لكل محرف تغيّر، بالترتيب الذي جرت به المراحل. تُعدّ المواضع بنقاط الترميز في النص الأصلي.</p>
     <div class="table-wrap">
       <table id="log">
         <thead><tr>
           <th scope="col">#</th>
           <th scope="col" data-i18n="colStage">المرحلة</th>
           <th scope="col" data-i18n="colRule">القاعدة</th>
-          <th scope="col" data-i18n="colSpan">الموضع</th>
+          <th scope="col" data-i18n="colSpan">الموضع في المدخل</th>
           <th scope="col" data-i18n="colBefore">قبل</th>
           <th scope="col" data-i18n="colAfter">بعد</th>
-          <th scope="col" data-i18n="colLossy">فاقد؟</th>
+          <th scope="col" data-i18n="colLossy">فاقد للمعلومات</th>
         </tr></thead>
         <tbody></tbody>
       </table>
@@ -139,7 +139,7 @@
   <section class="card" aria-labelledby="cmp-h">
     <h2 id="cmp-h" data-i18n="cmpH">قارن بسياسة أخرى</h2>
     <div class="row">
-      <label for="policy-b" class="lbl" data-i18n="cmpWith">قارن مع</label>
+      <label for="policy-b" class="lbl" data-i18n="cmpWith">السياسة المقارَن بها</label>
       <select id="policy-b"></select>
     </div>
     <p id="cmp-summary"></p>
@@ -158,19 +158,19 @@
   <section class="card how" aria-labelledby="how-h">
     <h2 id="how-h" data-i18n="howH">كيف يُحسب الناتج</h2>
     <ol>
-      <li data-i18n="how1">تحدد السياسة وضعًا لكل مرحلة من مراحل التوحيد الثماني عشرة، وتُطبَّق المراحل دائمًا بالترتيب نفسه.</li>
-      <li data-i18n="how2">تأتي بيانات المحارف من قاعدة بيانات يونيكود 18.0.0 المثبّتة في المكتبة، فلا يتغير الناتج بتغير المتصفح.</li>
+      <li data-i18n="how1">تحدد السياسة وضعًا لكل مرحلة من مراحل التوحيد الثماني عشرة، وتجري المراحل دائمًا بالترتيب نفسه.</li>
+      <li data-i18n="how2">تأتي خصائص المحارف من قاعدة بيانات يونيكود 18.0.0 المضمّنة في المكتبة، فلا يتغير الناتج بتغيّر المتصفح.</li>
       <li data-i18n="how3">يُسجَّل كل تغيير مع موضعه في النص الأصلي، وتربط خريطة الإزاحات كل محرف في الناتج بموضعه في المدخل.</li>
-      <li data-i18n="how4">التغييرات التي قد تجعل كلمتين مختلفتين متطابقتين، مثل ى إلى ي، تُعلَّم بأنها فاقدة للمعلومات.</li>
-      <li data-i18n="how5">تعرّف بصمة SHA-256 السياسة تعريفًا تامًا: اذكر معرّف السياسة وبصمتها ليعيد غيرك الناتج نفسه.</li>
+      <li data-i18n="how4">التغييرات التي قد تجعل كلمتين مختلفتين متطابقتين، مثل تحويل ى إلى ي، تُعلَّم بأنها فاقدة للمعلومات.</li>
+      <li data-i18n="how5">تعرّف بصمة SHA-256 السياسة تعريفًا تامًّا: اذكر معرّف السياسة وبصمتها ليتمكن غيرك من إعادة إنتاج الناتج نفسه.</li>
     </ol>
-    <p data-i18n="howLib">تعمل هذه الصفحة بمكتبة ‎@bayanat-labs/arabic-normalize‎ بلغة JavaScript، وهي تعطي الناتج نفسه الذي تعطيه مكتبة Python ‏arabic-normalize في جميع حالات الاختبار.</p>
+    <p data-i18n="howLib">تعمل هذه الصفحة بمكتبة JavaScript ‏⁦@bayanat-labs/arabic-normalize⁩، وهي تعطي الناتج نفسه الذي تعطيه مكتبة Python ‏⁦arabic-normalize⁩ في جميع حالات الاختبار.</p>
   </section>
 
   <section class="cta">
     <h2 data-i18n="ctaH">هل تحتاج إلى بيانات عربية جاهزة للإنتاج وواضحة الحقوق؟</h2>
-    <p data-i18n="ctaText">تبني بيانات لابز مجموعات بيانات عربية مرخّصة، موثّقة طريقة توحيدها.</p>
-    <a class="btn primary" id="cta-link" href="https://www.bayanatlabs.com/ar/products/knowledge" target="_blank" rel="noopener" data-i18n="ctaLink">تعرّف على بيانات لابز للمعرفة</a>
+    <p data-i18n="ctaText">تبني بيانات لابز مجموعات بيانات عربية مرخّصة، مع توثيق طريقة توحيد نصوصها.</p>
+    <a class="btn primary" id="cta-link" href="https://www.bayanatlabs.com/ar/products/knowledge" target="_blank" rel="noopener" data-i18n="ctaLink">اطّلع على مجموعات البيانات النصية العربية المرخّصة</a>
   </section>
 </main>
 
@@ -179,10 +179,10 @@
     <p><strong data-i18n="brand">بيانات لابز</strong> · <span id="version" dir="ltr"></span></p>
     <p class="links">
       <a href="https://github.com/Bayanat-Labs/arabic-normalize" target="_blank" rel="noopener">GitHub</a>
-      <a id="page-link" href="https://www.bayanatlabs.com/tools/arabic-normalizer" target="_blank" rel="noopener" data-i18n="pageLink">صفحة الأداة</a>
+      <a id="page-link" href="https://www.bayanatlabs.com/tools/arabic-normalizer" target="_blank" rel="noopener" data-i18n="pageLink">صفحة الأداة على موقع بيانات لابز</a>
       <a href="mailto:open@bayanatlabs.com">open@bayanatlabs.com</a>
     </p>
-    <p class="fine" data-i18n="licence">الشيفرة: Apache-2.0. ملفات السياسات والأمثلة: CC BY 4.0. جداول يونيكود: Unicode License V3. الخط: IBM Plex Sans Arabic، ‏SIL OFL 1.1.</p>
+    <p class="fine" data-i18n="licence">الشيفرة البرمجية: Apache-2.0. ملفات السياسات والأمثلة: CC BY 4.0. جداول يونيكود: Unicode License V3. الخط: IBM Plex Sans Arabic بترخيص SIL OFL 1.1.</p>
   </div>
 </footer>
 </body>

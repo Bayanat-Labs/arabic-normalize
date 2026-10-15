@@ -138,7 +138,7 @@ DEV = [
        en="Hamza on waw and on yeh is kept in bayanat-norm-v1.", ar="تبقى الهمزة على الواو وعلى الياء في التوحيد القياسي."),
     fx("dev-026", "hamza_carriers", A, "\u0633\u0624\u0627\u0644", "\u0633\u0624\u0627\u0644", [],
        en="asr-eval also keeps hamza carriers (folding them is reserved for search-v1).",
-       ar="سياسة تقييم الكلام تُبقي الهمزة على الواو أيضًا، ويُترك طيّها لسياسة البحث."),
+       ar="سياسة تقييم الكلام تُبقي الهمزة على الواو أيضًا، أما تحويلها إلى حرف بلا همزة فمتروك لسياسة البحث search-v1."),
     # --- Persian and Urdu lookalikes ----------------------------------------------------------------
     fx("dev-027", "persian_urdu", B, "\u06a9\u062a\u0627\u0628", "\u06a9\u062a\u0627\u0628", [],
        en="Keheh (U+06A9) is not mapped to kaf: mapping would corrupt Persian and Urdu text.",

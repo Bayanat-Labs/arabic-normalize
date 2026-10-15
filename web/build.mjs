@@ -62,7 +62,7 @@ const examples = [{
   policy_id: 'bayanat-norm-v1',
   input: 'إِلَى المَدْرَسَةِ الجَدِيدَةِ ١٢٣',
   note_en: 'The worked example of the README: hamza alef and alef maqsura folded (lossy, logged), harakat removed, digits to ASCII, taa marbuta kept and flagged.',
-  note_ar: 'المثال المشروح في ملف README: تصبح الألف المهموزة والألف المقصورة ا وي (تغيير فاقد للمعلومات ومسجَّل)، وتُحذف الحركات، وتتحول الأرقام المشرقية ١٢٣ إلى 123، وتبقى التاء المربوطة مع تنبيه.',
+  note_ar: 'المثال المشروح في ملف README: تصبح الألف المهموزة ألفًا مجردة، والألف المقصورة ياءً (تغييران فاقدان للمعلومات ومسجَّلان)، وتُحذف الحركات، وتتحول الأرقام المشرقية ١٢٣ إلى 123، وتبقى التاء المربوطة مع تنبيه.',
 }];
 for (const id of EXAMPLE_IDS) {
   const fx = fixtures.find((f) => f.fixture_id === id);

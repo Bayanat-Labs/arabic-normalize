@@ -37,6 +37,7 @@ HF_REPO = "Bayanat-Labs/arabic-normalization-conformance"
 GITHUB = "https://github.com/Bayanat-Labs/arabic-normalize"
 SPACE = "https://huggingface.co/spaces/Bayanat-Labs/arabic-normalizer"
 TOOL_PAGE = "https://www.bayanatlabs.com/tools/arabic-normalizer"
+TOOL_PAGE_AR = "https://www.bayanatlabs.com/ar/tools/arabic-normalizer"
 VERSION = "v0.1"
 DATE = "2026-10-15"
 CONFIGS = ["dev", "acceptance"]
@@ -460,7 +461,8 @@ def card_ar(s):
     return f"""---
 lang: ar
 dir: rtl
-native_review: ai_review_separate_pass (independent AI review and human native review recommended)
+native_review: independent_ai_review
+human_native_review: recommended
 ---
 
 <div dir="rtl" lang="ar">
@@ -468,14 +470,14 @@ native_review: ai_review_separate_pass (independent AI review and human native r
 # حالات اختبار المطابقة لتوحيد النص العربي من بيانات لابز
 
 > {s['total']} حالة اختبار مكتوبة يدويًا (حالات التطوير {r['dev']}، وحالات القبول {r['acceptance']}) تحدد بدقة ما يجب أن تخرجه سياسة مسمّاة لتوحيد النص العربي: النص الناتج، والقواعد المطبّقة، وتنبيهات فقد المعلومات، وخريطة الإزاحات.
-> الإصدار `{VERSION}` ({DATE}). المكتبة: [arabic-normalize]({GITHUB}) {an.__version__}. العرض التجريبي: [{SPACE}]({SPACE}). صفحة الأداة: {TOOL_PAGE}. البطاقة الإنجليزية: [README.md](README.md).
+> الإصدار `{VERSION}` ({DATE}). المكتبة: [arabic-normalize]({GITHUB}) {an.__version__}. العرض التجريبي: [{SPACE}]({SPACE}). صفحة الأداة: {TOOL_PAGE_AR}. البطاقة الإنجليزية: [README.md](README.md).
 > تنشرها **بيانات لابز** (bayanatlabs.com)، ولا صلة لها بموقع bayanat.ae ولا بشركة Space42 ولا بمكتبة `bayanat` من ARBML.
 
 ## 1. ما هذه المجموعة
 
-تختلف أدوات توحيد النص العربي في طريقة حذف الحركات والتطويل، وتوحيد صور الألف، وتحويل أشكال العرض، ومعالجة المحارف الصفرية العرض، ونادرًا ما تذكر الأبحاث ما فعلته بالضبط. تحوّل هذه الحالات ثلاث سياسات مسمّاة ذات بصمة من مكتبة arabic-normalize مفتوحة المصدر إلى اختبارات، فيستطيع أي تطبيق بأي لغة برمجة أن يتحقق من أنه يعطي الناتج نفسه. وهي مجموعة اختبارات المطابقة لمكتبة arabic-normalize، وتجتازها كلها مكتبة Python ونسختها بلغة JavaScript.
+تختلف أدوات توحيد النص العربي في طريقة حذف الحركات والتطويل، وتوحيد صور الألف، وتحويل أشكال العرض، ومعالجة المحارف الصفرية العرض، ونادرًا ما تذكر الأبحاث ما فعلته بالضبط. تحوّل هذه الحالات ثلاث سياسات مسمّاة ذات بصمة من مكتبة arabic-normalize مفتوحة المصدر إلى اختبارات، فتستطيع أي مكتبة أو أداة، بأي لغة برمجة، أن تتحقق من أنها تعطي الناتج نفسه. وهي مجموعة اختبارات المطابقة لمكتبة arabic-normalize، وتجتازها كلها مكتبة Python ونسختها بلغة JavaScript.
 
-**الاستخدامات المقصودة:** اختبار أداة توحيد عربية وفق سياسة مسمّاة، ونقل arabic-normalize إلى لغة برمجة أخرى، وتوثيق الحالات الحدّية في يونيكود العربي.
+**الاستخدامات المقصودة:** اختبار أداة توحيد عربية وفق سياسة مسمّاة، ونقل arabic-normalize إلى لغة برمجة أخرى، وتوثيق الحالات الحدّية في ترميز يونيكود للنص العربي.
 **استخدامات خارج النطاق:** تدريب النماذج اللغوية أو تقييمها (المجموعة صغيرة ومصطنعة)، واستخراج إحصاءات لغوية عن العربية، وأي ادعاء عن مدى شيوع ظاهرة في النصوص الحقيقية.
 
 ## 2. محتوى الإصدار
@@ -500,7 +502,7 @@ dev = load_dataset("{HF_REPO}", "dev", split="test")
 
 {family_table(s, 'ar')}
 
-- الحالات التي يكون ناتجها المتوقع فاقدًا للمعلومات: {s['lossy_fixtures']}. والحالات التي تحمل تنبيهًا للعلم: {s['flagged_fixtures']}.
+- الحالات التي يكون ناتجها المتوقع فاقدًا للمعلومات: {s['lossy_fixtures']}. والحالات التي تحمل تنبيهًا لا يغيّر النص: {s['flagged_fixtures']}.
 - الحالات التي تحدد خريطة الإزاحات كاملة: {s['with_offset_map']}. ويعطي العمود `reference_offset_map` خريطة الإزاحات لكل حالة.
 - معرّفات القواعد التي تغطيها الحالات: {len(s['rule_ids'])}.
 
@@ -508,14 +510,14 @@ dev = load_dataset("{HF_REPO}", "dev", split="test")
 
 ## 5. خط الأساس
 
-| التطبيق | الحالات المجتازة |
+| المكتبة | الحالات المجتازة |
 |---|---|
 | arabic-normalize {an.__version__} (Python) | {s['python_passing']} من {s['total']} |
 | ‎@bayanat-labs/arabic-normalize {an.__version__} (JavaScript) | {s['js_passing']} من {s['total']} |
 
 ## 6. المراجعة
 
-اجتازت كل الحالات في التطبيقين. أُجريت مراجعة عربية مستقلة بالذكاء الاصطناعي للحالات الفاقدة للمعلومات في 15 أكتوبر 2026، ولم يوقّع بعدُ مراجع لغوي بشري من الناطقين بالعربية، ولذلك يبقى الحقلان `reviewed_by` و`review_verdict` فارغين.
+اجتازت كل الحالات في المكتبتين. أُجريت مراجعة عربية مستقلة بالذكاء الاصطناعي للحالات الفاقدة للمعلومات في 15 أكتوبر 2026، ولم يوقّع بعدُ مراجع لغوي بشري من الناطقين بالعربية، ولذلك يبقى الحقلان `reviewed_by` و`review_verdict` فارغين.
 
 ## 7. الترخيص والاستشهاد
 
@@ -529,7 +531,7 @@ dev = load_dataset("{HF_REPO}", "dev", split="test")
 
 ## هل تحتاج إلى بيانات جاهزة للإنتاج وواضحة الحقوق؟
 
-يغطي هذا الإصدار المجاني حالات اختبار التوحيد. أما مجموعات البيانات النصية العربية المرخّصة ذات التوحيد الموثّق فتجدها في **Bayanat Labs Knowledge**: https://www.bayanatlabs.com/ar/products/knowledge
+يغطي هذا الإصدار المجاني حالات اختبار التوحيد. أما مجموعات البيانات النصية العربية المرخّصة ذات التوحيد الموثّق فتجدها في صفحة [مجموعات البيانات النصية العربية المرخّصة](https://www.bayanatlabs.com/ar/products/knowledge) من بيانات لابز.
 
 </div>
 """

@@ -42,7 +42,7 @@ STAGE_AR = {
 
 EFFECT = {  # (stage, mode) -> (English, Arabic)
     ("reject_invalid", "drop"): ("Remove lone surrogates, control characters other than whitespace, and noncharacters; report them in rejected_spans.",
-                                 "حذف البدائل المنفردة ومحارف التحكم غير الفراغية والمحارف غير الصالحة، مع تسجيلها في قائمة المقاطع المرفوضة."),
+                                 "حذف نقاط الترميز البديلة المنفردة (lone surrogates)، ومحارف التحكم التي ليست من المسافات، ونقاط الترميز المحجوزة بوصفها غير محارف (noncharacters)، مع تسجيلها في قائمة المقاطع المرفوضة."),
     ("reject_invalid", "error"): ("Reject the whole input if it contains any of them.", "رفض النص كاملًا إذا احتوى على أي منها."),
     ("strip_controls", "strip"): ("Remove invisible format characters: soft hyphen, word joiner, BOM and similar.",
                                   "حذف محارف التنسيق غير المرئية، مثل الواصلة المرنة ومحرف الربط وعلامة ترتيب البايتات."),
@@ -60,10 +60,10 @@ EFFECT = {  # (stage, mode) -> (English, Arabic)
     ("bidi_zw", "keep"): ("Keep them.", "إبقاؤها."),
     ("bidi_zw", "strip"): ("Remove all of them.", "حذفها كلها."),
     ("canonical_order", "NFC"): ("Apply NFC (canonical composition and mark order) from the pinned UCD 18.0.0 tables; a final NFC pass runs at the end.",
-                                 "تطبيق صيغة التطبيع NFC (التركيب القانوني وترتيب العلامات) من جداول يونيكود 18.0.0 المثبّتة، مع مرور أخير في النهاية."),
+                                 "تطبيق صيغة NFC من يونيكود (التركيب القانوني وترتيب العلامات) وفق جداول يونيكود 18.0.0 المثبّتة، ثم تطبيقها مرة أخيرة في نهاية المراحل."),
     ("canonical_order", "NFKC"): ("Apply NFKC to all text (lossy for non-Arabic compatibility characters).",
-                                  "تطبيق صيغة التطبيع NFKC على النص كله (تغيير فاقد للمعلومات في المحارف التوافقية غير العربية)."),
-    ("canonical_order", "none"): ("No Unicode normalisation.", "دون تطبيع يونيكود."),
+                                  "تطبيق صيغة NFKC من يونيكود على النص كله (تغيير فاقد للمعلومات في المحارف التوافقية غير العربية)."),
+    ("canonical_order", "none"): ("No Unicode normalisation.", "دون تطبيق أي صيغة من صيغ يونيكود."),
     ("tatweel", "strip"): ("Remove tatweel (ـ).", "حذف التطويل (ـ)."),
     ("tatweel", "keep"): ("Keep tatweel.", "إبقاء التطويل."),
     ("diacritics", "strip"): ("Remove harakat U+064B to U+0652 (tanween, fatha, damma, kasra, shadda, sukun).",
@@ -74,7 +74,7 @@ EFFECT = {  # (stage, mode) -> (English, Arabic)
                                  "حذف علامات الضبط القرآنية (القائمة الكاملة في المواصفة، القسم 4.9)."),
     ("quranic_marks", "keep"): ("Keep Quranic marks.", "إبقاء العلامات القرآنية."),
     ("superscript_alef", "strip"): ("Remove the superscript (dagger) alef.", "حذف الألف الخنجرية."),
-    ("superscript_alef", "to-alef"): ("Replace the superscript alef with a full alef.", "استبدال ألف كاملة بالألف الخنجرية."),
+    ("superscript_alef", "to-alef"): ("Replace the superscript alef with a full alef.", "تحويل الألف الخنجرية إلى ألف كاملة."),
     ("superscript_alef", "keep"): ("Keep the superscript alef.", "إبقاء الألف الخنجرية."),
     ("alef_variants", "map"): ("Map أ إ آ ٱ to ا (lossy).", "تحويل الألف المهموزة (أ، إ) والممدودة (آ) وهمزة الوصل (ٱ) إلى ا (تغيير فاقد للمعلومات)."),
     ("alef_variants", "keep"): ("Keep alef variants.", "إبقاء صور الألف."),
@@ -91,7 +91,7 @@ EFFECT = {  # (stage, mode) -> (English, Arabic)
     ("persian_urdu_letters", "map"): ("Map Persian and Urdu letters to their Arabic counterparts (lossy).",
                                       "تحويل الحروف الفارسية والأردية إلى نظائرها العربية (تغيير فاقد للمعلومات)."),
     ("digits", "ascii"): ("Map Arabic-Indic and Extended Arabic-Indic digits to 0 to 9.",
-                          "تحويل الأرقام العربية المشرقية والفارسية إلى الأرقام من 0 إلى 9."),
+                          "تحويل الأرقام العربية المشرقية والفارسية إلى أرقام ASCII من 0 إلى 9."),
     ("digits", "keep"): ("Keep digits as written.", "إبقاء الأرقام كما كُتبت."),
     ("digits", "arabic-indic"): ("Map digits to Arabic-Indic digits.", "تحويل الأرقام إلى الأرقام العربية المشرقية."),
     ("punctuation", "keep"): ("Keep punctuation.", "إبقاء علامات الترقيم."),
@@ -114,18 +114,18 @@ USE = {
     "bayanat-norm-v1": (
         "Default for text_norm columns in Bayanat Labs datasets, deduplication and statistics.",
         "The RULES.md section 5.1 recipe. Store `text_raw` (and `text_diac`, the raw-safe-v1 output) next to it.",
-        "السياسة الافتراضية لحقل النص الموحد text_norm في مجموعات بيانات بيانات لابز، ولإزالة التكرار والإحصاءات.",
-        "تطبّق وصفة القسم 5.1 من قواعد البرنامج. يُحفظ النص الخام text_raw والنص المشكول text_diac (ناتج raw-safe-v1) إلى جانبه."),
+        "السياسة الافتراضية لحقل النص الموحَّد text_norm في مجموعات البيانات التي تنشرها بيانات لابز، ولإزالة التكرار وحساب الإحصاءات.",
+        "وهي الوصفة الواردة في القسم 5.1 من ملف القواعد RULES.md. ويُحفظ إلى جانبها النص الخام text_raw والنص المشكول text_diac (ناتج raw-safe-v1)."),
     "asr-eval-v1": (
         "Scoring only: WER and CER for Arabic speech recognition.",
         "Apply the same policy to the reference and the hypothesis and report the policy id and hash with every score (TL-001 ArabicWER).",
-        "للتقييم فقط: حساب معدل خطأ الكلمات ومعدل خطأ الحروف في التعرّف الآلي على الكلام العربي.",
+        "للتقييم فقط: حساب معدل خطأ الكلمات (WER) ومعدل خطأ الحروف (CER) في التعرّف الآلي على الكلام العربي.",
         "تُطبَّق السياسة نفسها على النص المرجعي وعلى ناتج النظام، ويُذكر معرّف السياسة وبصمتها مع كل نتيجة."),
     "raw-safe-v1": (
         "Cleaning without changing any letter, mark, digit or punctuation.",
         "The recipe for text_diac columns, for display and for legal text.",
         "تنظيف لا يغيّر أي حرف أو علامة أو رقم أو علامة ترقيم.",
-        "وصفة حقل النص المشكول text_diac، وللعرض، وللنصوص القانونية."),
+        "وهي الوصفة المعتمدة لحقل النص المشكول text_diac، وتناسب العرض والنصوص القانونية."),
 }
 
 # Added after the lossy-rule review (docs/LOSSY_REVIEW.md, findings L-2 and L-3).
@@ -150,20 +150,20 @@ LIMITS = {
         ["تصبح الكلمات التي لا تختلف إلا في همزة الألف أو في الياء والألف المقصورة في آخرها متطابقة (مثل إن وأن، وعلى وعلي)، وتتغير كتابة بعض الأسماء.",
          "لا تُستخدم في مهام التشكيل أو التعرف الضوئي على الحروف أو الصوتيات؛ استخدم النص الخام أو سياسة raw-safe-v1.",
          "تبقى الحروف الفارسية والأردية كما هي، فلا يُوحَّد النص المختلط بين العربية والفارسية.",
-         "تتبع أشكال العرض العربية NFKC بدقة، ولذلك يترك الشكل المنفصل لعلامات التشكيل مثل U+FE70 مسافة بعد تحويله.",
+         "تتبع أشكال العرض العربية NFKC بدقة، ولذلك يترك الشكل المعزول لعلامات التشكيل، مثل U+FE70، مسافةً بعد تحويله.",
          UTHMANI_AR, MAQSURA_AR]),
     "asr-eval-v1": (
         ["Lossy by design (ة to ه, ى to ي, alef variants): never store its output as a text field.",
          "Arabic decimal and thousands separators are punctuation, so a number such as ١٬٢٥٠ becomes several tokens.",
          "Latin letter case is kept.", UTHMANI_EN, MAQSURA_EN],
-        ["يفقد بعض المعلومات عمدًا (تحويل التاء المربوطة إلى هاء، والألف المقصورة إلى ياء، وتوحيد صور الألف)، فلا يُخزَّن ناتجه حقلًا نصيًا.",
+        ["تفقد هذه السياسة بعض المعلومات عمدًا (تحويل التاء المربوطة إلى هاء، والألف المقصورة إلى ياء، وتوحيد صور الألف)، فلا يُخزَّن ناتجها أبدًا حقلًا نصيًا في مجموعة بيانات.",
          "الفاصلتان العشرية والألفية العربيتان علامتا ترقيم، فيتحول عدد مثل ١٬٢٥٠ إلى أكثر من كلمة.",
-         "تبقى حالة الحروف اللاتينية كما هي.", UTHMANI_AR, MAQSURA_AR]),
+         "تبقى حالة الحروف اللاتينية كما هي، فلا تُحوَّل إلى حروف صغيرة.", UTHMANI_AR, MAQSURA_AR]),
     "raw-safe-v1": (
         ["Removes bidi controls, which can change how mixed right-to-left and left-to-right text is displayed: keep text_raw when exact display matters.",
          "Keeps presentation forms, tatweel, harakat and every letter."],
-        ["يحذف محارف التحكم الاتجاهي، وقد يغيّر ذلك طريقة عرض النص المختلط بين الاتجاهين؛ احتفظ بالنص الخام إذا كان العرض الدقيق مهمًا.",
-         "يُبقي أشكال العرض والتطويل والحركات وجميع الحروف."]),
+        ["تحذف هذه السياسة محارف التحكم الاتجاهي، وقد يغيّر ذلك طريقة عرض النص الذي يجمع الكتابة من اليمين إلى اليسار ومن اليسار إلى اليمين؛ احتفظ بالنص الخام إذا كانت دقة العرض مهمة.",
+         "تُبقي هذه السياسة أشكال العرض والتطويل والحركات وجميع الحروف."]),
 }
 
 
@@ -244,12 +244,12 @@ def card(pid, res, lang):
         L += ["", "## Cite", "", "Normalised with `%s` (sha256 `%s`), arabic-normalize %s, Bayanat Labs." % (pid, p.policy_hash, an.__version__),
               "", "Arabic version: [%s.ar.md](%s.ar.md). Stage definitions: [SPEC.md](../SPEC.md). Generated by `scripts/make_docs.py`." % (pid, pid), ""]
         return "\n".join(L)
-    L = ["---", "lang: ar", "dir: rtl", "native_review: pending (independent AI Arabic review, then a human native review, recommended)", "---", "",
+    L = ["---", "lang: ar", "dir: rtl", "native_review: independent_ai_review", "human_native_review: recommended", "---", "",
          '<div dir="rtl" lang="ar">', "", "# %s" % pid, "", "**%s**" % meta.get("title_ar", ""), "",
          "| الحقل | القيمة |", "|---|---|",
          "| معرّف السياسة | `%s` |" % pid, "| بصمة SHA-256 | `%s` |" % p.policy_hash,
          "| المواصفة | %s |" % p.data["spec"], "| يونيكود | %s، صيغة %s |" % (p.data["unicode_version"], p.unicode_form),
-         "| ثابتة عند التكرار | %s (مختبرة) |" % ("نعم" if p.idempotent else "لا"),
+         "| ثبات الناتج عند إعادة التطبيق | %s (مختبَر) |" % ("نعم" if p.idempotent else "لا"),
          "| الحالة | إصدار تجريبي، arabic-normalize %s |" % an.__version__,
          "| الترخيص | CC BY 4.0 لملف السياسة، بيانات لابز |", "",
          "## الاستخدام", "", u[2] + " " + u[3], "",
@@ -257,7 +257,7 @@ def card(pid, res, lang):
     for i, (k, v) in enumerate(stage_rows(p), 1):
         L.append("| %d | %s (`%s`) | `%s` | %s |" % (i, STAGE_AR[k], k, v, EFFECT[(k, v)][1]))
     L += ["", "## القواعد الفاقدة للمعلومات", ""]
-    L += ["- `%s`" % x for x in lossy] or ["لا توجد: لا يتغير أي حرف."]
+    L += ["- `%s`" % x for x in lossy] or ["لا توجد؛ فلا يتغير أي حرف."]
     L += ["", "يُسجَّل كل تغيير فاقد للمعلومات في سجل التغييرات مع `lossy: true`، ويظهر في قائمة `lossy_flags`.", "",
           "## أمثلة من حالات الاختبار (ناتج محسوب)", "", "| الحالة | المدخل | الناتج | القواعد |", "|---|---|---|---|"]
     for fx, r in examples:
